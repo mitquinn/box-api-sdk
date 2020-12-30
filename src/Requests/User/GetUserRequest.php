@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Mitquinn\BoxApiSdk\Requests\User;
 
 use GuzzleHttp\Psr7\Request;
@@ -13,39 +12,31 @@ use Psr\Http\Message\RequestInterface;
  */
 class GetUserRequest extends BaseRequest
 {
+    /** @var int $id */
+    protected int $id;
 
-    protected int $user_id;
-
-    protected array $query;
-
+    /** @var string $method */
     protected string $method = 'GET';
-
 
     /**
      * UserRequest constructor.
-     * @param int $user_id
+     * @param int $id
      * @param array $query
      */
-    public function __construct(int $user_id, array $query = [])
+    public function __construct(int $id, array $query = [])
     {
-        $this->setUserId($user_id);
-        $this->setQuery($query);
+        parent::__construct(query: $query);
+        $this->setId($id);
     }
 
+    /**
+     * @return string
+     */
     public function getUri(): string
     {
-        return $this->getBaseUri().$this->getVersion().'/user/'.$this->getUserId();
+        $requestSegment = 'users/'.$this->getId();
+        return $this->generateUri($requestSegment);
     }
-
-    public function generateRequestInterface(): RequestInterface
-    {
-        $request = new Request(
-            $this->getMethod(),
-            $this->getUri(),
-        );
-    }
-
-
 
 
     /*** Start Getters and Setters ***/
@@ -53,39 +44,20 @@ class GetUserRequest extends BaseRequest
     /**
      * @return int
      */
-    public function getUserId(): int
+    public function getId(): int
     {
-        return $this->user_id;
+        return $this->id;
     }
 
     /**
-     * @param int $user_id
+     * @param int $id
      * @return GetUserRequest
      */
-    public function setUserId(int $user_id): GetUserRequest
+    public function setId(int $id): GetUserRequest
     {
-        $this->user_id = $user_id;
+        $this->id = $id;
         return $this;
     }
-
-    /**
-     * @return array
-     */
-    public function getQuery(): array
-    {
-        return $this->query;
-    }
-
-    /**
-     * @param array $query
-     * @return GetUserRequest
-     */
-    public function setQuery(array $query): GetUserRequest
-    {
-        $this->query = $query;
-        return $this;
-    }
-
 
     /*** End Getters and Setters ***/
 

@@ -13,7 +13,7 @@ interface BaseRequestInterface
 {
     public function getBaseUri(): string;
 
-    public function setBaseUri(string $uri): BaseRequestInterface;
+    public function setBaseUri(string $baseUri): BaseRequestInterface;
 
     public function getUri(): string;
 
@@ -23,4 +23,7 @@ interface BaseRequestInterface
 
     public function generateRequestInterface(): RequestInterface;
 
+    public function getQuery(): array;
+
+    public function setQuery(array $query): BaseRequestInterface;
 }

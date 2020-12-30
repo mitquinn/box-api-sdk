@@ -8,11 +8,11 @@ use Exception;
  * Class InvalidRequestException
  * @package Mitquinn\BoxApiSdk\Exceptions
  */
-class InvalidRequestException extends Exception
+class BoxBadRequestException extends BaseException
 {
 
-    protected $message = 'The provide request is invalid.';
+    protected $code = 400;
 
-    protected $code = 500;
+    protected $message = 'The provided request is invalid.';
 
 }

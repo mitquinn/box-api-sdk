@@ -12,8 +12,8 @@ use Psr\Http\Message\ResponseInterface;
 class UserResource
 {
 
-    /** @var int $user_id */
-    protected int $user_id;
+    /** @var int $id */
+    protected int $id;
 
     /** @var string $type */
     protected string $type = 'user';
@@ -27,8 +27,8 @@ class UserResource
     /** @var bool $can_see_managed_users */
     protected bool $can_see_managed_users;
 
-    /** @var DateTime $created_at */
-    protected DateTime $created_at;
+    /** @var DateTime|string $created_at */
+    protected DateTime|string $created_at;
 
     /** @var array|string[] $enterprise */
     protected array $enterprise = [
@@ -37,8 +37,8 @@ class UserResource
         'name' => ''
     ];
 
-    /** @var string $external_app_user_id */
-    protected string $external_app_user_id;
+    /** @var string|null $external_app_user_id */
+    protected null|string $external_app_user_id = null;
 
     /** @var string $hostname */
     protected string $hostname;
@@ -70,8 +70,8 @@ class UserResource
     /** @var int $max_upload_size */
     protected int $max_upload_size;
 
-    /** @var DateTime $modified_at */
-    protected DateTime $modified_at;
+    /** @var DateTime|string $modified_at */
+    protected DateTime|string $modified_at;
 
     /** @var array $my_tags */
     protected array $my_tags;
@@ -108,24 +108,143 @@ class UserResource
 
     /**
      * UserResource constructor.
-     * @param ResponseInterface $userResponse
+     * @param ResponseInterface|array $response
      */
-    public function __construct(ResponseInterface $userResponse)
+    public function __construct(ResponseInterface|array $response)
     {
-        $this->mapResponse($userResponse);
+        if (is_a($response, ResponseInterface::class)) {
+            $response = json_decode($response->getBody()->getContents(), true);
+        }
+
+        $this->mapResponse($response);
     }
 
-    public function mapResponse(ResponseInterface $response): UserResource
+    public function mapResponse(array $response): UserResource
     {
-        $body = json_decode($response->getBody()->getContents(), true);
 
-        if (isset($body['user_id'])) {
-            $this->setUserId($body['user_id']);
+        if (array_key_exists('id', $response)) {
+            $this->setId($response['id']);
+        }
+
+        if (array_key_exists('type', $response)) {
+            $this->setType($response['type']);
+        }
+
+        if (array_key_exists('address', $response)) {
+            $this->setAddress($response['address']);
+        }
+
+        if (array_key_exists('avatar_url', $response)) {
+            $this->setAvatarUrl($response['avatar_url']);
+        }
+
+        if (array_key_exists('can_see_managed_users', $response)) {
+            $this->setCanSeeManagedUsers($response['can_see_managed_users']);
+        }
+
+        if (array_key_exists('created_at', $response)) {
+            $this->setCreatedAt($response['created_at']);
+        }
+
+        if (array_key_exists('enterprise', $response)) {
+            $this->setEnterprise($response['enterprise']);
+        }
+
+        if (array_key_exists('external_app_user_id', $response)) {
+            $this->setExternalAppUserId($response['external_app_user_id']);
+        }
+
+        if (array_key_exists('hostname', $response)) {
+            $this->setHostname($response['hostname']);
+        }
+
+        if (array_key_exists('is_exempt_from_device_limits', $response)) {
+            $this->setIsExemptFromDeviceLimits($response['is_exempt_from_device_limits']);
+        }
+
+        if (array_key_exists('is_exempt_from_login_verification', $response)) {
+            $this->setIsExemptFromLoginVerification($response['is_exempt_from_login_verification']);
+        }
+
+        if (array_key_exists('is_external_collab_restricted', $response)) {
+            $this->setIsExternalCollabRestricted($response['is_external_collab_restricted']);
+        }
+
+        if (array_key_exists('is_platform_access_only', $response)) {
+            $this->setIsPlatformAccessOnly($response['is_platform_access_only']);
+        }
+
+        if (array_key_exists('is_sync_enabled', $response)) {
+            $this->setIsSyncEnabled($response['is_sync_enabled']);
+        }
+
+        if (array_key_exists('job_title', $response)) {
+            $this->setJobTitle($response['job_title']);
+        }
+
+        if (array_key_exists('language', $response)) {
+            $this->setLanguage($response['language']);
+        }
+
+        if (array_key_exists('login', $response)) {
+            $this->setLogin($response['login']);
+        }
+
+        if (array_key_exists('max_upload_size', $response)) {
+            $this->setMaxUploadSize($response['max_upload_size']);
+        }
+
+        if (array_key_exists('max_upload_size', $response)) {
+            $this->setMaxUploadSize($response['max_upload_size']);
+        }
+
+        if (array_key_exists('modified_at', $response)) {
+            $this->setModifiedAt($response['modified_at']);
+        }
+
+        // Todo: Check this one it may explode because of a "string array" type?
+        if (array_key_exists('my_tags', $response)) {
+            $this->setMyTags($response['my_tags']);
+        }
+
+        if (array_key_exists('name', $response)) {
+            $this->setName($response['name']);
+        }
+
+        if (array_key_exists('notification_email', $response)) {
+            $this->setNotificationEmail($response['notification_email']);
+        }
+
+        if (array_key_exists('phone', $response)) {
+            $this->setPhone($response['phone']);
+        }
+
+        if (array_key_exists('role', $response)) {
+            $this->setRole($response['role']);
+        }
+
+        if (array_key_exists('space_amount', $response)) {
+            $this->setSpaceAmount($response['space_amount']);
+        }
+
+        if (array_key_exists('space_used', $response)) {
+            $this->setSpaceUsed($response['space_used']);
+        }
+
+        if (array_key_exists('status', $response)) {
+            $this->setStatus($response['status']);
+        }
+
+        if (array_key_exists('timezone', $response)) {
+            $this->setTimezone($response['timezone']);
+        }
+
+        if (array_key_exists('tracking_codes', $response)) {
+            $this->setTrackingCodes($response['tracking_codes']);
         }
 
         return $this;
     }
-
 
 
     /*** Start Getters and Setters ***/
@@ -133,18 +252,18 @@ class UserResource
     /**
      * @return int
      */
-    public function getUserId(): int
+    public function getId(): int
     {
-        return $this->user_id;
+        return $this->id;
     }
 
     /**
-     * @param int $user_id
+     * @param int $id
      * @return UserResource
      */
-    public function setUserId(int $user_id): UserResource
+    public function setId(int $id): UserResource
     {
-        $this->user_id = $user_id;
+        $this->id = $id;
         return $this;
     }
 
@@ -221,54 +340,54 @@ class UserResource
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|string
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): DateTime|string
     {
         return $this->created_at;
     }
 
     /**
-     * @param DateTime $created_at
+     * @param DateTime|string $created_at
      * @return UserResource
      */
-    public function setCreatedAt(DateTime $created_at): UserResource
+    public function setCreatedAt(DateTime|string $created_at): UserResource
     {
         $this->created_at = $created_at;
         return $this;
     }
 
     /**
-     * @return array|string[]
+     * @return array
      */
-    public function getEnterprise()
+    public function getEnterprise(): array
     {
         return $this->enterprise;
     }
 
     /**
-     * @param array|string[] $enterprise
+     * @param array $enterprise
      * @return UserResource
      */
-    public function setEnterprise($enterprise)
+    public function setEnterprise(array $enterprise): UserResource
     {
         $this->enterprise = $enterprise;
         return $this;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getExternalAppUserId(): string
+    public function getExternalAppUserId(): null|string
     {
         return $this->external_app_user_id;
     }
 
     /**
-     * @param string $external_app_user_id
+     * @param string|null $external_app_user_id
      * @return UserResource
      */
-    public function setExternalAppUserId(string $external_app_user_id): UserResource
+    public function setExternalAppUserId(null|string $external_app_user_id): UserResource
     {
         $this->external_app_user_id = $external_app_user_id;
         return $this;
@@ -455,18 +574,18 @@ class UserResource
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|string
      */
-    public function getModifiedAt(): DateTime
+    public function getModifiedAt(): DateTime|string
     {
         return $this->modified_at;
     }
 
     /**
-     * @param DateTime $modified_at
+     * @param DateTime|string $modified_at
      * @return UserResource
      */
-    public function setModifiedAt(DateTime $modified_at): UserResource
+    public function setModifiedAt(DateTime|string $modified_at): UserResource
     {
         $this->modified_at = $modified_at;
         return $this;

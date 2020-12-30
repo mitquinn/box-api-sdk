@@ -92,7 +92,7 @@ class RequestAccessTokenRequest extends BaseRequest
 
     /**
      * @return RequestInterface
-     * @throws \Mitquinn\BoxApiSdk\Exceptions\InvalidRequestException
+     * @throws \Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException
      */
     public function generateRequestInterface(): RequestInterface
     {
@@ -128,7 +128,7 @@ class RequestAccessTokenRequest extends BaseRequest
         }
 
         if (!empty($this->getCode())) {
-            $body['code'] => $this->getCode();
+            $body['code'] = $this->getCode();
         }
 
         if (!empty($this->getGrantType())) {

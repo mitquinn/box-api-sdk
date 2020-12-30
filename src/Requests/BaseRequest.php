@@ -2,9 +2,12 @@
 
 namespace Mitquinn\BoxApiSdk\Requests;
 
-use Mitquinn\BoxApiSdk\Exceptions\InvalidRequestException;
+use GuzzleHttp\Psr7\Request;
+use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
+use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
 use Mitquinn\BoxApiSdk\Interfaces\BaseRequestInterface;
 use Psr\Http\Message\RequestInterface;
+
 
 /**
  * Class BaseRequest
@@ -21,28 +24,59 @@ abstract class BaseRequest implements BaseRequestInterface
     /** @var string $method **/
     protected string $method;
 
-    protected array $headers = [
+    /** @var array $headers */
+    protected array $headers = [];
 
-    ];
+    /** @var array $query */
+    protected array $query;
 
+    /** @var string[] VALID_METHODS */
     CONST VALID_METHODS = ['GET', 'POST', 'PUT', 'DELETE'];
+
+    public function __construct(array $query = [])
+    {
+        $this->setQuery($query);
+    }
 
     abstract public function getUri(): string;
 
-    abstract public function generateRequestInterface(): RequestInterface;
 
+    /**
+     * @return RequestInterface
+     * @throws BoxBadRequestException
+     */
+    public function generateRequestInterface(): RequestInterface
+    {
+        return new Request(
+            $this->getMethod(),
+            $this->getUri(),
+        );
+    }
+
+    /**
+     * @param string $requestSegment
+     * @return string
+     */
+    protected function generateUri(string $requestSegment): string
+    {
+        $query = '';
+        if (!empty($this->getQuery())) {
+            $query = '?'.http_build_query($this->getQuery());
+        }
+
+        return $this->getBaseUri().$this->getVersion().$requestSegment.$query;
+    }
 
     /*** Start Getters and Setters ***/
 
     /**
      * @return string
-     * @throws InvalidRequestException
+     * @throws BoxBadRequestException
      */
     public function getMethod(): string
     {
-
         if (!in_array($this->method, BaseRequest::VALID_METHODS)) {
-            throw new InvalidRequestException('The request method is invalid. The request method must be set.');
+            throw new BoxBadRequestException('The request method is invalid. The request method must be set.');
         }
 
         return $this->method;
@@ -95,11 +129,29 @@ abstract class BaseRequest implements BaseRequestInterface
 
     /**
      * @param array $headers
-     * @return BaseRequest
+     * @return BaseRequestInterface
      */
-    public function setHeaders(array $headers): BaseRequest
+    public function setHeaders(array $headers): BaseRequestInterface
     {
         $this->headers = $headers;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getQuery(): array
+    {
+        return $this->query;
+    }
+
+    /**
+     * @param array $query
+     * @return BaseRequestInterface
+     */
+    public function setQuery(array $query): BaseRequestInterface
+    {
+        $this->query = $query;
         return $this;
     }
 

@@ -11,22 +11,22 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": "^7.4",
+        "php": "^8.0",
         "guzzlehttp/guzzle": "^7.2",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-openssl": "*"
     },
     "autoload": {
         "psr-4": {
             "Mitquinn\\BoxApiSdk\\": "src/"
-        },
-        "autoload-dev": {
-            "psr-4": {
-                "Mitquinn\\BoxApiSdk\\Tests\\": "tests/"
-            }
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mitquinn\\BoxApiSdk\\Tests\\": "tests/"
         }
     },
     "require-dev": {
-        "ext-openssl": "*",
         "phpunit/phpunit": "^9.4",
         "symfony/dotenv": "^5.1",
         "firebase/php-jwt": "^5.2"
