@@ -15,8 +15,8 @@ class RequestAccessTokenRequest extends BaseRequest
     /** @var string $method */
     protected string $method = 'POST';
 
-    /** @var array|string[] $headers */
-    protected array $headers = [
+    /** @var array|string[] $header */
+    protected array $header = [
         'Content-Type' => 'application/x-www-form-urlencoded'
     ];
 
@@ -99,7 +99,7 @@ class RequestAccessTokenRequest extends BaseRequest
         return new Request(
             $this->getMethod(),
             $this->getUri(),
-            $this->getHeaders(),
+            $this->getHeader(),
             $this->getUrlEncodedBody()
         );
     }

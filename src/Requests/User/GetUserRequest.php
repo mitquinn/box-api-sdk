@@ -4,6 +4,7 @@ namespace Mitquinn\BoxApiSdk\Requests\User;
 
 use GuzzleHttp\Psr7\Request;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
+use Mitquinn\BoxApiSdk\Traits\HasIdProperty;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -12,6 +13,8 @@ use Psr\Http\Message\RequestInterface;
  */
 class GetUserRequest extends BaseRequest
 {
+    use HasIdProperty;
+
     /** @var int $id */
     protected int $id;
 
@@ -26,7 +29,7 @@ class GetUserRequest extends BaseRequest
     public function __construct(int $id, array $query = [])
     {
         parent::__construct(query: $query);
-        $this->setId($id);
+        $this->setId(id: $id);
     }
 
     /**
@@ -35,29 +38,13 @@ class GetUserRequest extends BaseRequest
     public function getUri(): string
     {
         $requestSegment = 'users/'.$this->getId();
-        return $this->generateUri($requestSegment);
+        return $this->generateUri(requestSegment: $requestSegment);
     }
 
 
     /*** Start Getters and Setters ***/
 
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
 
-    /**
-     * @param int $id
-     * @return GetUserRequest
-     */
-    public function setId(int $id): GetUserRequest
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     /*** End Getters and Setters ***/
 

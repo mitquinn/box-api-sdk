@@ -64,11 +64,23 @@ class UserCollectionTest extends BaseTest
     }
 
 
-
+    /**
+     * Todo: Need to extra the user id to an env variable.
+     * @throws \Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException
+     * @throws \Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException
+     * @throws \Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     */
     public function testGetUser()
     {
         $userResource = $this->getBoxService()->user()->getUser(id: 13372896237);
         static::assertInstanceOf(UserResource::class, $userResource);
+    }
+
+    public function testUpdateUser()
+    {
+        $userResource = $this->getBoxService()->user()->updateUser(id: 13372896237, body: ['address' => '123 Fake Street']);
+        static::assertInstanceOf($userResource::class, $userResource);
     }
 
 

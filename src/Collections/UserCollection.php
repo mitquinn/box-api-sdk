@@ -10,10 +10,10 @@ use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Requests\User\GetCurrentUserRequest;
 use Mitquinn\BoxApiSdk\Requests\User\GetUserRequest;
 use Mitquinn\BoxApiSdk\Requests\User\ListEnterpriseUsersRequest;
+use Mitquinn\BoxApiSdk\Requests\User\UpdateUserRequest;
 use Mitquinn\BoxApiSdk\Resources\UserResource;
 use Mitquinn\BoxApiSdk\Resources\UsersResource;
 use Psr\Http\Client\ClientExceptionInterface;
-use Psr\Http\Message\RequestInterface;
 
 /**
  * Class UserCollection
@@ -22,6 +22,11 @@ use Psr\Http\Message\RequestInterface;
 class UserCollection extends BaseCollection
 {
 
+    /**
+     * @param array $query
+     * @param ListEnterpriseUsersRequest|null $listEnterpriseUsersRequest
+     * @return UsersResource
+     */
     public function listEnterpriseUsers(array $query = [], ListEnterpriseUsersRequest $listEnterpriseUsersRequest = null): UsersResource
     {
         if (is_null($listEnterpriseUsersRequest)) {
@@ -71,16 +76,40 @@ class UserCollection extends BaseCollection
 
     }
 
+    /**
+     * Todo: I will need a box enterprise account to set this up.
+     * @return UserResource
+     */
     public function createUser(): UserResource
     {
 
     }
 
-    public function updateUser(): UserResource
+    /**
+     * @param int $id
+     * @param array $body
+     * @param array $query
+     * @param UpdateUserRequest|null $updateUserRequest
+     * @return UserResource
+     * @throws BoxAuthorizationException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function updateUser(int $id, array $body, array $query = [], UpdateUserRequest $updateUserRequest = null): UserResource
     {
+        if (is_null($updateUserRequest)) {
+            $updateUserRequest = new UpdateUserRequest(id: $id, body: $body, query: $query);
+        }
+
+        return $this->sendUserRequest($updateUserRequest);
 
     }
 
+    /**
+     * Todo: I will need a box enterprise account to set this up.
+     * @return UserResource
+     */
     public function deleteUser(): UserResource
     {
 
@@ -104,6 +133,15 @@ class UserCollection extends BaseCollection
         return new UserResource($response);
     }
 
+    /**
+     * @param BaseRequest $request
+     * @return UsersResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
     protected function sendUsersRequest(BaseRequest $request): UsersResource
     {
         $response = $this->getClient()->sendRequest($request->generateRequestInterface());

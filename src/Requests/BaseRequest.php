@@ -24,18 +24,30 @@ abstract class BaseRequest implements BaseRequestInterface
     /** @var string $method **/
     protected string $method;
 
-    /** @var array $headers */
-    protected array $headers = [];
+    /** @var array $header */
+    protected array $header = [];
 
     /** @var array $query */
     protected array $query;
 
+    /** @var array $body */
+    protected array $body = [];
+
+
     /** @var string[] VALID_METHODS */
     CONST VALID_METHODS = ['GET', 'POST', 'PUT', 'DELETE'];
 
-    public function __construct(array $query = [])
+    /**
+     * BaseRequest constructor.
+     * @param array $query
+     * @param array $body
+     * @param array $header
+     */
+    public function __construct(array $query = [], array $body = [], array $header = [])
     {
-        $this->setQuery($query);
+        $this->setHeader(header: $header);
+        $this->setQuery(query: $query);
+        $this->setBody(body: $body);
     }
 
     abstract public function getUri(): string;
@@ -50,6 +62,8 @@ abstract class BaseRequest implements BaseRequestInterface
         return new Request(
             $this->getMethod(),
             $this->getUri(),
+            $this->getHeader(),
+            json_encode($this->getBody())
         );
     }
 
@@ -122,18 +136,18 @@ abstract class BaseRequest implements BaseRequestInterface
     /**
      * @return array
      */
-    public function getHeaders(): array
+    public function getHeader(): array
     {
-        return $this->headers;
+        return $this->header;
     }
 
     /**
-     * @param array $headers
+     * @param array $header
      * @return BaseRequestInterface
      */
-    public function setHeaders(array $headers): BaseRequestInterface
+    public function setHeader(array $header): BaseRequestInterface
     {
-        $this->headers = $headers;
+        $this->header = $header;
         return $this;
     }
 
@@ -152,6 +166,24 @@ abstract class BaseRequest implements BaseRequestInterface
     public function setQuery(array $query): BaseRequestInterface
     {
         $this->query = $query;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getBody(): array
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param array $body
+     * @return BaseRequest
+     */
+    public function setBody(array $body): BaseRequest
+    {
+        $this->body = $body;
         return $this;
     }
 
