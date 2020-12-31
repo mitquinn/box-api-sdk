@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Requests\User;
+namespace Mitquinn\BoxApiSdk\Requests\Users;
 
 use GuzzleHttp\Psr7\Request;
 use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
@@ -9,7 +9,7 @@ use Psr\Http\Message\RequestInterface;
 
 /**
  * Class GetCurrentUserRequest
- * @package Mitquinn\BoxApiSdk\Requests\User
+ * @package Mitquinn\BoxApiSdk\Requests\Users
  */
 class GetCurrentUserRequest extends BaseRequest
 {

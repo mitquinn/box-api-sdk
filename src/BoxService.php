@@ -6,7 +6,8 @@ namespace Mitquinn\BoxApiSdk;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Mitquinn\BoxApiSdk\Collections\UserCollection;
+use Mitquinn\BoxApiSdk\Collections\FoldersCollection;
+use Mitquinn\BoxApiSdk\Collections\UsersCollection;
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Interfaces\AuthorizationInterface;
 use Psr\Http\Client\ClientInterface;
@@ -18,8 +19,11 @@ use Psr\Http\Client\ClientInterface;
 class BoxService
 {
 
-    /** @var UserCollection $userCollection */
-    protected UserCollection $userCollection;
+    /** @var FoldersCollection $foldersCollection */
+    protected FoldersCollection $foldersCollection;
+
+    /** @var UsersCollection $usersCollection */
+    protected UsersCollection $usersCollection;
 
     /** @var AuthorizationInterface $authorizationConfiguration */
     protected AuthorizationInterface $authorizationConfiguration;
@@ -90,16 +94,25 @@ class BoxService
 
     protected function initializeCollectionAccessors(): void
     {
-        $this->userCollection = new UserCollection($this->getClient());
+        $this->usersCollection = new UsersCollection($this->getClient());
+        $this->foldersCollection = new FoldersCollection($this->getClient());
 
     }
 
     /**
-     * @return UserCollection
+     * @return UsersCollection
      */
-    public function user(): UserCollection
+    public function users(): UsersCollection
     {
-        return $this->userCollection;
+        return $this->usersCollection;
+    }
+
+    /**
+     * @return FoldersCollection
+     */
+    public function folders(): FoldersCollection
+    {
+        return $this->foldersCollection;
     }
 
     /*** End Collection Accessors ***/

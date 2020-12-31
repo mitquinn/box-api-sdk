@@ -1,13 +1,13 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Requests\User;
+namespace Mitquinn\BoxApiSdk\Requests\Users;
 
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Traits\HasIdProperty;
 
 /**
  * Class UpdateUserRequest
- * @package Mitquinn\BoxApiSdk\Requests\User
+ * @package Mitquinn\BoxApiSdk\Requests\Users
  */
 class UpdateUserRequest extends BaseRequest
 {

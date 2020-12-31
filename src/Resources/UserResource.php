@@ -116,10 +116,10 @@ class UserResource
             $response = json_decode($response->getBody()->getContents(), true);
         }
 
-        $this->mapResponse($response);
+        $this->mapResource($response);
     }
 
-    public function mapResponse(array $response): UserResource
+    public function mapResource(array $response): UserResource
     {
 
         if (array_key_exists('id', $response)) {

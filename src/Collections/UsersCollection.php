@@ -7,10 +7,10 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
-use Mitquinn\BoxApiSdk\Requests\User\GetCurrentUserRequest;
-use Mitquinn\BoxApiSdk\Requests\User\GetUserRequest;
-use Mitquinn\BoxApiSdk\Requests\User\ListEnterpriseUsersRequest;
-use Mitquinn\BoxApiSdk\Requests\User\UpdateUserRequest;
+use Mitquinn\BoxApiSdk\Requests\Users\GetCurrentUserRequest;
+use Mitquinn\BoxApiSdk\Requests\Users\GetUserRequest;
+use Mitquinn\BoxApiSdk\Requests\Users\ListEnterpriseUsersRequest;
+use Mitquinn\BoxApiSdk\Requests\Users\UpdateUserRequest;
 use Mitquinn\BoxApiSdk\Resources\UserResource;
 use Mitquinn\BoxApiSdk\Resources\UsersResource;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -19,13 +19,18 @@ use Psr\Http\Client\ClientExceptionInterface;
  * Class UserCollection
  * @package Mitquinn\BoxApiSdk\Collections
  */
-class UserCollection extends BaseCollection
+class UsersCollection extends BaseCollection
 {
 
     /**
      * @param array $query
      * @param ListEnterpriseUsersRequest|null $listEnterpriseUsersRequest
      * @return UsersResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
      */
     public function listEnterpriseUsers(array $query = [], ListEnterpriseUsersRequest $listEnterpriseUsersRequest = null): UsersResource
     {
@@ -120,6 +125,7 @@ class UserCollection extends BaseCollection
      * @param BaseRequest $request
      * @return UserResource
      * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface

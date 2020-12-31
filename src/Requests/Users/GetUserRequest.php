@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Requests\User;
+namespace Mitquinn\BoxApiSdk\Requests\Users;
 
 use GuzzleHttp\Psr7\Request;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
@@ -8,8 +8,8 @@ use Mitquinn\BoxApiSdk\Traits\HasIdProperty;
 use Psr\Http\Message\RequestInterface;
 
 /**
- * Class UserRequest
- * @package Mitquinn\BoxApiSdk\Requests
+ * Class GetUserRequest
+ * @package Mitquinn\BoxApiSdk\Requests\Users
  */
 class GetUserRequest extends BaseRequest
 {

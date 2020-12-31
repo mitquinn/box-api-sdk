@@ -15,13 +15,13 @@ class UserCollectionTest extends BaseTest
 
     public function testGetCurrentUser()
     {
-        $userResource = $this->getBoxService()->user()->getCurrentUser();
+        $userResource = $this->getBoxService()->users()->getCurrentUser();
         static::assertInstanceOf(UserResource::class, $userResource);
     }
 
     public function testGetCurrentUserWithFullFields()
     {
-        $userResource = $this->getBoxService()->user()->getCurrentUser(query: ['fields' => 'id,type,address,avatar_url,can_see_managed_users,created_at,enterprise,external_app_user_id,hostname,is_exempt_from_device_limits,is_exempt_from_login_verification,is_external_collab_restricted,is_platform_access_only,is_sync_enabled,job_title,language,login,max_upload_size,modified_at,my_tags,name,notification_email,phone,role,space_amount,space_used,status,timezone,tracking_codes']);
+        $userResource = $this->getBoxService()->users()->getCurrentUser(query: ['fields' => 'id,type,address,avatar_url,can_see_managed_users,created_at,enterprise,external_app_user_id,hostname,is_exempt_from_device_limits,is_exempt_from_login_verification,is_external_collab_restricted,is_platform_access_only,is_sync_enabled,job_title,language,login,max_upload_size,modified_at,my_tags,name,notification_email,phone,role,space_amount,space_used,status,timezone,tracking_codes']);
         static::assertInstanceOf(UserResource::class, $userResource);
         static::assertIsInt($userResource->getId());
         static::assertIsString($userResource->getType());
@@ -59,7 +59,7 @@ class UserCollectionTest extends BaseTest
 
     public function testListEnterpriseUsers()
     {
-        $usersResource = $this->getBoxService()->user()->listEnterpriseUsers();
+        $usersResource = $this->getBoxService()->users()->listEnterpriseUsers();
         static::assertInstanceOf(UsersResource::class, $usersResource);
     }
 
@@ -73,13 +73,13 @@ class UserCollectionTest extends BaseTest
      */
     public function testGetUser()
     {
-        $userResource = $this->getBoxService()->user()->getUser(id: 13372896237);
+        $userResource = $this->getBoxService()->users()->getUser(id: 13372896237);
         static::assertInstanceOf(UserResource::class, $userResource);
     }
 
     public function testUpdateUser()
     {
-        $userResource = $this->getBoxService()->user()->updateUser(id: 13372896237, body: ['address' => '123 Fake Street']);
+        $userResource = $this->getBoxService()->users()->updateUser(id: 13372896237, body: ['address' => '123 Fake Street']);
         static::assertInstanceOf($userResource::class, $userResource);
     }
 
