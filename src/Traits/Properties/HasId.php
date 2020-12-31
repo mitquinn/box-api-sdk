@@ -1,12 +1,12 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Traits;
+namespace Mitquinn\BoxApiSdk\Traits\Properties;
 
 /**
  * Trait HasIdProperty
  * @package Mitquinn\BoxApiSdk\Traits
  */
-trait HasIdProperty
+trait HasId
 {
 
     protected int $id;

@@ -2,10 +2,8 @@
 
 namespace Mitquinn\BoxApiSdk\Requests\Users;
 
-use GuzzleHttp\Psr7\Request;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
-use Mitquinn\BoxApiSdk\Traits\HasIdProperty;
-use Psr\Http\Message\RequestInterface;
+use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
 
 /**
  * Class GetUserRequest
@@ -13,7 +11,7 @@ use Psr\Http\Message\RequestInterface;
  */
 class GetUserRequest extends BaseRequest
 {
-    use HasIdProperty;
+    use HasId;
 
     /** @var int $id */
     protected int $id;

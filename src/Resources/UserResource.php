@@ -16,7 +16,8 @@ class UserResource
     protected int $id;
 
     /** @var string $type */
-    protected string $type = 'user';
+    protected string $type;
+    //protected string $type = 'user'; Todo: Removed the default off of this, I dont think it needs a default
 
     /** @var string $address */
     protected string $address;

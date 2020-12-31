@@ -3,7 +3,7 @@
 namespace Mitquinn\BoxApiSdk\Requests\Users;
 
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
-use Mitquinn\BoxApiSdk\Traits\HasIdProperty;
+use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
 
 /**
  * Class UpdateUserRequest
@@ -11,7 +11,7 @@ use Mitquinn\BoxApiSdk\Traits\HasIdProperty;
  */
 class UpdateUserRequest extends BaseRequest
 {
-    use HasIdProperty;
+    use HasId;
 
     /** @var string $method */
     protected string $method = 'PUT';

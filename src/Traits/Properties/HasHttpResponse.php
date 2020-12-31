@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Traits;
+namespace Mitquinn\BoxApiSdk\Traits\Properties;
 
 use Psr\Http\Message\ResponseInterface;
 
