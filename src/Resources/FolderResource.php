@@ -47,8 +47,8 @@ class FolderResource extends BaseResource
     /** @var string|null $etag */
     protected string|null $etag;
 
-    /** @var string $expires_at */
-    protected string $expires_at;
+    /** @var string|null $expires_at */
+    protected string|null $expires_at;
 
     /** @var array|null $folder_upload_email */
     protected array|null $folder_upload_email;
@@ -165,6 +165,11 @@ class FolderResource extends BaseResource
         if (array_key_exists('etag', $response)) {
             $this->setEtag($response['etag']);
         }
+
+        if (array_key_exists('expires_at', $response)) {
+            $this->setExpiresAt($response['expires_at']);
+        }
+
 
         if (array_key_exists('folder_upload_email', $response)) {
             $this->setFolderUploadEmail($response['folder_upload_email']);
@@ -427,18 +432,18 @@ class FolderResource extends BaseResource
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getExpiresAt(): string
+    public function getExpiresAt(): string|null
     {
         return $this->expires_at;
     }
 
     /**
-     * @param string $expires_at
+     * @param string|null $expires_at
      * @return FolderResource
      */
-    public function setExpiresAt(string $expires_at): FolderResource
+    public function setExpiresAt(string|null $expires_at): FolderResource
     {
         $this->expires_at = $expires_at;
         return $this;

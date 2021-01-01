@@ -2,12 +2,13 @@
 
 namespace Mitquinn\BoxApiSdk\Tests\Api;
 
+use Faker\Factory;
+use Faker\Generator;
 use Mitquinn\BoxApiSdk\AuthorizationConfigurations\ServerAuthorization;
 use Mitquinn\BoxApiSdk\BoxService;
 use Mitquinn\BoxApiSdk\Interfaces\AuthorizationInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Dotenv\Dotenv;
-use function Couchbase\defaultDecoder;
 
 /**
  * Class BoxApiSdkBaseTest
@@ -15,6 +16,9 @@ use function Couchbase\defaultDecoder;
  */
 abstract class BaseTest extends TestCase
 {
+
+    /** @var Generator $faker */
+    protected Generator $faker;
 
     /** @var AuthorizationInterface $authorizationConfiguration */
     protected AuthorizationInterface $authorizationConfiguration;
@@ -33,6 +37,8 @@ abstract class BaseTest extends TestCase
     public function __construct(?string $name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
+
+        $this->faker = Factory::create();
 
         $dotenv = new Dotenv();
         //TODO: This is silly. There must be a way to define this in phpunit.xml
