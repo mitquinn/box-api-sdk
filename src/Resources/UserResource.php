@@ -3,21 +3,17 @@
 namespace Mitquinn\BoxApiSdk\Resources;
 
 use DateTime;
+use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
+use Mitquinn\BoxApiSdk\Traits\Properties\HasType;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class UserResource
  * @package Mitquinn\BoxApiSdk\Resources
  */
-class UserResource
+class UserResource extends BaseResource
 {
-
-    /** @var int $id */
-    protected int $id;
-
-    /** @var string $type */
-    protected string $type;
-    //protected string $type = 'user'; Todo: Removed the default off of this, I dont think it needs a default
+    use HasId, HasType;
 
     /** @var string $address */
     protected string $address;
@@ -107,24 +103,20 @@ class UserResource
     /** @var array $tracking_codes */
     protected array $tracking_codes;
 
+
     /**
-     * UserResource constructor.
-     * @param ResponseInterface|array $response
+     * @param array $response
+     * @return $this
      */
-    public function __construct(ResponseInterface|array $response)
+    protected function mapResource(array $response): static
     {
-        if (is_a($response, ResponseInterface::class)) {
-            $response = json_decode($response->getBody()->getContents(), true);
-        }
-
-        $this->mapResource($response);
-    }
-
-    public function mapResource(array $response): UserResource
-    {
-
         if (array_key_exists('id', $response)) {
-            $this->setId($response['id']);
+            /** @info There are situations where the id of a user is "". (Example: Trash or Root Folder) In these situations we will set the value to null. */
+            if ($response['id'] === "") {
+                $this->setId(id: null);
+            } else {
+                $this->setId($response['id']);
+            }
         }
 
         if (array_key_exists('type', $response)) {
@@ -249,42 +241,6 @@ class UserResource
 
 
     /*** Start Getters and Setters ***/
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return UserResource
-     */
-    public function setId(int $id): UserResource
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $type
-     * @return UserResource
-     */
-    public function setType(string $type): UserResource
-    {
-        $this->type = $type;
-        return $this;
-    }
 
     /**
      * @return string

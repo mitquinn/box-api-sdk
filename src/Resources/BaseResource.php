@@ -1,0 +1,54 @@
+<?php
+
+namespace Mitquinn\BoxApiSdk\Resources;
+
+use Psr\Http\Message\ResponseInterface;
+
+/**
+ * Class BaseResource
+ * @package Mitquinn\BoxApiSdk\Resources
+ */
+abstract class BaseResource
+{
+    /** @var array $response */
+    protected array $response;
+
+    /**
+     * BaseResource constructor.
+     * @param ResponseInterface|array $response
+     */
+    public function __construct(ResponseInterface|array $response)
+    {
+        if (is_a($response, ResponseInterface::class)) {
+            $response = json_decode($response->getBody()->getContents(), true);
+        }
+
+        $this->setResponse(response: $response);
+        $this->mapResource(response: $response);
+    }
+
+    /**
+     * @param array $response
+     * @return $this
+     */
+    abstract protected function mapResource(array $response): static;
+
+    /**
+     * @return array
+     */
+    public function getResponse(): array
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param array $response
+     * @return BaseResource
+     */
+    public function setResponse(array $response): BaseResource
+    {
+        $this->response = $response;
+        return $this;
+    }
+
+}

@@ -36,15 +36,15 @@ abstract class EntriesResource
         }
 
         if (array_key_exists('offset', $response)) {
-            $this->setLimit($response['offset']);
+            $this->setOffset($response['offset']);
         }
 
         if (array_key_exists('order', $response)) {
-            $this->setLimit($response['order']);
+            $this->setOrder($response['order']);
         }
 
         if (array_key_exists('total_count', $response)) {
-            $this->setLimit($response['limit']);
+            $this->setTotalCount($response['limit']);
         }
 
         return $this;

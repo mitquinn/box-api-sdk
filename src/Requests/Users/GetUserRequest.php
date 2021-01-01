@@ -13,9 +13,6 @@ class GetUserRequest extends BaseRequest
 {
     use HasId;
 
-    /** @var int $id */
-    protected int $id;
-
     /** @var string $method */
     protected string $method = 'GET';
 

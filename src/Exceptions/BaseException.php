@@ -3,7 +3,7 @@
 namespace Mitquinn\BoxApiSdk\Exceptions;
 
 use Exception;
-use Mitquinn\BoxApiSdk\Traits\HasHttpResponse;
+use Mitquinn\BoxApiSdk\Traits\Properties\HasHttpResponse;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
@@ -24,6 +24,7 @@ abstract class BaseException extends Exception
      */
     public function __construct(string $message = "", int $code = 0, Throwable $previous = null, ResponseInterface $response = null)
     {
+        var_dump($response->getBody()->getContents());
         parent::__construct($message, $code, $previous);
         if (!is_null($response)) {
             $this->setResponse($response);

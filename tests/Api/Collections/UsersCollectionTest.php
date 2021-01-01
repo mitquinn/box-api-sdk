@@ -10,7 +10,7 @@ use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
  * Class BoxApiSdkUserTest
  * @package Mitquinn\BoxApiSdk\Tests\Api\User
  */
-class UserCollectionTest extends BaseTest
+class UsersCollectionTest extends BaseTest
 {
 
     public function testGetCurrentUser()

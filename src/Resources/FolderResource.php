@@ -16,7 +16,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class FolderResource
  * @package Mitquinn\BoxApiSdk\Resources
  */
-class FolderResource
+class FolderResource extends BaseResource
 {
     use HasId, HasType, HasCreatedAt, HasDescription, HasModifiedAt, HasName, HasSize;
 
@@ -32,26 +32,26 @@ class FolderResource
     /** @var bool $can_non_owners_view_collaborators */
     protected bool $can_non_owners_view_collaborators;
 
-    /** @var array $classification */
-    protected array $classification;
+    /** @var array|null $classification */
+    protected array|null $classification;
 
-    /** @var string $content_created_at */
-    protected string $content_created_at;
+    /** @var string|null $content_created_at */
+    protected string|null $content_created_at;
 
-    /** @var string $content_modified_at */
-    protected string $content_modified_at;
+    /** @var string|null $content_modified_at */
+    protected string|null $content_modified_at;
 
     /** @var UserResource $created_by */
     protected UserResource $created_by;
 
-    /** @var string $etag */
-    protected string $etag;
+    /** @var string|null $etag */
+    protected string|null $etag;
 
     /** @var string $expires_at */
     protected string $expires_at;
 
-    /** @var array $folder_upload_email */
-    protected array $folder_upload_email;
+    /** @var array|null $folder_upload_email */
+    protected array|null $folder_upload_email;
 
     /** @var bool $has_collaborations */
     protected bool $has_collaborations;
@@ -86,14 +86,14 @@ class FolderResource
     /** @var array $permissions */
     protected array $permissions;
 
-    /** @var string $purged_at */
-    protected string $purged_at;
+    /** @var string|null $purged_at */
+    protected string|null $purged_at;
 
-    /** @var string $sequence_id */
-    protected string $sequence_id;
+    /** @var string|null $sequence_id */
+    protected string|null $sequence_id;
 
-    /** @var array $shared_link */
-    protected array $shared_link;
+    /** @var array|null $shared_link */
+    protected array|null $shared_link;
 
     /** @var string $sync_state */
     protected string $sync_state;
@@ -101,31 +101,17 @@ class FolderResource
     /** @var array $tags */
     protected array $tags;
 
-    /** @var string $trashed_at */
-    protected string $trashed_at;
+    /** @var string|null $trashed_at */
+    protected string|null $trashed_at;
 
     /** @var array $watermark_info */
     protected array $watermark_info;
-
-
-    /**
-     * FolderResource constructor.
-     * @param ResponseInterface|array $response
-     */
-    public function __construct(ResponseInterface|array $response)
-    {
-        if (is_a($response, ResponseInterface::class)) {
-            $response = json_decode($response->getBody()->getContents(), true);
-        }
-
-        $this->mapResource($response);
-    }
 
     /**
      * @param array $response
      * @return $this
      */
-    protected function mapResource(array $response): FolderResource
+    protected function mapResource(array $response): static
     {
 
         if (array_key_exists('id', $response)) {
@@ -351,54 +337,54 @@ class FolderResource
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getClassification(): array
+    public function getClassification(): array|null
     {
         return $this->classification;
     }
 
     /**
-     * @param array $classification
+     * @param array|null $classification
      * @return FolderResource
      */
-    public function setClassification(array $classification): FolderResource
+    public function setClassification(array|null $classification): FolderResource
     {
         $this->classification = $classification;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getContentCreatedAt(): string
+    public function getContentCreatedAt(): string|null
     {
         return $this->content_created_at;
     }
 
     /**
-     * @param string $content_created_at
+     * @param string|null $content_created_at
      * @return FolderResource
      */
-    public function setContentCreatedAt(string $content_created_at): FolderResource
+    public function setContentCreatedAt(string|null $content_created_at): FolderResource
     {
         $this->content_created_at = $content_created_at;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getContentModifiedAt(): string
+    public function getContentModifiedAt(): string|null
     {
         return $this->content_modified_at;
     }
 
     /**
-     * @param string $content_modified_at
+     * @param string|null $content_modified_at
      * @return FolderResource
      */
-    public function setContentModifiedAt(string $content_modified_at): FolderResource
+    public function setContentModifiedAt(string|null $content_modified_at): FolderResource
     {
         $this->content_modified_at = $content_modified_at;
         return $this;
@@ -423,18 +409,18 @@ class FolderResource
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEtag(): string
+    public function getEtag(): string|null
     {
         return $this->etag;
     }
 
     /**
-     * @param string $etag
+     * @param string|null $etag
      * @return FolderResource
      */
-    public function setEtag(string $etag): FolderResource
+    public function setEtag(string|null $etag): FolderResource
     {
         $this->etag = $etag;
         return $this;
@@ -459,18 +445,18 @@ class FolderResource
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getFolderUploadEmail(): array
+    public function getFolderUploadEmail(): array|null
     {
         return $this->folder_upload_email;
     }
 
     /**
-     * @param array $folder_upload_email
+     * @param array|null $folder_upload_email
      * @return FolderResource
      */
-    public function setFolderUploadEmail(array $folder_upload_email): FolderResource
+    public function setFolderUploadEmail(array|null $folder_upload_email): FolderResource
     {
         $this->folder_upload_email = $folder_upload_email;
         return $this;
@@ -675,54 +661,54 @@ class FolderResource
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPurgedAt(): string
+    public function getPurgedAt(): string|null
     {
         return $this->purged_at;
     }
 
     /**
-     * @param string $purged_at
+     * @param string|null $purged_at
      * @return FolderResource
      */
-    public function setPurgedAt(string $purged_at): FolderResource
+    public function setPurgedAt(string|null $purged_at): FolderResource
     {
         $this->purged_at = $purged_at;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSequenceId(): string
+    public function getSequenceId(): string|null
     {
         return $this->sequence_id;
     }
 
     /**
-     * @param string $sequence_id
+     * @param string|null $sequence_id
      * @return FolderResource
      */
-    public function setSequenceId(string $sequence_id): FolderResource
+    public function setSequenceId(string|null $sequence_id): FolderResource
     {
         $this->sequence_id = $sequence_id;
         return $this;
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getSharedLink(): array
+    public function getSharedLink(): array|null
     {
         return $this->shared_link;
     }
 
     /**
-     * @param array $shared_link
+     * @param array|null $shared_link
      * @return FolderResource
      */
-    public function setSharedLink(array $shared_link): FolderResource
+    public function setSharedLink(array|null $shared_link): FolderResource
     {
         $this->shared_link = $shared_link;
         return $this;
@@ -765,18 +751,18 @@ class FolderResource
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTrashedAt(): string
+    public function getTrashedAt(): string|null
     {
         return $this->trashed_at;
     }
 
     /**
-     * @param string $trashed_at
+     * @param string|null $trashed_at
      * @return FolderResource
      */
-    public function setTrashedAt(string $trashed_at): FolderResource
+    public function setTrashedAt(string|null $trashed_at): FolderResource
     {
         $this->trashed_at = $trashed_at;
         return $this;

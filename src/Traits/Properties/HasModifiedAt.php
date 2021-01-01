@@ -8,21 +8,21 @@ namespace Mitquinn\BoxApiSdk\Traits\Properties;
  */
 trait HasModifiedAt
 {
-    protected string $modified_at;
+    protected string|null $modified_at;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getModifiedAt(): string
+    public function getModifiedAt(): string|null
     {
         return $this->modified_at;
     }
 
     /**
-     * @param string $modified_at
+     * @param string|null $modified_at
      * @return HasModifiedAt
      */
-    public function setModifiedAt(string $modified_at): static
+    public function setModifiedAt(string|null $modified_at): static
     {
         $this->modified_at = $modified_at;
         return $this;
