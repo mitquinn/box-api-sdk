@@ -5,6 +5,7 @@ namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
 use Faker\Guesser\Name;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
+use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Mitquinn\BoxApiSdk\Resources\UserResource;
 use Mitquinn\BoxApiSdk\Tests\Api\BoxServiceTest;
 
@@ -89,6 +90,26 @@ class FoldersCollectionTest extends BoxServiceTest
 
         $folderResource = $this->getBoxService()->folders()->createFolder($body);
         static::assertInstanceOf(FolderResource::class, $folderResource);
+    }
+
+    public function testDeleteFolder()
+    {
+        $body = [
+            'name' => $this->faker->name,
+            'parent' => [
+                'id' => 0
+            ]
+        ];
+        $folderResource = $this->getBoxService()->folders()->createFolder($body);
+        static::assertInstanceOf(FolderResource::class, $folderResource);
+
+
+        $deleteThisId = $folderResource->getId();
+        $noContentResource = $this->getBoxService()->folders()->deleteFolder($deleteThisId);
+        static::assertInstanceOf(NoContentResource::class ,$noContentResource);
+
+
+
     }
 
 

@@ -25,9 +25,12 @@ trait CanValidateHttpResponse
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      */
-    public function validateResponse(ResponseInterface $response)
+    public function validateResponse(ResponseInterface $response): bool
     {
-        if ($response->getStatusCode() === 200 or $response->getStatusCode() === 201) {
+        if ($response->getStatusCode() === 200
+            or $response->getStatusCode() === 201
+            or $response->getStatusCode() === 204
+        ) {
             return true;
         }
 

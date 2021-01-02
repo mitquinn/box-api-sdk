@@ -6,7 +6,16 @@ Todo:
 
 * ~~Finished adding test cases for testGetFolderInformationFillFields~~ 1/1/21
 * ~~List items in folder~~ 1/1/21
-* Create folder
+* ~~Create folder~~ 1/1/21
+* ~~Delete Folder~~ 1/2/21
+* Update Folder
+* Copy Folder
+* Create ReadMe
+* Create a technical overview
+
+
+
+
 
 
 Features to Consider

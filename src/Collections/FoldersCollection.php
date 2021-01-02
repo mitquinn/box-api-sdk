@@ -2,12 +2,19 @@
 
 namespace Mitquinn\BoxApiSdk\Collections;
 
+use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
+use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
+use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
+use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\CreateFolderRequest;
+use Mitquinn\BoxApiSdk\Requests\Folders\DeleteFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\GetFolderInformationRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\ListItemsInFolderRequest;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
+use Mitquinn\BoxApiSdk\Resources\NoContentResource;
+use Psr\Http\Client\ClientExceptionInterface;
 
 /**
  * Class FoldersCollection
@@ -37,6 +44,11 @@ class FoldersCollection extends BaseCollection
      * @param array $query
      * @param ListItemsInFolderRequest|null $listItemsInFolderRequest
      * @return ItemsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
      */
     public function listItemsInFolder(int $id, array $query = [], ListItemsInFolderRequest $listItemsInFolderRequest = null): ItemsResource
     {
@@ -62,18 +74,27 @@ class FoldersCollection extends BaseCollection
         return $this->sendFolderRequest($createFolderRequest);
     }
 
-
-
-
-
-    protected function sendItemsRequest(BaseRequest $request): ItemsResource
+    /**
+     * @param int $id
+     * @param array $query
+     * @param array $header
+     * @param DeleteFolderRequest|null $deleteFolderRequest
+     * @return NoContentResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function deleteFolder(int $id, array $query = [], array $header = [], DeleteFolderRequest $deleteFolderRequest = null)
     {
-        $response = $this->getClient()->sendRequest($request->generateRequestInterface());
+        if (is_null($deleteFolderRequest)) {
+            $deleteFolderRequest = new DeleteFolderRequest(id: $id, query: $query, header: $header);
+        }
 
-        $this->validateResponse($response);
-
-        return new ItemsResource($response);
+        return $this->sendNoContentRequest($deleteFolderRequest);
     }
+
 
 
     protected function sendFolderRequest(BaseRequest $request): FolderResource
