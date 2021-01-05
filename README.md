@@ -8,8 +8,8 @@ Todo:
 * ~~List items in folder~~ 1/1/21
 * ~~Create folder~~ 1/1/21
 * ~~Delete Folder~~ 1/2/21
-* Update Folder
-* Copy Folder
+* ~~Update Folder~~ 1/3/21
+* ~~Copy Folder~~ 1/3/21
 * Create ReadMe
 * Create a technical overview
 
