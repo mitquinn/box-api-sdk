@@ -24,7 +24,6 @@ abstract class BaseException extends Exception
      */
     public function __construct(string $message = "", int $code = 0, Throwable $previous = null, ResponseInterface $response = null)
     {
-        var_dump($response->getBody()->getContents());
         parent::__construct($message, $code, $previous);
         if (!is_null($response)) {
             $this->setResponse($response);

@@ -2,18 +2,17 @@
 
 namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
 
-use Faker\Guesser\Name;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Mitquinn\BoxApiSdk\Resources\UserResource;
-use Mitquinn\BoxApiSdk\Tests\Api\BoxServiceTest;
+use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
 
 /**
  * Class FoldersCollectionTest
  * @package Mitquinn\BoxApiSdk\Tests\Api\Collections
  */
-class FoldersCollectionTest extends BoxServiceTest
+class FoldersCollectionTest extends BaseTest
 {
 
     public function testGetFolderInformation()

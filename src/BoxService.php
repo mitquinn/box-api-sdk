@@ -6,6 +6,7 @@ namespace Mitquinn\BoxApiSdk;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Mitquinn\BoxApiSdk\Collections\FilesCollection;
 use Mitquinn\BoxApiSdk\Collections\FoldersCollection;
 use Mitquinn\BoxApiSdk\Collections\UsersCollection;
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
@@ -18,6 +19,9 @@ use Psr\Http\Client\ClientInterface;
  */
 class BoxService
 {
+
+    /** @var FilesCollection $filesCollection */
+    protected FilesCollection $filesCollection;
 
     /** @var FoldersCollection $foldersCollection */
     protected FoldersCollection $foldersCollection;
@@ -96,6 +100,7 @@ class BoxService
     {
         $this->usersCollection = new UsersCollection($this->getClient());
         $this->foldersCollection = new FoldersCollection($this->getClient());
+        $this->filesCollection = new FilesCollection($this->getClient());
 
     }
 
@@ -113,6 +118,14 @@ class BoxService
     public function folders(): FoldersCollection
     {
         return $this->foldersCollection;
+    }
+
+    /**
+     * @return FilesCollection
+     */
+    public function files(): FilesCollection
+    {
+        return $this->filesCollection;
     }
 
     /*** End Collection Accessors ***/

@@ -2,19 +2,18 @@
 
 namespace Mitquinn\BoxApiSdk\Resources;
 
-
 use Mitquinn\BoxApiSdk\Traits\Properties\HasAllowedInviteeRoles;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasClassification;
+use Mitquinn\BoxApiSdk\Traits\Properties\HasExpiresAt;
+use Mitquinn\BoxApiSdk\Traits\Properties\HasHasCollaborations;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasContentCreatedAt;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasContentModifiedAt;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasCreatedAt;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasCreatedBy;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasDescription;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasETag;
-use Mitquinn\BoxApiSdk\Traits\Properties\HasExpiresAt;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasItemStatus;
-use Mitquinn\BoxApiSdk\Traits\Properties\HasIsExternallyOwned;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasMetadata;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasModifiedAt;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasModifiedBy;
@@ -31,13 +30,8 @@ use Mitquinn\BoxApiSdk\Traits\Properties\HasTags;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasTrashedAt;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasType;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasWatermarkInfo;
-use Psr\Http\Message\ResponseInterface;
 
-/**
- * Class FolderResource
- * @package Mitquinn\BoxApiSdk\Resources
- */
-class FolderResource extends BaseResource
+class FileResource extends BaseResource
 {
     use HasAllowedInviteeRoles,
         HasClassification,
@@ -48,11 +42,11 @@ class FolderResource extends BaseResource
         HasDescription,
         HasETag,
         HasExpiresAt,
+        HasHasCollaborations,
         HasId,
         HasItemStatus,
-        HasIsExternallyOwned,
-        HasModifiedAt,
         HasMetadata,
+        HasModifiedAt,
         HasModifiedBy,
         HasName,
         HasOwnedBy,
@@ -68,37 +62,49 @@ class FolderResource extends BaseResource
         HasType,
         HasWatermarkInfo;
 
-    /** @var array $allowed_shared_link_access_levels */
-    protected array $allowed_shared_link_access_levels;
+    //Todo: Make sure to go back and set the default values where they apply  LIKE WITH TYPE
+//    /** @var string $type */
+//    protected string $type = 'file';
 
-    /** @var bool $can_non_owners_invite */
-    protected bool $can_non_owners_invite;
+    /** @var int $comment_count */
+    protected int $comment_count;
 
-    /** @var bool $can_non_owners_view_collaborators */
-    protected bool $can_non_owners_view_collaborators;
+    /** @var array $expiring_embed_link */
+    protected array $expiring_embed_link;
 
-    /** @var array|null $folder_upload_email */
-    protected array|null $folder_upload_email;
+    /** @var string $extension */
+    protected string $extension;
 
-    /** @var bool $has_collaborations */
-    protected bool $has_collaborations;
+    //Todo: create FileVersionResource @see https://developer.box.com/reference/resources/file-version--mini/
+    /** @var array $file_version */
+    protected array $file_version;
 
-    /** @var bool $is_collaboration_restricted_to_enterprise */
-    protected bool $is_collaboration_restricted_to_enterprise;
+    /** @var bool $is_externally_owned */
+    protected bool $is_externally_owned;
 
-    /** @var ItemsResource $item_collection */
-    protected ItemsResource $item_collection;
+    /** @var bool $is_package */
+    protected bool $is_package;
 
-    /** @var string $sync_state */
-    protected string $sync_state;
+    /** @var array|null $lock */
+    protected array|null $lock;
+
+    /** @var array $representations */
+    protected array $representations;
+
+    /** @var string $sha1 */
+    protected string $sha1;
+
+    /** @var string $uploader_display_name */
+    protected string $uploader_display_name;
+
+    /** @var string $version_number */
+    protected string $version_number;
 
     /**
-     * @param array $response
-     * @return $this
+     * @inheritDoc
      */
     protected function mapResource(array $response): static
     {
-
         if (array_key_exists('id', $response)) {
             $this->setId($response['id']);
         }
@@ -111,20 +117,12 @@ class FolderResource extends BaseResource
             $this->setAllowedInviteeRoles($response['allowed_invitee_roles']);
         }
 
-        if (array_key_exists('allowed_shared_link_access_levels', $response)) {
-            $this->setAllowedSharedLinkAccessLevels($response['allowed_shared_link_access_levels']);
-        }
-
-        if (array_key_exists('can_non_owners_invite', $response)) {
-            $this->setCanNonOwnersInvite($response['can_non_owners_invite']);
-        }
-
-        if (array_key_exists('can_non_owners_view_collaborators', $response)) {
-            $this->setCanNonOwnersViewCollaborators($response['can_non_owners_view_collaborators']);
-        }
-
         if (array_key_exists('classification', $response)) {
             $this->setClassification($response['classification']);
+        }
+
+        if (array_key_exists('comment_count', $response)) {
+            $this->setCommentCount($response['comment_count']);
         }
 
         if (array_key_exists('content_created_at', $response)) {
@@ -155,29 +153,36 @@ class FolderResource extends BaseResource
             $this->setExpiresAt($response['expires_at']);
         }
 
+        if (array_key_exists('expiring_embed_link', $response)) {
+            $this->setExpiringEmbedLink($response['expiring_embed_link']);
+        }
 
-        if (array_key_exists('folder_upload_email', $response)) {
-            $this->setFolderUploadEmail($response['folder_upload_email']);
+        if (array_key_exists('extension', $response)) {
+            $this->setExtension($response['extension']);
+        }
+
+        if (array_key_exists('file_version', $response)) {
+            $this->setFileVersion($response['file_version']);
         }
 
         if (array_key_exists('has_collaborations', $response)) {
             $this->setHasCollaborations($response['has_collaborations']);
         }
 
-        if (array_key_exists('is_collaboration_restricted_to_enterprise', $response)) {
-            $this->setIsCollaborationRestrictedToEnterprise($response['is_collaboration_restricted_to_enterprise']);
-        }
-
         if (array_key_exists('is_externally_owned', $response)) {
             $this->setIsExternallyOwned($response['is_externally_owned']);
         }
 
-        if (array_key_exists('item_collection', $response)) {
-            $this->setItemCollection(new ItemsResource($response['item_collection']));
+        if (array_key_exists('is_package', $response)) {
+            $this->setIsPackage($response['is_package']);
         }
 
         if (array_key_exists('item_status', $response)) {
             $this->setItemStatus($response['item_status']);
+        }
+
+        if (array_key_exists('lock', $response)) {
+            $this->setLock($response['lock']);
         }
 
         if (array_key_exists('metadata', $response)) {
@@ -221,8 +226,16 @@ class FolderResource extends BaseResource
             $this->setPurgedAt($response['purged_at']);
         }
 
+        if (array_key_exists('representations', $response)) {
+            $this->setRepresentations($response['representations']);
+        }
+
         if (array_key_exists('sequence_id', $response)) {
             $this->setSequenceId($response['sequence_id']);
+        }
+
+        if (array_key_exists('sha1', $response)) {
+            $this->setSha1($response['sha1']);
         }
 
         if (array_key_exists('shared_link', $response)) {
@@ -233,16 +246,20 @@ class FolderResource extends BaseResource
             $this->setSize($response['size']);
         }
 
-        if (array_key_exists('sync_state', $response)) {
-            $this->setSyncState($response['sync_state']);
-        }
-
         if (array_key_exists('tags', $response)) {
             $this->setTags($response['tags']);
         }
 
         if (array_key_exists('trashed_at', $response)) {
             $this->setTrashedAt($response['trashed_at']);
+        }
+
+        if (array_key_exists('uploader_display_name', $response)) {
+            $this->setUploaderDisplayName($response['uploader_display_name']);
+        }
+
+        if (array_key_exists('version_number', $response)) {
+            $this->setVersionNumber($response['version_number']);
         }
 
         if (array_key_exists('watermark_info', $response)) {
@@ -252,167 +269,203 @@ class FolderResource extends BaseResource
         return $this;
     }
 
-    /*** Start Getters and Setters  ***/
+    /*** Start Getters and Setters ***/
+
+    /**
+     * @return int
+     */
+    public function getCommentCount(): int
+    {
+        return $this->comment_count;
+    }
+
+    /**
+     * @param int $comment_count
+     * @return FileResource
+     */
+    public function setCommentCount(int $comment_count): FileResource
+    {
+        $this->comment_count = $comment_count;
+        return $this;
+    }
 
     /**
      * @return array
      */
-    public function getAllowedSharedLinkAccessLevels(): array
+    public function getExpiringEmbedLink(): array
     {
-        return $this->allowed_shared_link_access_levels;
+        return $this->expiring_embed_link;
     }
 
     /**
-     * @param array $allowed_shared_link_access_levels
-     * @return FolderResource
+     * @param array $expiring_embed_link
+     * @return FileResource
      */
-    public function setAllowedSharedLinkAccessLevels(array $allowed_shared_link_access_levels): FolderResource
+    public function setExpiringEmbedLink(array $expiring_embed_link): FileResource
     {
-        $this->allowed_shared_link_access_levels = $allowed_shared_link_access_levels;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isCanNonOwnersInvite(): bool
-    {
-        return $this->can_non_owners_invite;
-    }
-
-    /**
-     * @param bool $can_non_owners_invite
-     * @return FolderResource
-     */
-    public function setCanNonOwnersInvite(bool $can_non_owners_invite): FolderResource
-    {
-        $this->can_non_owners_invite = $can_non_owners_invite;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isCanNonOwnersViewCollaborators(): bool
-    {
-        return $this->can_non_owners_view_collaborators;
-    }
-
-    /**
-     * @param bool $can_non_owners_view_collaborators
-     * @return FolderResource
-     */
-    public function setCanNonOwnersViewCollaborators(bool $can_non_owners_view_collaborators): FolderResource
-    {
-        $this->can_non_owners_view_collaborators = $can_non_owners_view_collaborators;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getContentModifiedAt(): string|null
-    {
-        return $this->content_modified_at;
-    }
-
-    /**
-     * @param string|null $content_modified_at
-     * @return FolderResource
-     */
-    public function setContentModifiedAt(string|null $content_modified_at): FolderResource
-    {
-        $this->content_modified_at = $content_modified_at;
-        return $this;
-    }
-
-    /**
-     * @return array|null
-     */
-    public function getFolderUploadEmail(): array|null
-    {
-        return $this->folder_upload_email;
-    }
-
-    /**
-     * @param array|null $folder_upload_email
-     * @return FolderResource
-     */
-    public function setFolderUploadEmail(array|null $folder_upload_email): FolderResource
-    {
-        $this->folder_upload_email = $folder_upload_email;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isHasCollaborations(): bool
-    {
-        return $this->has_collaborations;
-    }
-
-    /**
-     * @param bool $has_collaborations
-     * @return FolderResource
-     */
-    public function setHasCollaborations(bool $has_collaborations): FolderResource
-    {
-        $this->has_collaborations = $has_collaborations;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isIsCollaborationRestrictedToEnterprise(): bool
-    {
-        return $this->is_collaboration_restricted_to_enterprise;
-    }
-
-    /**
-     * @param bool $is_collaboration_restricted_to_enterprise
-     * @return FolderResource
-     */
-    public function setIsCollaborationRestrictedToEnterprise(bool $is_collaboration_restricted_to_enterprise): FolderResource
-    {
-        $this->is_collaboration_restricted_to_enterprise = $is_collaboration_restricted_to_enterprise;
-        return $this;
-    }
-
-    /**
-     * @return ItemsResource
-     */
-    public function getItemCollection(): ItemsResource
-    {
-        return $this->item_collection;
-    }
-
-    /**
-     * @param ItemsResource $item_collection
-     * @return FolderResource
-     */
-    public function setItemCollection(ItemsResource $item_collection): FolderResource
-    {
-        $this->item_collection = $item_collection;
+        $this->expiring_embed_link = $expiring_embed_link;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getSyncState(): string
+    public function getExtension(): string
     {
-        return $this->sync_state;
+        return $this->extension;
     }
 
     /**
-     * @param string $sync_state
-     * @return FolderResource
+     * @param string $extension
+     * @return FileResource
      */
-    public function setSyncState(string $sync_state): FolderResource
+    public function setExtension(string $extension): FileResource
     {
-        $this->sync_state = $sync_state;
+        $this->extension = $extension;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFileVersion(): array
+    {
+        return $this->file_version;
+    }
+
+    /**
+     * @param array $file_version
+     * @return FileResource
+     */
+    public function setFileVersion(array $file_version): FileResource
+    {
+        $this->file_version = $file_version;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isIsExternallyOwned(): bool
+    {
+        return $this->is_externally_owned;
+    }
+
+    /**
+     * @param bool $is_externally_owned
+     * @return FileResource
+     */
+    public function setIsExternallyOwned(bool $is_externally_owned): FileResource
+    {
+        $this->is_externally_owned = $is_externally_owned;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isIsPackage(): bool
+    {
+        return $this->is_package;
+    }
+
+    /**
+     * @param bool $is_package
+     * @return FileResource
+     */
+    public function setIsPackage(bool $is_package): FileResource
+    {
+        $this->is_package = $is_package;
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getLock(): ?array
+    {
+        return $this->lock;
+    }
+
+    /**
+     * @param array|null $lock
+     * @return FileResource
+     */
+    public function setLock(?array $lock): FileResource
+    {
+        $this->lock = $lock;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRepresentations(): array
+    {
+        return $this->representations;
+    }
+
+    /**
+     * @param array $representations
+     * @return FileResource
+     */
+    public function setRepresentations(array $representations): FileResource
+    {
+        $this->representations = $representations;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSha1(): string
+    {
+        return $this->sha1;
+    }
+
+    /**
+     * @param string $sha1
+     * @return FileResource
+     */
+    public function setSha1(string $sha1): FileResource
+    {
+        $this->sha1 = $sha1;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUploaderDisplayName(): string
+    {
+        return $this->uploader_display_name;
+    }
+
+    /**
+     * @param string $uploader_display_name
+     * @return FileResource
+     */
+    public function setUploaderDisplayName(string $uploader_display_name): FileResource
+    {
+        $this->uploader_display_name = $uploader_display_name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVersionNumber(): string
+    {
+        return $this->version_number;
+    }
+
+    /**
+     * @param string $version_number
+     * @return FileResource
+     */
+    public function setVersionNumber(string $version_number): FileResource
+    {
+        $this->version_number = $version_number;
         return $this;
     }
 
