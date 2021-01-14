@@ -13,6 +13,9 @@ abstract class BaseResource
     /** @var array $response */
     protected array $response;
 
+    /** @var array $headers */
+    protected array $headers;
+
     /**
      * BaseResource constructor.
      * @param ResponseInterface|array $response
@@ -20,6 +23,7 @@ abstract class BaseResource
     public function __construct(ResponseInterface|array $response)
     {
         if (is_a($response, ResponseInterface::class)) {
+            $this->setHeaders($response->getHeaders());
             $response = json_decode($response->getBody()->getContents(), true);
         }
 
@@ -48,6 +52,24 @@ abstract class BaseResource
     public function setResponse(array $response): BaseResource
     {
         $this->response = $response;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @param array $headers
+     * @return BaseResource
+     */
+    public function setHeaders(array $headers): BaseResource
+    {
+        $this->headers = $headers;
         return $this;
     }
 

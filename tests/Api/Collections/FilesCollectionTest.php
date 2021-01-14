@@ -39,6 +39,42 @@ class FilesCollectionTest extends BaseTest
         return $this->getBoxService()->files()->uploadFile(body: $body);
     }
 
+    public function uploadPng(): FilesResource
+    {
+        $name = $this->faker->firstName;
+        $path = "tests/TestingData/bulbasaur.png";
+        $dateTimeString = Carbon::now()->toRfc3339String();
+        $body = [
+            'attributes' => [
+                'content_created_at' => $dateTimeString,
+                'content_modified_at' => $dateTimeString,
+                'name' => $name,
+                'parent' => [
+                    'id' => 0
+                ]
+            ],
+            'file' => [
+                'name' => 'file',
+                'contents' => file_get_contents($path),
+                'filename' => $name
+            ]
+        ];
+
+        return $this->getBoxService()->files()->uploadFile(body: $body);
+    }
+
+
+    public function testUploadImage()
+    {
+        $filesResource = $this->uploadPng();
+        static::assertInstanceOf(FilesResource::class, $filesResource);
+        $entriesArray = $filesResource->getEntries();
+        $fileResource = $entriesArray[0];
+        $noContentResource = $this->getBoxService()->files()->deleteFile($fileResource->getId());
+    }
+
+
+
     public function testUploadFile()
     {
         $filesResource = $this->uploadFile();
@@ -69,6 +105,40 @@ class FilesCollectionTest extends BaseTest
         static::assertInstanceOf(NoContentResource::class, $noContentResource);
         static::expectException(BoxNotFoundException::class);
         $checkFileResource = $this->getBoxService()->files()->getFileInformation($fileResource->getId());
+    }
+
+    public function testGetFileThumbnail()
+    {
+        $filesResource = $this->uploadPng();
+        $entriesArray = $filesResource->getEntries();
+        $fileResource = $entriesArray[0];
+        $noContentResource = $this->getBoxService()->files()->getFileThumbnail($fileResource->getId(), 'png');
+        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        $headers = $noContentResource->getHeaders();
+        static::assertArrayHasKey('Location', $headers);
+        //Todo: Maybe I want to validate the url of the Location?
+        $this->getBoxService()->files()->deleteFile($fileResource->getId());
+    }
+
+
+    public function testCopyFile()
+    {
+        $filesResource = $this->uploadFile();
+        $entriesArray = $filesResource->getEntries();
+        $oldFileResource = $entriesArray[0];
+        $newFileName = $oldFileResource->getName().'- Copy';
+        $body = [
+            'name' => $newFileName,
+            'parent' => [
+                'id' => 0
+            ]
+        ];
+
+        $fileResource = $this->getBoxService()->files()->copyFile($oldFileResource->getId(), $body);
+        static::assertInstanceOf(FileResource::class, $fileResource);
+        static::assertEquals($newFileName, $fileResource->getName());
+        $this->getBoxService()->files()->deleteFile($oldFileResource->getId());
+        $this->getBoxService()->files()->deleteFile($fileResource->getId());
     }
 
 

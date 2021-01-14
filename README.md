@@ -3,6 +3,8 @@ This is an unofficial Box.com API SDK.
 
 
 Todo: 
+Total Api Requests Included
+14/188 Requests - Estimated time for completion April 6th
 
 Folders Api
 * ~~Finished adding test cases for testGetFolderInformationFillFields~~ 1/1/21
@@ -18,8 +20,16 @@ Folders Api
 * ~~Upload File~~ 1/7/21
 * ~~Get File Information~~ 1/10/21
 * ~~Delete File~~ 1/10/21
-* Get File Thumbnail
-* Copy File
+* ~~Get File Thumbnail~~ 1/10/21
+* ~~Copy File~~ 1/11/21
+
+Collaborations
+* Collaboration Resource
+* Collaborations Resource
+* Create Collaboration
+* Get Collaboration
+* Update Collaboration
+* Delete Collaboration
 
 General
 * Create ReadMe

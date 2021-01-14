@@ -7,9 +7,12 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
+use Mitquinn\BoxApiSdk\Requests\Files\CopyFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\DeleteFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileInformationRequest;
+use Mitquinn\BoxApiSdk\Requests\Files\GetFileThumbnailRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UploadFileRequest;
+use Mitquinn\BoxApiSdk\Requests\Folders\CopyFolderRequest;
 use Mitquinn\BoxApiSdk\Resources\FileResource;
 use Mitquinn\BoxApiSdk\Resources\FilesResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -41,14 +44,22 @@ class FilesCollection extends BaseCollection
 
     }
 
-    public function getFileThumbnail()
+    public function getFileThumbnail(int $id, string $extension, array $query = [], GetFileThumbnailRequest $getFileThumbnailRequest = null): NoContentResource
     {
+        if (is_null($getFileThumbnailRequest)) {
+            $getFileThumbnailRequest = new GetFileThumbnailRequest(id: $id, extension: $extension, query: $query);
+        }
 
+        return $this->sendNoContentRequest($getFileThumbnailRequest);
     }
 
-    public function copyFile()
+    public function copyFile(int $id, array $body, array $query = [], CopyFileRequest $copyFileRequest = null ): FileResource
     {
+        if (is_null($copyFileRequest)) {
+            $copyFileRequest = new CopyFileRequest(id: $id, body: $body, query: $query);
+        }
 
+        return $this->sendFileRequest($copyFileRequest);
     }
 
     public function updateFile()

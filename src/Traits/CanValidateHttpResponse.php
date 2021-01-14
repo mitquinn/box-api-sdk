@@ -32,6 +32,7 @@ trait CanValidateHttpResponse
         if ($response->getStatusCode() === 200
             or $response->getStatusCode() === 201
             or $response->getStatusCode() === 204
+            or $response->getStatusCode() === 302
         ) {
             return true;
         }
