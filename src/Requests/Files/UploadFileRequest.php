@@ -17,12 +17,6 @@ class UploadFileRequest extends BaseRequest
     /** @var string $method */
     protected string $method = 'POST';
 
-
-    public function __construct(array $query = [], array $body = [], array $header = [])
-    {
-        parent::__construct($query, $body, $header);
-    }
-
     /**
      * @return RequestInterface
      */

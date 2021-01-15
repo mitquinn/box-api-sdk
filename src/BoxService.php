@@ -6,6 +6,7 @@ namespace Mitquinn\BoxApiSdk;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Mitquinn\BoxApiSdk\Collections\CollaborationsCollection;
 use Mitquinn\BoxApiSdk\Collections\FilesCollection;
 use Mitquinn\BoxApiSdk\Collections\FoldersCollection;
 use Mitquinn\BoxApiSdk\Collections\UsersCollection;
@@ -28,6 +29,9 @@ class BoxService
 
     /** @var UsersCollection $usersCollection */
     protected UsersCollection $usersCollection;
+
+    /** @var CollaborationsCollection $collaborationsCollection */
+    protected CollaborationsCollection $collaborationsCollection;
 
     /** @var AuthorizationInterface $authorizationConfiguration */
     protected AuthorizationInterface $authorizationConfiguration;
@@ -101,7 +105,15 @@ class BoxService
         $this->usersCollection = new UsersCollection($this->getClient());
         $this->foldersCollection = new FoldersCollection($this->getClient());
         $this->filesCollection = new FilesCollection($this->getClient());
+        $this->collaborationsCollection = new CollaborationsCollection($this->getClient());
+    }
 
+    /**
+     * @return CollaborationsCollection
+     */
+    public function collaborations(): CollaborationsCollection
+    {
+        return $this->collaborationsCollection;
     }
 
     /**

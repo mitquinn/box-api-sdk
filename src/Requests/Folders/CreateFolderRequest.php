@@ -14,18 +14,6 @@ class CreateFolderRequest extends BaseRequest
     protected string $method = 'POST';
 
     /**
-     * CreateFolderRequest constructor.
-     * Todo: Add validation for Body
-     * @param array $query
-     * @param array $body
-     * @param array $header
-     */
-    public function __construct(array $query = [], array $body = [], array $header = [])
-    {
-        parent::__construct(query: $query, body: $body, header: $header);
-    }
-
-    /**
      * @return string
      */
     public function getUri(): string

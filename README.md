@@ -24,9 +24,10 @@ Folders Api
 * ~~Copy File~~ 1/11/21
 
 Collaborations
-* Collaboration Resource
+* ~~Collaboration Resource~~ 1/14/21
 * Collaborations Resource
-* Create Collaboration
+* ~~Create Collaboration~~ 1/14/21
+  * ~~add test for Create Collaboration~~ 1/15/21
 * Get Collaboration
 * Update Collaboration
 * Delete Collaboration

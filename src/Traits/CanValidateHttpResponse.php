@@ -3,6 +3,7 @@
 namespace Mitquinn\BoxApiSdk\Traits;
 
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
+use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxConflictException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
@@ -26,6 +27,7 @@ trait CanValidateHttpResponse
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws BoxConflictException
+     * @throws BoxBadRequestException
      */
     public function validateResponse(ResponseInterface $response): bool
     {
@@ -35,6 +37,10 @@ trait CanValidateHttpResponse
             or $response->getStatusCode() === 302
         ) {
             return true;
+        }
+
+        if ($response->getStatusCode() === 400) {
+            throw new BoxBadRequestException(response: $response);
         }
 
         if ($response->getStatusCode() === 401) {
