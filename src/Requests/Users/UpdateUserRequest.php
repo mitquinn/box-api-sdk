@@ -25,9 +25,8 @@ class UpdateUserRequest extends BaseRequest
      */
     public function __construct(int $id, array $body, array $query = [])
     {
-        parent::__construct(query: $query, body: $body);
         $this->setId($id);
-
+        parent::__construct(query: $query, body: $body);
     }
 
     /**

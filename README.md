@@ -28,9 +28,9 @@ Collaborations
 * Collaborations Resource
 * ~~Create Collaboration~~ 1/14/21
   * ~~add test for Create Collaboration~~ 1/15/21
-* ~~Get Collaboration~~
-* Update Collaboration
-* Delete Collaboration
+* ~~Get Collaboration~~ 1/16/21
+* ~~Update Collaboration~~ 1/16/21 
+* ~~Delete Collaboration~~ 1/16/21
 
 General
 * Create ReadMe

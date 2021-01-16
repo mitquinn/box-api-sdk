@@ -7,6 +7,7 @@ use Faker\Generator;
 use Mitquinn\BoxApiSdk\AuthorizationConfigurations\ServerAuthorization;
 use Mitquinn\BoxApiSdk\BoxService;
 use Mitquinn\BoxApiSdk\Interfaces\AuthorizationInterface;
+use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Dotenv\Dotenv;
@@ -80,6 +81,26 @@ abstract class BaseTest extends TestCase
         $folderResource = $this->getBoxService()->folders()->createFolder($folderBody);
         static::assertInstanceOf(FolderResource::class, $folderResource);
         return $folderResource;
+    }
+
+
+    public function createCollaboration(FolderResource $folderResource): CollaborationResource
+    {
+        $body = [
+            'accessible_by' => [
+                'type' => 'user',
+                'login' => $_ENV['PersonalEmail']
+            ],
+            'item' => [
+                'id' => $folderResource->getId(),
+                'type' => 'folder'
+            ],
+            'role' => 'viewer'
+        ];
+
+        $collaborationResource = $this->getBoxService()->collaborations()->createCollaboration($body);
+        static::assertInstanceOf(CollaborationResource::class, $collaborationResource);
+        return $collaborationResource;
     }
 
 

@@ -12,12 +12,27 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\CreateCollaborationRequest;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\GetCollaborationRequest;
+use Mitquinn\BoxApiSdk\Requests\Collaborations\RemoveCollaborationRequest;
+use Mitquinn\BoxApiSdk\Requests\Collaborations\UpdateCollaborationRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
+use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Psr\Http\Client\ClientExceptionInterface;
 
 class CollaborationsCollection extends BaseCollection
 {
 
+    /**
+     * @param int $id
+     * @param array $query
+     * @param GetCollaborationRequest|null $getCollaborationRequest
+     * @return CollaborationResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
     public function getCollaboration(int $id, array $query = [], GetCollaborationRequest $getCollaborationRequest = null): CollaborationResource
     {
         if (is_null($getCollaborationRequest)) {
@@ -27,6 +42,19 @@ class CollaborationsCollection extends BaseCollection
         return $this->sendCollaborationRequest($getCollaborationRequest);
     }
 
+
+    /**
+     * @param array $body
+     * @param array $query
+     * @param CreateCollaborationRequest|null $createCollaborationRequest
+     * @return CollaborationResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
     public function createCollaboration(array $body, array $query = [], CreateCollaborationRequest $createCollaborationRequest = null): CollaborationResource
     {
         if (is_null($createCollaborationRequest)) {
@@ -36,16 +64,45 @@ class CollaborationsCollection extends BaseCollection
         return $this->sendCollaborationRequest($createCollaborationRequest);
     }
 
-    public function updateCollaboration()
+    /**
+     * @param int $id
+     * @param array $body
+     * @param UpdateCollaborationRequest|null $updateCollaborationRequest
+     * @return CollaborationResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function updateCollaboration(int $id, array $body, UpdateCollaborationRequest $updateCollaborationRequest = null): CollaborationResource
     {
+        if (is_null($updateCollaborationRequest)) {
+            $updateCollaborationRequest = new UpdateCollaborationRequest(id: $id, body: $body);
+        }
 
+        return $this->sendCollaborationRequest($updateCollaborationRequest);
     }
 
-    public function removeCollaboration()
+    /**
+     * @param int $id
+     * @param RemoveCollaborationRequest|null $removeCollaborationRequest
+     * @return NoContentResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function removeCollaboration(int $id, RemoveCollaborationRequest $removeCollaborationRequest = null): NoContentResource
     {
+        if (is_null($removeCollaborationRequest)) {
+            $removeCollaborationRequest = new RemoveCollaborationRequest($id);
+        }
 
+        return $this->sendNoContentRequest($removeCollaborationRequest);
     }
-
 
     /**
      * @param BaseRequest $request
