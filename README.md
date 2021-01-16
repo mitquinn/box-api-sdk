@@ -28,7 +28,7 @@ Collaborations
 * Collaborations Resource
 * ~~Create Collaboration~~ 1/14/21
   * ~~add test for Create Collaboration~~ 1/15/21
-* Get Collaboration
+* ~~Get Collaboration~~
 * Update Collaboration
 * Delete Collaboration
 

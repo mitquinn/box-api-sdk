@@ -7,6 +7,7 @@ use Faker\Generator;
 use Mitquinn\BoxApiSdk\AuthorizationConfigurations\ServerAuthorization;
 use Mitquinn\BoxApiSdk\BoxService;
 use Mitquinn\BoxApiSdk\Interfaces\AuthorizationInterface;
+use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Dotenv\Dotenv;
 
@@ -65,6 +66,35 @@ abstract class BaseTest extends TestCase
         $this->setAuthorizationConfiguration($serverAuthorization);
         $this->setBoxService(new BoxService($serverAuthorization));
     }
+
+
+    public function createFolder(): FolderResource
+    {
+        $folderBody = [
+            'name' => $this->faker->name,
+            'parent' => [
+                'id' => 0
+            ]
+        ];
+
+        $folderResource = $this->getBoxService()->folders()->createFolder($folderBody);
+        static::assertInstanceOf(FolderResource::class, $folderResource);
+        return $folderResource;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * @return AuthorizationInterface
