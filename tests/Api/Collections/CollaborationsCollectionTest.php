@@ -7,9 +7,12 @@ use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
 
+/**
+ * Class CollaborationsCollectionTest
+ * @package Mitquinn\BoxApiSdk\Tests\Api\Collections
+ */
 class CollaborationsCollectionTest extends BaseTest
 {
-
 
     public function testCreateCollaboration()
     {
@@ -34,7 +37,6 @@ class CollaborationsCollectionTest extends BaseTest
     }
 
 
-
     public function testGetCollaboration()
     {
         //Create Folder
@@ -49,7 +51,6 @@ class CollaborationsCollectionTest extends BaseTest
 
         $this->getBoxService()->folders()->deleteFolder($folderResource->getId());
     }
-
 
     public function testUpdateCollaboration()
     {
@@ -68,7 +69,6 @@ class CollaborationsCollectionTest extends BaseTest
         $this->getBoxService()->folders()->deleteFolder($folderResource->getId());
     }
 
-
     public function testRemoveCollaboration()
     {
         $folderResource = $this->createFolder();
@@ -77,8 +77,5 @@ class CollaborationsCollectionTest extends BaseTest
         static::assertInstanceOf(NoContentResource::class, $noContentResource);
         $this->getBoxService()->folders()->deleteFolder($folderResource->getId());
     }
-
-
-
 
 }
