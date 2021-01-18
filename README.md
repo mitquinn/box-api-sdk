@@ -53,7 +53,7 @@ Group
 * ~~Create Group~~ 1/18/21
 * ~~Remove Group~~ 1/18/21
 * ~~Get Group~~ 1/18/21
-* Update Group
+* ~~Update Group~~ 1/18/21
 * List Groups for Enterprise
 
 

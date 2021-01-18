@@ -11,6 +11,7 @@ use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\CreateGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\GetGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\RemoveGroupRequest;
+use Mitquinn\BoxApiSdk\Requests\Groups\UpdateGroupRequest;
 use Mitquinn\BoxApiSdk\Resources\GroupResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -70,9 +71,26 @@ class GroupsCollection extends BaseCollection
     }
 
 
-    public function updateGroup()
+    /**
+     * @param int $id
+     * @param array $query
+     * @param array $body
+     * @param UpdateGroupRequest|null $updateGroupRequest
+     * @return GroupResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function updateGroup(int $id, array $query = [], array $body = [], UpdateGroupRequest $updateGroupRequest = null): GroupResource
     {
+        if (is_null($updateGroupRequest)) {
+            $updateGroupRequest = new UpdateGroupRequest(id: $id, query: $query, body: $body);
+        }
 
+        return $this->sendGroupRequest($updateGroupRequest);
     }
 
     /**

@@ -53,4 +53,18 @@ class GroupsCollectionTest extends BaseTest
     }
 
 
+    public function testUpdateGroup()
+    {
+        $groupResource = $this->createGroup();
+        $name = $groupResource->getName().' Updated';
+        $updateBody = [
+            'name' => $name
+        ];
+
+        $updateGroupResource = $this->getBoxService()->groups()->updateGroup(id: $groupResource->getId(), body:$updateBody);
+        static::assertInstanceOf(GroupResource::class, $updateGroupResource);
+        static::assertEquals($name, $updateGroupResource->getName() );
+        $this->getBoxService()->groups()->removeGroup($groupResource->getId());
+    }
+
 }
