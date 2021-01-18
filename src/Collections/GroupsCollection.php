@@ -9,7 +9,9 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\CreateGroupRequest;
+use Mitquinn\BoxApiSdk\Requests\Groups\RemoveGroupRequest;
 use Mitquinn\BoxApiSdk\Resources\GroupResource;
+use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Psr\Http\Client\ClientExceptionInterface;
 
 /**
@@ -56,9 +58,13 @@ class GroupsCollection extends BaseCollection
 
     }
 
-    public function removeGroup()
+    public function removeGroup(int $id, RemoveGroupRequest $removeGroupRequest = null): NoContentResource
     {
+        if (is_null($removeGroupRequest)) {
+            $removeGroupRequest = new RemoveGroupRequest(id: $id);
+        }
 
+        return $this->sendNoContentRequest($removeGroupRequest);
     }
 
     /**

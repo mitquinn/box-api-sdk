@@ -51,7 +51,7 @@ Group
 * ~~Group Resource~~ 1/18/21
 * Groups Resource
 * ~~Create Group~~ 1/18/21
-* Remove Group
+* ~~Remove Group~~ 1/18/21
 * Get Group
 * Update Group
 * List Groups for Enterprise
