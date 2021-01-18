@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Mitquinn\BoxApiSdk\Collections;
-
 
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
@@ -12,12 +10,18 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\CreateCollaborationRequest;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\GetCollaborationRequest;
+use Mitquinn\BoxApiSdk\Requests\Collaborations\ListPendingCollaborationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\RemoveCollaborationRequest;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\UpdateCollaborationRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
+use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Psr\Http\Client\ClientExceptionInterface;
 
+/**
+ * Class CollaborationsCollection
+ * @package Mitquinn\BoxApiSdk\Collections
+ */
 class CollaborationsCollection extends BaseCollection
 {
 
@@ -103,6 +107,29 @@ class CollaborationsCollection extends BaseCollection
 
         return $this->sendNoContentRequest($removeCollaborationRequest);
     }
+
+    /**
+     * @param array $query
+     * @param ListPendingCollaborationsRequest|null $listPendingCollaborationsRequest
+     * @return CollaborationsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function listPendingCollaborations(array $query, ListPendingCollaborationsRequest $listPendingCollaborationsRequest = null)
+    {
+
+        if (is_null($listPendingCollaborationsRequest)) {
+            $listPendingCollaborationsRequest = new ListPendingCollaborationsRequest(query: $query);
+        }
+
+        return $this->sendCollaborationsRequest($listPendingCollaborationsRequest);
+    }
+
+
 
     /**
      * @param BaseRequest $request

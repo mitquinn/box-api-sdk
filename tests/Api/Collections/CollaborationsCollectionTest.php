@@ -4,6 +4,7 @@ namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
 
 
 use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
+use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
 
@@ -76,6 +77,15 @@ class CollaborationsCollectionTest extends BaseTest
         $noContentResource = $this->getBoxService()->collaborations()->removeCollaboration($collaborationResource->getId());
         static::assertInstanceOf(NoContentResource::class, $noContentResource);
         $this->getBoxService()->folders()->deleteFolder($folderResource->getId());
+    }
+
+    public function testListPendingCollaborations()
+    {
+        $query = [
+            'status' => 'pending'
+        ];
+        $collaborationsResource = $this->getBoxService()->collaborations()->listPendingCollaborations(query: $query);
+        static::assertInstanceOf(CollaborationsResource::class, $collaborationsResource);
     }
 
 }

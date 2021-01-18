@@ -41,7 +41,7 @@ File Collaborations
 * ~~Collaborations Resource~~ 1/17/21
 * ~~List Folder Collaborations~~ 1/17/21
 * ~~List File Collaborations~~ 1/18/21
-* List Pending Collaborations
+* ~~List Pending Collaborations~~ 1/18/21
 * List Collaborations for Group
 
 
