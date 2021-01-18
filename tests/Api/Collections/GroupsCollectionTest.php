@@ -44,6 +44,13 @@ class GroupsCollectionTest extends BaseTest
         static::assertInstanceOf(NoContentResource::class, $noContentResource);
     }
 
+    public function testGetGroup()
+    {
+        $groupResource = $this->createGroup();
+        $getGroupRequestResource = $this->getBoxService()->groups()->getGroup($groupResource->getId());
+        static::assertInstanceOf(GroupResource::class, $getGroupRequestResource);
+        $this->getBoxService()->groups()->removeGroup($groupResource->getId());
+    }
 
 
 }

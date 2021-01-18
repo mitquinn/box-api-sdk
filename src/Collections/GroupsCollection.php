@@ -9,6 +9,7 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\CreateGroupRequest;
+use Mitquinn\BoxApiSdk\Requests\Groups\GetGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\RemoveGroupRequest;
 use Mitquinn\BoxApiSdk\Resources\GroupResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -26,9 +27,25 @@ class GroupsCollection extends BaseCollection
 
     }
 
-    public function getGroup()
+    /**
+     * @param int $id
+     * @param array $query
+     * @param GetGroupRequest|null $getGroupRequest
+     * @return GroupResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function getGroup(int $id, array $query = [], GetGroupRequest $getGroupRequest = null): GroupResource
     {
+        if (is_null($getGroupRequest)) {
+            $getGroupRequest = new GetGroupRequest(id: $id, query: $query);
+        }
 
+        return $this->sendGroupRequest($getGroupRequest);
     }
 
     /**
@@ -58,6 +75,16 @@ class GroupsCollection extends BaseCollection
 
     }
 
+    /**
+     * @param int $id
+     * @param RemoveGroupRequest|null $removeGroupRequest
+     * @return NoContentResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
     public function removeGroup(int $id, RemoveGroupRequest $removeGroupRequest = null): NoContentResource
     {
         if (is_null($removeGroupRequest)) {

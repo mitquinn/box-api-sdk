@@ -52,7 +52,7 @@ Group
 * Groups Resource
 * ~~Create Group~~ 1/18/21
 * ~~Remove Group~~ 1/18/21
-* Get Group
+* ~~Get Group~~ 1/18/21
 * Update Group
 * List Groups for Enterprise
 
