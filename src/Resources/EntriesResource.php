@@ -10,17 +10,25 @@ use Psr\Http\Message\ResponseInterface;
  */
 abstract class EntriesResource
 {
-
+    /** @var array $entries */
     protected array $entries = [];
 
+    /** @var int $limit */
     protected int $limit;
 
+    /** @var int $offset */
     protected int $offset;
 
+    /** @var array $order */
     protected array $order = [];
 
+    /** @var int $total_count */
     protected int $total_count;
 
+    /**
+     * EntriesResource constructor.
+     * @param ResponseInterface|array $response
+     */
     public function __construct(ResponseInterface|array $response)
     {
         if (is_a($response, ResponseInterface::class)) {
@@ -29,6 +37,10 @@ abstract class EntriesResource
         $this->mapResource($response);
     }
 
+    /**
+     * @param array $response
+     * @return $this
+     */
     protected function mapResource(array $response): static
     {
         if (array_key_exists('limit', $response)) {
@@ -44,7 +56,7 @@ abstract class EntriesResource
         }
 
         if (array_key_exists('total_count', $response)) {
-            $this->setTotalCount($response['limit']);
+            $this->setTotalCount($response['total_count']);
         }
 
         return $this;

@@ -11,8 +11,10 @@ use Mitquinn\BoxApiSdk\Requests\Folders\CopyFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\CreateFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\DeleteFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\GetFolderInformationRequest;
+use Mitquinn\BoxApiSdk\Requests\Folders\ListFolderCollaborationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\ListItemsInFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\UpdateFolderRequest;
+use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -128,8 +130,31 @@ class FoldersCollection extends BaseCollection
         }
 
         return $this->sendFolderRequest($updateFolderRequest);
-
     }
+
+    /**
+     * @param int $id
+     * @param array $query
+     * @param ListFolderCollaborationsRequest|null $listFolderCollaborationsRequest
+     * @return CollaborationsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     * @throws \Mitquinn\BoxApiSdk\Exceptions\BoxConflictException
+     */
+    public function listFolderCollaborations(int $id, array $query = [], ListFolderCollaborationsRequest $listFolderCollaborationsRequest = null): CollaborationsResource
+    {
+        if (is_null($listFolderCollaborationsRequest)) {
+            $listFolderCollaborationsRequest = new ListFolderCollaborationsRequest(id: $id, query: $query);
+        }
+
+        return $this->sendCollaborationsRequest($listFolderCollaborationsRequest);
+    }
+
+
+
 
     /**
      * @param int $id

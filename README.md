@@ -4,7 +4,12 @@ This is an unofficial Box.com API SDK.
 
 Todo: 
 Total Api Requests Included
-14/188 Requests - Estimated time for completion April 6th
+19/188 Requests - Estimated time for completion April 6th
+
+Users Api
+* Delete User
+* Create User
+
 
 Folders Api
 * ~~Finished adding test cases for testGetFolderInformationFillFields~~ 1/1/21
@@ -22,15 +27,24 @@ Folders Api
 * ~~Delete File~~ 1/10/21
 * ~~Get File Thumbnail~~ 1/10/21
 * ~~Copy File~~ 1/11/21
+* Update File
 
 Collaborations
 * ~~Collaboration Resource~~ 1/14/21
-* Collaborations Resource
 * ~~Create Collaboration~~ 1/14/21
   * ~~add test for Create Collaboration~~ 1/15/21
 * ~~Get Collaboration~~ 1/16/21
 * ~~Update Collaboration~~ 1/16/21 
 * ~~Delete Collaboration~~ 1/16/21
+
+File Collaborations
+* ~~Collaborations Resource~~ 1/17/21
+* ~~List Folder Collaborations~~ 1/17/21
+* List File Collaborations
+* List Pending Collaborations
+* List Collaborations for Group
+
+
 
 General
 * Create ReadMe

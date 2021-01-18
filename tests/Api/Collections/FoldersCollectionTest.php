@@ -2,6 +2,7 @@
 
 namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
 
+use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -169,6 +170,15 @@ class FoldersCollectionTest extends BaseTest
         $noContentResource2 = $this->getBoxService()->folders()->deleteFolder($copyFolderResource->getId());
         static::assertInstanceOf(NoContentResource::class ,$noContentResource2);
     }
+
+    public function testListFolderCollaborations()
+    {
+        $folderResource = $this->createFolder();
+        $collaborationsResource = $this->getBoxService()->folders()->listFolderCollaborations($folderResource->getId());
+        static::assertInstanceOf(CollaborationsResource::class, $collaborationsResource);
+        $this->getBoxService()->folders()->deleteFolder($folderResource->getId());
+    }
+
 
 
 }

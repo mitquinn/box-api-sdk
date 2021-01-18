@@ -7,6 +7,7 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
+use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Mitquinn\BoxApiSdk\Traits\CanValidateHttpResponse;
@@ -32,6 +33,26 @@ abstract class BaseCollection
     {
         $this->setClient($client);
     }
+
+    /**
+     * @param BaseRequest $request
+     * @return CollaborationsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     * @throws \Mitquinn\BoxApiSdk\Exceptions\BoxConflictException
+     */
+    public function sendCollaborationsRequest(BaseRequest $request): CollaborationsResource
+    {
+        $response = $this->getClient()->sendRequest($request->generateRequestInterface());
+
+        $this->validateResponse($response);
+
+        return new CollaborationsResource($response);
+    }
+
 
     /**
      * @param BaseRequest $request
