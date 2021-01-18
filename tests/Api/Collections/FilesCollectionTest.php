@@ -4,6 +4,7 @@ namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
 
 use Carbon\Carbon;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
+use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\FileResource;
 use Mitquinn\BoxApiSdk\Resources\FilesResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -16,7 +17,7 @@ use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
 class FilesCollectionTest extends BaseTest
 {
 
-    public function uploadFile(): FilesResource
+    public function uploadFile(): FileResource
     {
         $name = $this->faker->firstName;
         $path = "tests/TestingData/TestingFile.txt";
@@ -36,7 +37,12 @@ class FilesCollectionTest extends BaseTest
                 'filename' => $name
             ]
         ];
-        return $this->getBoxService()->files()->uploadFile(body: $body);
+        $filesResource = $this->getBoxService()->files()->uploadFile(body: $body);
+        static::assertInstanceOf(FilesResource::class, $filesResource);
+        static::assertIsArray($filesResource->getEntries());
+        static::assertIsInt($filesResource->getTotalCount());
+        $entriesArray = $filesResource->getEntries();
+        return $entriesArray[0];
     }
 
     public function uploadPng(): FilesResource
@@ -77,34 +83,27 @@ class FilesCollectionTest extends BaseTest
 
     public function testUploadFile()
     {
-        $filesResource = $this->uploadFile();
-        static::assertInstanceOf(FilesResource::class, $filesResource);
-        static::assertIsArray($filesResource->getEntries());
-        static::assertIsInt($filesResource->getTotalCount());
-        $entriesArray = $filesResource->getEntries();
-        $fileResource = $entriesArray[0];
+        $fileResource = $this->uploadFile();
         $noContentResource = $this->getBoxService()->files()->deleteFile($fileResource->getId());
+        static::assertInstanceOf(NoContentResource::class, $noContentResource);
     }
 
     public function testGetFileInformation()
     {
-        $filesResource = $this->uploadFile();
-        $entriesArray = $filesResource->getEntries();
-        $oldFileResource = $entriesArray[0];
+        $oldFileResource = $this->uploadFile();
         $fileResource = $this->getBoxService()->files()->getFileInformation($oldFileResource->getId());
         static::assertInstanceOf(FileResource::class, $fileResource);
         $noContentResource = $this->getBoxService()->files()->deleteFile($fileResource->getId());
+        static::assertInstanceOf(NoContentResource::class, $noContentResource);
     }
 
     public function testDeleteFile()
     {
-        $filesResource = $this->uploadFile();
-        $entriesArray = $filesResource->getEntries();
-        $fileResource = $entriesArray[0];
+        $fileResource = $this->uploadFile();
         $noContentResource = $this->getBoxService()->files()->deleteFile($fileResource->getId());
         static::assertInstanceOf(NoContentResource::class, $noContentResource);
         static::expectException(BoxNotFoundException::class);
-        $checkFileResource = $this->getBoxService()->files()->getFileInformation($fileResource->getId());
+        $this->getBoxService()->files()->getFileInformation($fileResource->getId());
     }
 
     public function testGetFileThumbnail()
@@ -123,9 +122,7 @@ class FilesCollectionTest extends BaseTest
 
     public function testCopyFile()
     {
-        $filesResource = $this->uploadFile();
-        $entriesArray = $filesResource->getEntries();
-        $oldFileResource = $entriesArray[0];
+        $oldFileResource = $this->uploadFile();
         $newFileName = $oldFileResource->getName().'- Copy';
         $body = [
             'name' => $newFileName,
@@ -141,6 +138,15 @@ class FilesCollectionTest extends BaseTest
         $this->getBoxService()->files()->deleteFile($fileResource->getId());
     }
 
+
+    public function testListFileCollaborations()
+    {
+        $fileResource = $this->uploadFile();
+        $collaborationsResource = $this->getBoxService()->files()->listFileCollaborations($fileResource->getId());
+        static::assertInstanceOf(CollaborationsResource::class, $collaborationsResource);
+        $noContentResource = $this->getBoxService()->files()->deleteFile($fileResource->getId());
+        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+    }
 
 
 

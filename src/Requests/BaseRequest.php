@@ -50,6 +50,9 @@ abstract class BaseRequest implements BaseRequestInterface
         $this->setBody(body: $body);
     }
 
+    /**
+     * @return string
+     */
     abstract public function getUri(): string;
 
 

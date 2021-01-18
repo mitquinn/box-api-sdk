@@ -11,8 +11,10 @@ use Mitquinn\BoxApiSdk\Requests\Files\CopyFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\DeleteFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileInformationRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileThumbnailRequest;
+use Mitquinn\BoxApiSdk\Requests\Files\ListFileCollaborationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UploadFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\CopyFolderRequest;
+use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\FileResource;
 use Mitquinn\BoxApiSdk\Resources\FilesResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -86,6 +88,28 @@ class FilesCollection extends BaseCollection
 
         return $this->sendNoContentRequest($deleteFileRequest);
     }
+
+    /**
+     * @param int $id
+     * @param array $query
+     * @param ListFileCollaborationsRequest|null $listFileCollaborationsRequest
+     * @return CollaborationsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     * @throws \Mitquinn\BoxApiSdk\Exceptions\BoxConflictException
+     */
+    public function listFileCollaborations(int $id, array $query = [], ListFileCollaborationsRequest $listFileCollaborationsRequest = null): CollaborationsResource
+    {
+        if (is_null($listFileCollaborationsRequest)) {
+            $listFileCollaborationsRequest = new ListFileCollaborationsRequest(id: $id, query: $query);
+        }
+
+        return $this->sendCollaborationsRequest($listFileCollaborationsRequest);
+    }
+
 
 
     /**
