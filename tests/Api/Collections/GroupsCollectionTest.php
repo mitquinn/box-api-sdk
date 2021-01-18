@@ -3,6 +3,7 @@
 namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
 
 use Mitquinn\BoxApiSdk\Resources\GroupResource;
+use Mitquinn\BoxApiSdk\Resources\GroupsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
 
@@ -66,5 +67,13 @@ class GroupsCollectionTest extends BaseTest
         static::assertEquals($name, $updateGroupResource->getName() );
         $this->getBoxService()->groups()->removeGroup($groupResource->getId());
     }
+
+    public function testListGroupsForEnterprise()
+    {
+        $groupsResource = $this->getBoxService()->groups()->listGroupsForEnterprise();
+        static::assertInstanceOf(GroupsResource::class, $groupsResource);
+    }
+
+
 
 }

@@ -4,7 +4,7 @@ This is an unofficial Box.com API SDK.
 
 Todo: 
 Total Api Requests Included
-21/188 Requests - Estimated time for completion April 6th
+26/188 Requests - Estimated time for completion April 6th
 
 
 Users Api
@@ -47,14 +47,14 @@ List Collaborations
   * blocked by groups api
 
 Group
-* Group Collection
+* ~~Group Collection~~ 1/18/21
 * ~~Group Resource~~ 1/18/21
-* Groups Resource
+* ~~Groups Resource~~ 1/18/21
 * ~~Create Group~~ 1/18/21
 * ~~Remove Group~~ 1/18/21
 * ~~Get Group~~ 1/18/21
 * ~~Update Group~~ 1/18/21
-* List Groups for Enterprise
+* ~~List Groups for Enterprise~~ 1/18/21
 
 
 

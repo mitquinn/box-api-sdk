@@ -10,9 +10,11 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\CreateGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\GetGroupRequest;
+use Mitquinn\BoxApiSdk\Requests\Groups\ListGroupsForEnterpriseRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\RemoveGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\UpdateGroupRequest;
 use Mitquinn\BoxApiSdk\Resources\GroupResource;
+use Mitquinn\BoxApiSdk\Resources\GroupsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Psr\Http\Client\ClientExceptionInterface;
 
@@ -23,8 +25,24 @@ use Psr\Http\Client\ClientExceptionInterface;
 class GroupsCollection extends BaseCollection
 {
 
-    public function listGroupsForEnterprise()
+    /**
+     * @param array $query
+     * @param ListGroupsForEnterpriseRequest|null $listGroupsForEnterpriseRequest
+     * @return GroupsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function listGroupsForEnterprise(array $query = [], ListGroupsForEnterpriseRequest $listGroupsForEnterpriseRequest = null)
     {
+        if (is_null($listGroupsForEnterpriseRequest)) {
+            $listGroupsForEnterpriseRequest = new ListGroupsForEnterpriseRequest(query: $query);
+        }
+
+        return $this->sendGroupsRequest($listGroupsForEnterpriseRequest);
 
     }
 
@@ -131,9 +149,23 @@ class GroupsCollection extends BaseCollection
         return new GroupResource($response);
     }
 
-    protected function sendGroupsRequest()
+    /**
+     * @param BaseRequest $request
+     * @return GroupsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    protected function sendGroupsRequest(BaseRequest $request): GroupsResource
     {
+        $response = $this->getClient()->sendRequest($request->generateRequestInterface());
 
+        $this->validateResponse($response);
+
+        return new GroupsResource($response);
     }
 
 }
