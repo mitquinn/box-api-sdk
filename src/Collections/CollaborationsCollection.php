@@ -119,7 +119,7 @@ class CollaborationsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function listPendingCollaborations(array $query, ListPendingCollaborationsRequest $listPendingCollaborationsRequest = null)
+    public function listPendingCollaborations(array $query, ListPendingCollaborationsRequest $listPendingCollaborationsRequest = null): CollaborationsResource
     {
 
         if (is_null($listPendingCollaborationsRequest)) {
@@ -128,6 +128,8 @@ class CollaborationsCollection extends BaseCollection
 
         return $this->sendCollaborationsRequest($listPendingCollaborationsRequest);
     }
+
+
 
 
 

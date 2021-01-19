@@ -10,9 +10,11 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\CreateGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\GetGroupRequest;
+use Mitquinn\BoxApiSdk\Requests\Groups\ListGroupCollaborationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\ListGroupsForEnterpriseRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\RemoveGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\UpdateGroupRequest;
+use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\GroupResource;
 use Mitquinn\BoxApiSdk\Resources\GroupsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -129,6 +131,29 @@ class GroupsCollection extends BaseCollection
 
         return $this->sendNoContentRequest($removeGroupRequest);
     }
+
+    /**
+     * @param int $id
+     * @param array $query
+     * @param ListGroupCollaborationsRequest|null $listGroupCollaborationsRequest
+     * @return CollaborationsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function listGroupCollaborations(int $id, array $query = [], ListGroupCollaborationsRequest $listGroupCollaborationsRequest = null)
+    {
+        if (is_null($listGroupCollaborationsRequest)) {
+            $listGroupCollaborationsRequest = new ListGroupCollaborationsRequest(id: $id, query: $query);
+        }
+
+        return $this->sendCollaborationsRequest($listGroupCollaborationsRequest);
+
+    }
+
 
     /**
      * @param BaseRequest $request
