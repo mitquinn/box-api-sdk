@@ -4,15 +4,18 @@ namespace Mitquinn\BoxApiSdk\Collections;
 
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
+use Mitquinn\BoxApiSdk\Exceptions\BoxConflictException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
+use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Mitquinn\BoxApiSdk\Traits\CanValidateHttpResponse;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class BaseCollection
@@ -36,13 +39,31 @@ abstract class BaseCollection
 
     /**
      * @param BaseRequest $request
+     * @return ResponseInterface
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     * @throws BoxConflictException
+     */
+    private function sendRequest(BaseRequest $request): ResponseInterface
+    {
+        $response = $this->getClient()->sendRequest($request->generateRequestInterface());
+        $this->validateResponse($response);
+        return $response;
+    }
+
+
+    /**
+     * @param BaseRequest $request
      * @return CollaborationsResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
-     * @throws \Mitquinn\BoxApiSdk\Exceptions\BoxConflictException
+     * @throws BoxConflictException
      */
     public function sendCollaborationsRequest(BaseRequest $request): CollaborationsResource
     {
@@ -89,6 +110,21 @@ abstract class BaseCollection
         $this->validateResponse($response);
 
         return new ItemsResource($response);
+    }
+
+    /**
+     * @param BaseRequest $request
+     * @return GroupMembershipsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    protected function sendGroupMembershipsRequest(BaseRequest $request): GroupMembershipsResource
+    {
+        return new GroupMembershipsResource($this->sendRequest($request));
     }
 
 

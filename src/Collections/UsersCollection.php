@@ -4,13 +4,16 @@ namespace Mitquinn\BoxApiSdk\Collections;
 
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
+use Mitquinn\BoxApiSdk\Exceptions\BoxConflictException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\GetCurrentUserRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\GetUserRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\ListEnterpriseUsersRequest;
+use Mitquinn\BoxApiSdk\Requests\Users\ListUsersGroupsRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\UpdateUserRequest;
+use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
 use Mitquinn\BoxApiSdk\Resources\UserResource;
 use Mitquinn\BoxApiSdk\Resources\UsersResource;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -117,6 +120,28 @@ class UsersCollection extends BaseCollection
      */
     public function deleteUser(): UserResource
     {
+
+    }
+
+    /**
+     * @param int $id
+     * @param array $query
+     * @param ListUsersGroupsRequest|null $listUsersGroupsRequest
+     * @return GroupMembershipsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     * @throws BoxConflictException
+     */
+    public function listUsersGroups(int $id, array $query = [], ListUsersGroupsRequest $listUsersGroupsRequest = null)
+    {
+        if (is_null($listUsersGroupsRequest)) {
+            $listUsersGroupsRequest = new ListUsersGroupsRequest(id: $id, query: $query);
+        }
+
+        return $this->sendGroupMembershipsRequest($listUsersGroupsRequest);
 
     }
 

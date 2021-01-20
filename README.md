@@ -57,10 +57,10 @@ Group
 
 Group Membership
 * GroupMembership Resource
-* GroupMemberships Resource
+* ~~GroupMemberships Resource~~ 1/20/21
 * GroupMemberships Collection
 * Add User to Group
-* List Users Groups
+* ~~List Users Groups~~ 1/20/21
 * List members of Group
 * Update Group Membership
 * Remove User from Group

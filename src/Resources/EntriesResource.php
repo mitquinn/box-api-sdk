@@ -10,6 +10,9 @@ use Psr\Http\Message\ResponseInterface;
  */
 abstract class EntriesResource
 {
+    /** @var array $response */
+    protected array $response;
+
     /** @var array $entries */
     protected array $entries = [];
 
@@ -35,6 +38,7 @@ abstract class EntriesResource
             $response = json_decode($response->getBody()->getContents(), true);
         }
         $this->mapResource($response);
+        $this->setResponse($response);
     }
 
     /**
@@ -152,6 +156,24 @@ abstract class EntriesResource
     public function setTotalCount(int $total_count): EntriesResource
     {
         $this->total_count = $total_count;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResponse(): array
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param array $response
+     * @return EntriesResource
+     */
+    public function setResponse(array $response): EntriesResource
+    {
+        $this->response = $response;
         return $this;
     }
 

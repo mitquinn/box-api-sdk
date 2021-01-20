@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Resources;
+namespace Mitquinn\BoxApiSdk\Traits;
 
 /**
  * Trait HasIsExternallyOwned

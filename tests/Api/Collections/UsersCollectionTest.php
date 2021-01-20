@@ -2,6 +2,7 @@
 
 namespace Mitquinn\BoxApiSdk\Tests\Api\User;
 
+use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
 use Mitquinn\BoxApiSdk\Resources\UserResource;
 use Mitquinn\BoxApiSdk\Resources\UsersResource;
 use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
@@ -83,6 +84,12 @@ class UsersCollectionTest extends BaseTest
         static::assertInstanceOf($userResource::class, $userResource);
     }
 
+    public function testListUsersGroups()
+    {
+        $userResource = $this->getBoxService()->users()->getCurrentUser();
+        $groupMembershipsResource = $this->getBoxService()->users()->listUsersGroups($userResource->getId());
+        static::assertInstanceOf(GroupMembershipsResource::class, $groupMembershipsResource);
+    }
 
 
 }
