@@ -12,9 +12,11 @@ use Mitquinn\BoxApiSdk\Requests\Groups\CreateGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\GetGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\ListGroupCollaborationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\ListGroupsForEnterpriseRequest;
+use Mitquinn\BoxApiSdk\Requests\Groups\ListMembersOfGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\RemoveGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\UpdateGroupRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
+use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
 use Mitquinn\BoxApiSdk\Resources\GroupResource;
 use Mitquinn\BoxApiSdk\Resources\GroupsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -144,14 +146,35 @@ class GroupsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function listGroupCollaborations(int $id, array $query = [], ListGroupCollaborationsRequest $listGroupCollaborationsRequest = null)
+    public function listGroupCollaborations(int $id, array $query = [], ListGroupCollaborationsRequest $listGroupCollaborationsRequest = null): CollaborationsResource
     {
         if (is_null($listGroupCollaborationsRequest)) {
             $listGroupCollaborationsRequest = new ListGroupCollaborationsRequest(id: $id, query: $query);
         }
 
         return $this->sendCollaborationsRequest($listGroupCollaborationsRequest);
+    }
 
+
+    /**
+     * @param int $id
+     * @param array $query
+     * @param ListMembersOfGroupRequest|null $listMembersOfGroupRequest
+     * @return GroupMembershipsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function listMembersOfGroup(int $id, array $query = [], ListMembersOfGroupRequest $listMembersOfGroupRequest = null): GroupMembershipsResource
+    {
+        if (is_null($listMembersOfGroupRequest)) {
+            $listMembersOfGroupRequest = new ListMembersOfGroupRequest(id: $id, query: $query);
+        }
+
+        return $this->sendGroupMembershipsRequest($listMembersOfGroupRequest);
     }
 
 

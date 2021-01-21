@@ -56,12 +56,12 @@ Group
 * ~~List Groups for Enterprise~~ 1/18/21
 
 Group Membership
-* GroupMembership Resource
+* ~~GroupMembership Resource~~ 1/21/21
 * ~~GroupMemberships Resource~~ 1/20/21
 * GroupMemberships Collection
 * Add User to Group
 * ~~List Users Groups~~ 1/20/21
-* List members of Group
+* ~~List members of Group~~
 * Update Group Membership
 * Remove User from Group
 

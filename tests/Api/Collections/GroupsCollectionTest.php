@@ -3,6 +3,7 @@
 namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
 
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
+use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
 use Mitquinn\BoxApiSdk\Resources\GroupResource;
 use Mitquinn\BoxApiSdk\Resources\GroupsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -81,6 +82,14 @@ class GroupsCollectionTest extends BaseTest
         $groupResource = $this->createGroup();
         $collaborationsResource = $this->getBoxService()->groups()->listGroupCollaborations($groupResource->getId());
         static::assertInstanceOf(CollaborationsResource::class, $collaborationsResource);
+        $this->getBoxService()->groups()->removeGroup($groupResource->getId());
+    }
+
+    public function testListMembersOfGroup()
+    {
+        $groupResource = $this->createGroup();
+        $groupMembershipsResource = $this->getBoxService()->groups()->listMembersOfGroup($groupResource->getId());
+        static::assertInstanceOf(GroupMembershipsResource::class, $groupMembershipsResource);
         $this->getBoxService()->groups()->removeGroup($groupResource->getId());
     }
 
