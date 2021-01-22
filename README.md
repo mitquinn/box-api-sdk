@@ -59,13 +59,13 @@ Group Membership
 * ~~GroupMembership Resource~~ 1/21/21
 * ~~GroupMemberships Resource~~ 1/20/21
 * GroupMemberships Collection
-* Add User to Group
+* ~~Get Group Membership~~ 1/21/21
+  * ~~Need to create the group membership before I can get it.~~ 1/22/21 
+* ~~Add User to Group~~ 1/22/21
 * ~~List Users Groups~~ 1/20/21
 * ~~List members of Group~~
 * Update Group Membership
 * Remove User from Group
-
-
 
 General
 * Create ReadMe

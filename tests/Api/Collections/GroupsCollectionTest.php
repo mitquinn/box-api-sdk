@@ -16,19 +16,6 @@ use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
 class GroupsCollectionTest extends BaseTest
 {
 
-
-    public function createGroup(): GroupResource
-    {
-        $body = [
-            'name' => $this->faker->name
-        ];
-
-        $groupResource = $this->getBoxService()->groups()->createGroup(body: $body);
-        static::assertInstanceOf(GroupResource::class, $groupResource);
-        return $groupResource;
-    }
-
-
     public function testCreateGroup()
     {
         $body = [

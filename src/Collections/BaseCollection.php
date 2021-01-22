@@ -9,6 +9,7 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
+use Mitquinn\BoxApiSdk\Resources\GroupMembershipResource;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -111,6 +112,22 @@ abstract class BaseCollection
 
         return new ItemsResource($response);
     }
+
+    /**
+     * @param BaseRequest $request
+     * @return GroupMembershipResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    protected function sendGroupMembershipRequest(BaseRequest $request): GroupMembershipResource
+    {
+        return new GroupMembershipResource($this->sendRequest($request));
+    }
+
 
     /**
      * @param BaseRequest $request

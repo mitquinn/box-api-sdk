@@ -9,6 +9,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mitquinn\BoxApiSdk\Collections\CollaborationsCollection;
 use Mitquinn\BoxApiSdk\Collections\FilesCollection;
 use Mitquinn\BoxApiSdk\Collections\FoldersCollection;
+use Mitquinn\BoxApiSdk\Collections\GroupMembershipsCollection;
 use Mitquinn\BoxApiSdk\Collections\GroupsCollection;
 use Mitquinn\BoxApiSdk\Collections\UsersCollection;
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
@@ -36,6 +37,9 @@ class BoxService
 
     /** @var GroupsCollection $groupsCollection */
     protected GroupsCollection $groupsCollection;
+
+    /** @var GroupMembershipsCollection $groupMembershipCollection */
+    protected GroupMembershipsCollection $groupMembershipCollection;
 
 
     /** @var AuthorizationInterface $authorizationConfiguration */
@@ -112,6 +116,16 @@ class BoxService
         $this->filesCollection = new FilesCollection($this->getClient());
         $this->collaborationsCollection = new CollaborationsCollection($this->getClient());
         $this->groupsCollection = new GroupsCollection($this->getClient());
+        $this->groupMembershipCollection = new GroupMembershipsCollection($this->getClient());
+    }
+
+
+    /**
+     * @return GroupMembershipsCollection
+     */
+    public function groupMemberships(): GroupMembershipsCollection
+    {
+        return $this->groupMembershipCollection;
     }
 
     /**

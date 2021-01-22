@@ -9,6 +9,7 @@ use Mitquinn\BoxApiSdk\BoxService;
 use Mitquinn\BoxApiSdk\Interfaces\AuthorizationInterface;
 use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
+use Mitquinn\BoxApiSdk\Resources\GroupResource;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Dotenv\Dotenv;
 
@@ -103,18 +104,16 @@ abstract class BaseTest extends TestCase
         return $collaborationResource;
     }
 
+    public function createGroup(): GroupResource
+    {
+        $body = [
+            'name' => $this->faker->name
+        ];
 
-
-
-
-
-
-
-
-
-
-
-
+        $groupResource = $this->getBoxService()->groups()->createGroup(body: $body);
+        static::assertInstanceOf(GroupResource::class, $groupResource);
+        return $groupResource;
+    }
 
 
     /**
