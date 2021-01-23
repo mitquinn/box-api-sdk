@@ -10,6 +10,7 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipResource;
 use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
 use Psr\Http\Client\ClientExceptionInterface;
+use Throwable;
 
 /**
  * Class GroupMembershipsCollection
@@ -72,5 +73,14 @@ class GroupMembershipsCollectionTest extends BaseTest
         static::assertInstanceOf(GroupMembershipResource::class, $groupMembershipResource);
         $this->getBoxService()->groups()->removeGroup($groupMembershipResource->getGroup()->getId());
     }
+
+    public function testUpdateGroupMembership()
+    {
+        $groupMembershipResource = $this->createGroupMembership();
+        $updatedGroupMembershipResource = $this->getBoxService()->groupMemberships()->updateGroupMembership($groupMembershipResource->getId());
+        static::assertInstanceOf(GroupMembershipResource::class, $updatedGroupMembershipResource);
+        $this->getBoxService()->groups()->removeGroup($groupMembershipResource->getGroup()->getId());
+    }
+
 
 }

@@ -64,7 +64,7 @@ Group Membership
 * ~~Add User to Group~~ 1/22/21
 * ~~List Users Groups~~ 1/20/21
 * ~~List members of Group~~
-* Update Group Membership
+* ~~Update Group Membership~~ 1/22/21
 * Remove User from Group
 
 General

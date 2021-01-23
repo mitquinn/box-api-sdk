@@ -10,6 +10,7 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Requests\GroupMemberships\AddUserToGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\GroupMemberships\GetGroupMembershipRequest;
+use Mitquinn\BoxApiSdk\Requests\GroupMemberships\UpdateGroupMembershipRequest;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipResource;
 use Psr\Http\Client\ClientExceptionInterface;
 
@@ -63,9 +64,26 @@ class GroupMembershipsCollection extends BaseCollection
         return $this->sendGroupMembershipRequest($addUserToGroupRequest);
     }
 
-    public function updateGroupMembership()
+    /**
+     * @param int $id
+     * @param array $query
+     * @param array $body
+     * @param UpdateGroupMembershipRequest|null $updateGroupMembershipRequest
+     * @return GroupMembershipResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function updateGroupMembership(int $id, array $query = [], array $body = [], UpdateGroupMembershipRequest $updateGroupMembershipRequest = null): GroupMembershipResource
     {
+        if (is_null($updateGroupMembershipRequest)) {
+            $updateGroupMembershipRequest = new UpdateGroupMembershipRequest(id: $id, query: $query, body: $body);
+        }
 
+        return $this->sendGroupMembershipRequest($updateGroupMembershipRequest);
     }
 
     public function removeUserFromGroup()
