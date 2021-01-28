@@ -7,11 +7,12 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxConflictException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
-use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Requests\GroupMemberships\AddUserToGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\GroupMemberships\GetGroupMembershipRequest;
+use Mitquinn\BoxApiSdk\Requests\GroupMemberships\RemoveUserFromGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\GroupMemberships\UpdateGroupMembershipRequest;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipResource;
+use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Psr\Http\Client\ClientExceptionInterface;
 
 /**
@@ -86,9 +87,23 @@ class GroupMembershipsCollection extends BaseCollection
         return $this->sendGroupMembershipRequest($updateGroupMembershipRequest);
     }
 
-    public function removeUserFromGroup()
+    /**
+     * @param int $id
+     * @param RemoveUserFromGroupRequest|null $removeUserFromGroupRequest
+     * @return NoContentResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function removeUserFromGroup(int $id, RemoveUserFromGroupRequest $removeUserFromGroupRequest = null): NoContentResource
     {
+        if (is_null($removeUserFromGroupRequest)) {
+            $removeUserFromGroupRequest = new RemoveUserFromGroupRequest(id: $id);
+        }
 
+        return $this->sendNoContentRequest($removeUserFromGroupRequest);
     }
 
 
