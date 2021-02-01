@@ -2,6 +2,8 @@
 
 namespace Mitquinn\BoxApiSdk\Requests\Folders;
 
+use Adbar\Dot;
+use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 
 /**
@@ -13,11 +15,36 @@ class CreateFolderRequest extends BaseRequest
     /** @var string $method */
     protected string $method = 'POST';
 
+    public function __construct(array $body, array $query = [])
+    {
+        parent::__construct(query: $query, body: $body);
+    }
+
     /**
      * @return string
      */
     public function getUri(): string
     {
         return $this->generateUri('folders');
+    }
+
+    public function validateQuery(array $query): bool
+    {
+        return true;
+    }
+
+    public function validateBody(array $body): bool
+    {
+        $dot = new Dot($body);
+        if ($dot->isEmpty(['name', 'parent.id'])) {
+            throw new BoxBadRequestException();
+        }
+
+        return true;
+    }
+
+    public function validateHeader(array $header): bool
+    {
+        return true;
     }
 }

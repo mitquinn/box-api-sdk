@@ -14,7 +14,8 @@
         "php": "^8.0",
         "guzzlehttp/guzzle": "^7.2",
         "ext-json": "*",
-        "ext-openssl": "*"
+        "ext-openssl": "*",
+        "adbario/php-dot-notation": "^2.2"
     },
     "autoload": {
         "psr-4": {

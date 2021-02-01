@@ -3,7 +3,6 @@
 namespace Mitquinn\BoxApiSdk\Requests;
 
 use GuzzleHttp\Psr7\Request;
-use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
 use Mitquinn\BoxApiSdk\Interfaces\BaseRequestInterface;
 use Psr\Http\Message\RequestInterface;
@@ -45,15 +44,36 @@ abstract class BaseRequest implements BaseRequestInterface
      */
     public function __construct(array $query = [], array $body = [], array $header = [])
     {
-        $this->setHeader(header: $header);
+        $this->validateQuery(query: $query);
+        $this->validateBody(body: $body);
+        $this->validateHeader(header: $header);
         $this->setQuery(query: $query);
         $this->setBody(body: $body);
+        $this->setHeader(header: $header);
     }
 
     /**
      * @return string
      */
     abstract public function getUri(): string;
+
+    /**
+     * @param array $query
+     * @return bool
+     */
+    abstract public function validateQuery(array $query): bool;
+
+    /**
+     * @param array $body
+     * @return bool
+     */
+    abstract public function validateBody(array $body): bool;
+
+    /**
+     * @param array $header
+     * @return bool
+     */
+    abstract public function validateHeader(array $header): bool;
 
 
     /**
@@ -68,6 +88,16 @@ abstract class BaseRequest implements BaseRequestInterface
             $this->getHeader(),
             json_encode($this->getBody())
         );
+    }
+
+    /**
+     * @param string $method
+     * @return BaseRequest
+     */
+    public function setMethod(string $method): BaseRequest
+    {
+        $this->method = $method;
+        return $this;
     }
 
     /**

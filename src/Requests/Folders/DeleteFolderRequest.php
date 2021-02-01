@@ -15,15 +15,30 @@ class DeleteFolderRequest extends BaseRequest
 
     protected string $method = 'DELETE';
 
-    public function __construct(int $id, array $query = [], array $body = [], array $header = [])
+    public function __construct(int $id, array $query = [], array $header = [])
     {
-        parent::__construct($query, $body, $header);
         $this->setId($id);
+        parent::__construct(query: $query, header: $header);
     }
 
     public function getUri(): string
     {
         $requestSegment = 'folders/'.$this->getId();
         return $this->generateUri($requestSegment);
+    }
+
+    public function validateQuery(array $query): bool
+    {
+        return true;
+    }
+
+    public function validateBody(array $body): bool
+    {
+        return true;
+    }
+
+    public function validateHeader(array $header): bool
+    {
+        return true;
     }
 }

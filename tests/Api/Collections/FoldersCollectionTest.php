@@ -2,6 +2,9 @@
 
 namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
 
+use Mitquinn\BoxApiSdk\Requests\Folders\CreateFolderRequest;
+use Mitquinn\BoxApiSdk\Requests\Folders\DeleteFolderRequest;
+use Mitquinn\BoxApiSdk\Requests\GenericRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
@@ -79,7 +82,7 @@ class FoldersCollectionTest extends BaseTest
         static::assertInstanceOf(ItemsResource::class, $itemsResource);
     }
 
-    public function testCreateFolderTest()
+    public function testCreateFolder()
     {
         $body = [
             'name' => $this->faker->name,
@@ -88,7 +91,7 @@ class FoldersCollectionTest extends BaseTest
             ]
         ];
 
-        $folderResource = $this->getBoxService()->folders()->createFolder($body);
+        $folderResource = $this->getBoxService()->folders()->createFolder(new CreateFolderRequest(body: $body));
         static::assertInstanceOf(FolderResource::class, $folderResource);
     }
 
@@ -100,12 +103,15 @@ class FoldersCollectionTest extends BaseTest
                 'id' => 0
             ]
         ];
-        $folderResource = $this->getBoxService()->folders()->createFolder($body);
+        $createFolderRequest = new CreateFolderRequest(body: $body);
+        $folderResource = $this->getBoxService()->folders()->createFolder($createFolderRequest);
         static::assertInstanceOf(FolderResource::class, $folderResource);
 
 
         $deleteThisId = $folderResource->getId();
-        $noContentResource = $this->getBoxService()->folders()->deleteFolder($deleteThisId);
+        $deleteFolderRequest = new DeleteFolderRequest(id: $deleteThisId);
+//        $deleteFolderRequest = new GenericRequest('DELETE', "folders/$deleteThisId");
+        $noContentResource = $this->getBoxService()->folders()->deleteFolder($deleteFolderRequest);
         static::assertInstanceOf(NoContentResource::class ,$noContentResource);
 
     }
