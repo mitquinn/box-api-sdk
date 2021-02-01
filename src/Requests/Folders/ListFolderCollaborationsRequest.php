@@ -20,21 +20,43 @@ class ListFolderCollaborationsRequest extends BaseRequest
      * ListFolderCollaborationsRequest constructor.
      * @param int $id
      * @param array $query
-     * @param array $body
-     * @param array $header
      */
-    public function __construct(int $id, array $query = [], array $body = [], array $header = [])
+    public function __construct(int $id, array $query = [], )
     {
         $this->setId($id);
-        parent::__construct(query: $query, body: $body, header: $header);
+        parent::__construct(query: $query);
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getUri(): string
     {
         $requestSegment = 'folders/'.$this->getId().'/collaborations';
         return $this->generateUri($requestSegment);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function validateQuery(array $query): bool
+    {
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function validateBody(array $body): bool
+    {
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function validateHeader(array $header): bool
+    {
+        return true;
     }
 }

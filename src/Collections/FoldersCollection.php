@@ -4,6 +4,7 @@ namespace Mitquinn\BoxApiSdk\Collections;
 
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
+use Mitquinn\BoxApiSdk\Exceptions\BoxConflictException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
@@ -100,34 +101,22 @@ class FoldersCollection extends BaseCollection
     }
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param ListFolderCollaborationsRequest|null $listFolderCollaborationsRequest
+     * @param GenericRequest|ListFolderCollaborationsRequest $request
      * @return CollaborationsResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
+     * @throws BoxConflictException
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
-     * @throws \Mitquinn\BoxApiSdk\Exceptions\BoxConflictException
      */
-    public function listFolderCollaborations(int $id, array $query = [], ListFolderCollaborationsRequest $listFolderCollaborationsRequest = null): CollaborationsResource
+    public function listFolderCollaborations(GenericRequest|ListFolderCollaborationsRequest $request): CollaborationsResource
     {
-        if (is_null($listFolderCollaborationsRequest)) {
-            $listFolderCollaborationsRequest = new ListFolderCollaborationsRequest(id: $id, query: $query);
-        }
-
-        return $this->sendCollaborationsRequest($listFolderCollaborationsRequest);
+        return $this->sendCollaborationsRequest($request);
     }
 
-
-
-
     /**
-     * @param int $id
-     * @param array $body
-     * @param array $query
-     * @param CopyFolderRequest|null $copyFolderRequest
+     * @param GenericRequest|CopyFolderRequest $request
      * @return FolderResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -135,13 +124,9 @@ class FoldersCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function copyFolder(int $id, array $body, array $query = [], CopyFolderRequest $copyFolderRequest = null): FolderResource
+    public function copyFolder(GenericRequest|CopyFolderRequest $request): FolderResource
     {
-        if (is_null($copyFolderRequest)) {
-            $copyFolderRequest = new CopyFolderRequest(id: $id, body: $body, query: $query);
-        }
-
-        return $this->sendFolderRequest($copyFolderRequest);
+        return $this->sendFolderRequest($request);
     }
 
 

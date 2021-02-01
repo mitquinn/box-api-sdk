@@ -7,6 +7,7 @@ use Faker\Generator;
 use Mitquinn\BoxApiSdk\AuthorizationConfigurations\ServerAuthorization;
 use Mitquinn\BoxApiSdk\BoxService;
 use Mitquinn\BoxApiSdk\Interfaces\AuthorizationInterface;
+use Mitquinn\BoxApiSdk\Requests\Folders\CreateFolderRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use Mitquinn\BoxApiSdk\Resources\GroupResource;
@@ -79,7 +80,8 @@ abstract class BaseTest extends TestCase
             ]
         ];
 
-        $folderResource = $this->getBoxService()->folders()->createFolder($folderBody);
+        $request = new CreateFolderRequest($folderBody);
+        $folderResource = $this->getBoxService()->folders()->createFolder($request);
         static::assertInstanceOf(FolderResource::class, $folderResource);
         return $folderResource;
     }

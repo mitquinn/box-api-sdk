@@ -189,6 +189,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] Create Folder 1/1/21
     - [x] Refactored 1/30/21
 - [x] Copy Folder 1/3/21
+    - [x] Refactored 2/1/21
 - [x] Update Folder 1/3/21
     - [x] Refactored 2/1/21
 - [x] Delete Folder 1/2/21
