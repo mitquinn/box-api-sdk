@@ -8,6 +8,7 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxConflictException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
+use Mitquinn\BoxApiSdk\Requests\GenericRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\GetCurrentUserRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\GetUserRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\ListEnterpriseUsersRequest;
@@ -26,8 +27,7 @@ class UsersCollection extends BaseCollection
 {
 
     /**
-     * @param array $query
-     * @param ListEnterpriseUsersRequest|null $listEnterpriseUsersRequest
+     * @param GenericRequest|ListEnterpriseUsersRequest $request
      * @return UsersResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -35,14 +35,9 @@ class UsersCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function listEnterpriseUsers(array $query = [], ListEnterpriseUsersRequest $listEnterpriseUsersRequest = null): UsersResource
+    public function listEnterpriseUsers(GenericRequest|ListEnterpriseUsersRequest $request): UsersResource
     {
-        if (is_null($listEnterpriseUsersRequest)) {
-            $listEnterpriseUsersRequest = new ListEnterpriseUsersRequest(query: $query);
-        }
-
-        return $this->sendUsersRequest($listEnterpriseUsersRequest);
-
+        return $this->sendUsersRequest($request);
     }
 
     /**

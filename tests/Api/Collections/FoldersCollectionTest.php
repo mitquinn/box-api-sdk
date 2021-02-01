@@ -9,7 +9,6 @@ use Mitquinn\BoxApiSdk\Requests\Folders\GetFolderInformationRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\ListFolderCollaborationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\ListItemsInFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\UpdateFolderRequest;
-use Mitquinn\BoxApiSdk\Requests\GenericRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;

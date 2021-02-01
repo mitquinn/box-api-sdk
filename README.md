@@ -182,6 +182,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Folder Base Resource
 - [x] Items Resource 1/1/21
 - [x] Folders Collection 1/3/21
+  - [x] Refactored 2/1/21  
 - [x] Get Folder Information 1/1/2
     - [x] Refactored 2/1/21
 - [x] List items in folder 1/1/21
@@ -450,6 +451,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] User (Mini) Resource
 - [ ] User (Base) Resource
 - [x] List enterprise users 1/1/21
+    - [x] Refactored 2/1/21
 - [x] Get current user 1/1/21
 - [x] Get user 1/1/21
 - [ ] Create user
