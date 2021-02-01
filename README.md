@@ -9,12 +9,12 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 * Estimated time for completion April 6th
 
 ### General
-- [x] ~~Create shared property traits~~ - 1/9/21
-- [x] ~~add shared traits to folder/files resources~~ - 1/10/21
+- [x] Create shared property traits - 1/9/21
+- [x] add shared traits to folder/files resources - 1/10/21
 - [ ] Rename Collections to something else
-- [x] ~~Write ReadMe~~ 1/27/21
+- [x] Write ReadMe 1/27/21
 - [ ] Create Technical Overview
-- [x] ~~Copy over things that have been done to the new ReadMe~~ 1/28/21 
+- [x] Copy over things that have been done to the new ReadMe 1/28/21 
 
 ### Authorization Api
 - [ ] AccessToken Resource
@@ -48,19 +48,19 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Remove Classification from Folder
 
 ### Collaborations
-- [x] ~~Collaborations Collection~~ 1/16/21
-- [x] ~~Collaboration Resource~~ 1/14/21
-- [x] ~~Collaborations Resource~~ 1/17/21
-- [x] ~~Get Collaboration~~ 1/16/21
-- [x] ~~Create Collaboration~~ 1/15/21
-- [x] ~~Update Collaboration~~ 1/16/21
-- [x] ~~Remove Collaboration~~ 1/16/21
+- [x] Collaborations Collection 1/16/21
+- [x] Collaboration Resource 1/14/21
+- [x] Collaborations Resource 1/17/21
+- [x] Get Collaboration 1/16/21
+- [x] Create Collaboration 1/15/21
+- [x] Update Collaboration 1/16/21
+- [x] Remove Collaboration 1/16/21
 
 ### Collaborations (List)
-- [x] ~~List File Collaborations~~ 1/18/21
-- [x] ~~List Folder Collaborations~~ 1/17/21
-- [x] ~~List Pending Collaborations~~ 1/18/21
-- [x] ~~List Collaborations for Group~~ 1/18/21
+- [x] List File Collaborations 1/18/21
+- [x] List Folder Collaborations 1/17/21
+- [x] List Pending Collaborations 1/18/21
+- [x] List Collaborations for Group 1/18/21
 
 ### Collections
 - [ ] Collections Collection
@@ -156,16 +156,16 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 
 ### Files
 - [ ] Files Collection
-- [x] ~~File Resource~~ 1/7/21
-- [x] ~~File(Full) Resource~~ 1/7/21
+- [x] File Resource 1/7/21
+- [x] File(Full) Resource 1/7/21
 - [ ] File(Mini) Resource
 - [ ] File(Base) Resource
-- [x] ~~Files Resource~~ 1/7/21
-- [x] ~~Get File information~~ 1/10/21
-- [x] ~~Get File Thumbnail~~ 1/10/21
-- [x] ~~Copy File~~ 1/11/21
+- [x] Files Resource 1/7/21
+- [x] Get File information 1/10/21
+- [x] Get File Thumbnail 1/10/21
+- [x] Copy File 1/11/21
 - [ ] Update File
-- [x] ~~Delete File~~ 1/10/21
+- [x] Delete File 1/10/21
   
 ### Folder Locks
 - [ ] FolderLock Resource
@@ -176,46 +176,47 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Delete Folder lock
   
 ### Folders
-- [x] ~~Folder Resource~~ 1/1/21
-- [x] ~~Folder Full Resource~~ 1/1/21
+- [x] Folder Resource 1/1/21
+- [x] Folder Full Resource 1/1/21
 - [ ] Folder Mini Resource
 - [ ] Folder Base Resource
-- [x] ~~Items Resource~~ 1/1/21
-- [x] ~~Folders Collection~~ 1/3/21
-- [x] ~~Get Folder Information~~ 1/1/2
-    - [x] ~~Refactored~~ 2/1/21
-- [x] ~~List items in folder~~ 1/1/21
-    - [x] ~~Refactored~~ 2/1/21
-- [x] ~~Create Folder~~ 1/1/21
-    - [x] ~~Refactored~~ 1/30/21
-- [x] ~~Copy Folder~~ 1/3/21
-- [x] ~~Update Folder~~ 1/3/21
-- [x] ~~Delete Folder~~ 1/2/21
-    - [x] ~~Refactored~~ 1/30/21
+- [x] Items Resource 1/1/21
+- [x] Folders Collection 1/3/21
+- [x] Get Folder Information 1/1/2
+    - [x] Refactored 2/1/21
+- [x] List items in folder 1/1/21
+    - [x] Refactored 2/1/21
+- [x] Create Folder 1/1/21
+    - [x] Refactored 1/30/21
+- [x] Copy Folder 1/3/21
+- [x] Update Folder 1/3/21
+    - [x] Refactored 2/1/21
+- [x] Delete Folder 1/2/21
+    - [x] Refactored 1/30/21
 
 ### Group Memberships
-- [x] ~~GroupMembership Resource~~ 1/21/21
-- [x] ~~GroupMemberships Resource~~ 1/20/21
-- [x] ~~GroupMemberships Collection~~ 1/23/21
-- [x] ~~List User's Groups~~ 1/20/21
-- [x] ~~List members of Group~~ 1/20/21
-- [x] ~~Get Group Membership~~ 1/21/21
-- [x] ~~Add user to Group~~ 1/22/21
-- [x] ~~Update Group Membership~~ 1/22/21
-- [x] ~~Remove user from group~~ 1/23/21
+- [x] GroupMembership Resource 1/21/21
+- [x] GroupMemberships Resource 1/20/21
+- [x] GroupMemberships Collection 1/23/21
+- [x] List User's Groups 1/20/21
+- [x] List members of Group 1/20/21
+- [x] Get Group Membership 1/21/21
+- [x] Add user to Group 1/22/21
+- [x] Update Group Membership 1/22/21
+- [x] Remove user from group 1/23/21
 
 ### Groups
-- [x] ~~Group Resource~~ 1/18/21
-- [x] ~~Groups Resource~~ 1/18/21
-- [x] ~~Groups Collection~~ 1/18/21
-- [x] ~~Group Base Resource~~ 1/18/21
-- [x] ~~Group Mini Resource~~ 1/18/21
-- [x] ~~Group Full Resource~~ 1/18/21
-- [x] ~~List Groups for enterprise~~ 1/18/21
-- [x] ~~Get Group~~ 1/18/21
-- [x] ~~Create Group~~ 1/18/21
-- [x] ~~Update Group~~ 1/18/21
-- [x] ~~Remove Group~~ 1/18/21
+- [x] Group Resource 1/18/21
+- [x] Groups Resource 1/18/21
+- [x] Groups Collection 1/18/21
+- [x] Group Base Resource 1/18/21
+- [x] Group Mini Resource 1/18/21
+- [x] Group Full Resource 1/18/21
+- [x] List Groups for enterprise 1/18/21
+- [x] Get Group 1/18/21
+- [x] Create Group 1/18/21
+- [x] Update Group 1/18/21
+- [x] Remove Group 1/18/21
   
 ### Invites
 - [ ] Invite Resource
@@ -441,17 +442,17 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Get User Avatar
   
 ### Users
-- [x] ~~User Resource~~
-- [x] ~~Users Resource~~ 1/1/21
-- [x] ~~Users Collection~~ 1/1/21
-- [x] ~~User (Full) Resource~~ 1/1/21
+- [x] User Resource
+- [x] Users Resource 1/1/21
+- [x] Users Collection 1/1/21
+- [x] User (Full) Resource 1/1/21
 - [ ] User (Mini) Resource
 - [ ] User (Base) Resource
-- [x] ~~List enterprise users~~ 1/1/21
-- [x] ~~Get current user~~ 1/1/21
-- [x] ~~Get user~~ 1/1/21
+- [x] List enterprise users 1/1/21
+- [x] Get current user 1/1/21
+- [x] Get user 1/1/21
 - [ ] Create user
-- [x] ~~Update user~~ 1/1/21
+- [x] Update user 1/1/21
 - [ ] Delete user
   
 ### Watermarks (Files)

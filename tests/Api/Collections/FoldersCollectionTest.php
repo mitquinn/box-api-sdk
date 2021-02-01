@@ -6,6 +6,7 @@ use Mitquinn\BoxApiSdk\Requests\Folders\CreateFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\DeleteFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\GetFolderInformationRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\ListItemsInFolderRequest;
+use Mitquinn\BoxApiSdk\Requests\Folders\UpdateFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\GenericRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
@@ -99,7 +100,8 @@ class FoldersCollectionTest extends BaseTest
             ]
         ];
 
-        $folderResource = $this->getBoxService()->folders()->createFolder(new CreateFolderRequest(body: $body));
+        $request = new CreateFolderRequest(body: $body);
+        $folderResource = $this->getBoxService()->folders()->createFolder($request);
         static::assertInstanceOf(FolderResource::class, $folderResource);
     }
 
@@ -118,7 +120,8 @@ class FoldersCollectionTest extends BaseTest
 
         $deleteThisId = $folderResource->getId();
         $deleteFolderRequest = new DeleteFolderRequest(id: $deleteThisId);
-//        $deleteFolderRequest = new GenericRequest('DELETE', "folders/$deleteThisId");
+        //This works
+        //$deleteFolderRequest = new GenericRequest('DELETE', "folders/$deleteThisId");
         $noContentResource = $this->getBoxService()->folders()->deleteFolder($deleteFolderRequest);
         static::assertInstanceOf(NoContentResource::class ,$noContentResource);
 
@@ -134,20 +137,23 @@ class FoldersCollectionTest extends BaseTest
                 'id' => 0
             ]
         ];
-        $folderResource = $this->getBoxService()->folders()->createFolder($createBody);
+        $createRequest = new CreateFolderRequest($createBody);
+        $folderResource = $this->getBoxService()->folders()->createFolder($createRequest);
         static::assertInstanceOf(FolderResource::class, $folderResource);
 
         // Update the Folder
         $updateBody = [
             'name' => "Updated $name"
         ];
-        $updateFolderResource = $this->getBoxService()->folders()->updateFolder($folderResource->getId(), $updateBody);
+        $updateRequest = new UpdateFolderRequest(id: $folderResource->getId(), body: $updateBody);
+        $updateFolderResource = $this->getBoxService()->folders()->updateFolder($updateRequest);
         static::assertInstanceOf(FolderResource::class, $updateFolderResource);
         static::assertEquals("Updated $name", $updateFolderResource->getName());
 
         //Delete the Folder
         $deleteThisId = $folderResource->getId();
-        $noContentResource = $this->getBoxService()->folders()->deleteFolder($deleteThisId);
+        $deleteRequest = new DeleteFolderRequest($deleteThisId);
+        $noContentResource = $this->getBoxService()->folders()->deleteFolder($deleteRequest);
         static::assertInstanceOf(NoContentResource::class ,$noContentResource);
     }
 

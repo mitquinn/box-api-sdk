@@ -72,10 +72,7 @@ class FoldersCollection extends BaseCollection
     }
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param array $header
-     * @param DeleteFolderRequest|null $request
+     * @param GenericRequest|DeleteFolderRequest $request
      * @return NoContentResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -89,11 +86,7 @@ class FoldersCollection extends BaseCollection
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @param array $query
-     * @param array $header
-     * @param UpdateFolderRequest|null $updateFolderRequest
+     * @param GenericRequest|UpdateFolderRequest $updateFolderRequest
      * @return FolderResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -101,12 +94,8 @@ class FoldersCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function updateFolder(int $id, array $body, array $query = [], array $header = [], UpdateFolderRequest $updateFolderRequest = null): FolderResource
+    public function updateFolder(GenericRequest|UpdateFolderRequest $updateFolderRequest): FolderResource
     {
-        if (is_null($updateFolderRequest)) {
-            $updateFolderRequest = new UpdateFolderRequest(id: $id, query: $query, body: $body, header: $header);
-        }
-
         return $this->sendFolderRequest($updateFolderRequest);
     }
 
