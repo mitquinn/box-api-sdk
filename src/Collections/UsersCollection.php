@@ -41,22 +41,17 @@ class UsersCollection extends BaseCollection
     }
 
     /**
-     * @param array $query
-     * @param GetCurrentUserRequest|null $getCurrentUserRequest
+     * @param GenericRequest|GetCurrentUserRequest $request
      * @return UserResource
      * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
-     * @throws BoxBadRequestException
      */
-    public function getCurrentUser(array $query = [], GetCurrentUserRequest $getCurrentUserRequest = null): UserResource
+    public function getCurrentUser(GenericRequest|GetCurrentUserRequest $request): UserResource
     {
-        if (is_null($getCurrentUserRequest)) {
-            $getCurrentUserRequest = new GetCurrentUserRequest(query: $query);
-        }
-
-        return $this->sendUserRequest($getCurrentUserRequest);
+        return $this->sendUserRequest($request);
     }
 
     /**

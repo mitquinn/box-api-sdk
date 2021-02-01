@@ -35,28 +35,4 @@ class ListFolderCollaborationsRequest extends BaseRequest
         $requestSegment = 'folders/'.$this->getId().'/collaborations';
         return $this->generateUri($requestSegment);
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function validateQuery(array $query): bool
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function validateBody(array $body): bool
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function validateHeader(array $header): bool
-    {
-        return true;
-    }
 }

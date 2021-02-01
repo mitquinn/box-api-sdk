@@ -28,11 +28,6 @@ class CreateFolderRequest extends BaseRequest
         return $this->generateUri('folders');
     }
 
-    public function validateQuery(array $query): bool
-    {
-        return true;
-    }
-
     public function validateBody(array $body): bool
     {
         $dot = new Dot($body);
@@ -40,11 +35,6 @@ class CreateFolderRequest extends BaseRequest
             throw new BoxBadRequestException();
         }
 
-        return true;
-    }
-
-    public function validateHeader(array $header): bool
-    {
         return true;
     }
 }

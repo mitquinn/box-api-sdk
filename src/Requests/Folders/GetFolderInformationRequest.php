@@ -34,19 +34,4 @@ class GetFolderInformationRequest extends BaseRequest
         $requestSegment = 'folders/'.$this->getId();
         return $this->generateUri(requestSegment: $requestSegment);
     }
-
-    public function validateQuery(array $query): bool
-    {
-        return true;
-    }
-
-    public function validateBody(array $body): bool
-    {
-        return true;
-    }
-
-    public function validateHeader(array $header): bool
-    {
-        return true;
-    }
 }

@@ -30,35 +30,11 @@ class UpdateFolderRequest extends BaseRequest
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getUri(): string
     {
         $requestSegment = 'folders/'.$this->getId();
         return $this->generateUri($requestSegment);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function validateQuery(array $query): bool
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function validateBody(array $body): bool
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function validateHeader(array $header): bool
-    {
-        return true;
     }
 }

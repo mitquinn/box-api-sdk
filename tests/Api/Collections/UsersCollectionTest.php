@@ -2,6 +2,7 @@
 
 namespace Mitquinn\BoxApiSdk\Tests\Api\User;
 
+use Mitquinn\BoxApiSdk\Requests\Users\GetCurrentUserRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\ListEnterpriseUsersRequest;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
 use Mitquinn\BoxApiSdk\Resources\UserResource;
@@ -17,13 +18,15 @@ class UsersCollectionTest extends BaseTest
 
     public function testGetCurrentUser()
     {
-        $userResource = $this->getBoxService()->users()->getCurrentUser();
+        $request = new GetCurrentUserRequest();
+        $userResource = $this->getBoxService()->users()->getCurrentUser($request);
         static::assertInstanceOf(UserResource::class, $userResource);
     }
 
     public function testGetCurrentUserWithFullFields()
     {
-        $userResource = $this->getBoxService()->users()->getCurrentUser(query: ['fields' => 'id,type,address,avatar_url,can_see_managed_users,created_at,enterprise,external_app_user_id,hostname,is_exempt_from_device_limits,is_exempt_from_login_verification,is_external_collab_restricted,is_platform_access_only,is_sync_enabled,job_title,language,login,max_upload_size,modified_at,my_tags,name,notification_email,phone,role,space_amount,space_used,status,timezone,tracking_codes']);
+        $request = new GetCurrentUserRequest(['fields' => 'id,type,address,avatar_url,can_see_managed_users,created_at,enterprise,external_app_user_id,hostname,is_exempt_from_device_limits,is_exempt_from_login_verification,is_external_collab_restricted,is_platform_access_only,is_sync_enabled,job_title,language,login,max_upload_size,modified_at,my_tags,name,notification_email,phone,role,space_amount,space_used,status,timezone,tracking_codes']);
+        $userResource = $this->getBoxService()->users()->getCurrentUser($request);
         static::assertInstanceOf(UserResource::class, $userResource);
         static::assertIsInt($userResource->getId());
         static::assertIsString($userResource->getType());

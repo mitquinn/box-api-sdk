@@ -61,19 +61,30 @@ abstract class BaseRequest implements BaseRequestInterface
      * @param array $query
      * @return bool
      */
-    abstract public function validateQuery(array $query): bool;
+    public function validateQuery(array $query): bool
+    {
+        return true;
+    }
+
 
     /**
      * @param array $body
      * @return bool
      */
-    abstract public function validateBody(array $body): bool;
+    public function validateBody(array $body): bool
+    {
+        return true;
+    }
+
 
     /**
      * @param array $header
      * @return bool
      */
-    abstract public function validateHeader(array $header): bool;
+    public function validateHeader(array $header): bool
+    {
+        return true;
+    }
 
 
     /**

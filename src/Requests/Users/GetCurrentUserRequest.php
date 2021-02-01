@@ -26,7 +26,7 @@ class GetCurrentUserRequest extends BaseRequest
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getUri(): string
     {

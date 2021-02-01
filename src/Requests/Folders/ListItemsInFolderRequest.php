@@ -36,28 +36,4 @@ class ListItemsInFolderRequest extends BaseRequest
         $requestSegment = 'folders/'.$this->getId().'/items';
         return $this->generateUri(requestSegment: $requestSegment);
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function validateQuery(array $query): bool
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function validateBody(array $body): bool
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function validateHeader(array $header): bool
-    {
-        return true;
-    }
 }
