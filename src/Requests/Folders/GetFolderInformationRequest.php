@@ -16,10 +16,16 @@ class GetFolderInformationRequest extends BaseRequest
     /** @var string $method */
     protected string $method = 'GET';
 
-    public function __construct(int $id, array $query = [], array $body = [], array $header = [])
+    /**
+     * GetFolderInformationRequest constructor.
+     * @param int $id
+     * @param array $query
+     * @param array $header
+     */
+    public function __construct(int $id, array $query = [], array $header = [])
     {
-        parent::__construct(query: $query, body: $body, header: $header);
         $this->setId(id: $id);
+        parent::__construct(query: $query, header: $header);
     }
 
 
@@ -27,5 +33,20 @@ class GetFolderInformationRequest extends BaseRequest
     {
         $requestSegment = 'folders/'.$this->getId();
         return $this->generateUri(requestSegment: $requestSegment);
+    }
+
+    public function validateQuery(array $query): bool
+    {
+        return true;
+    }
+
+    public function validateBody(array $body): bool
+    {
+        return true;
+    }
+
+    public function validateHeader(array $header): bool
+    {
+        return true;
     }
 }

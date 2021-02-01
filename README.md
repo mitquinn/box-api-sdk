@@ -182,12 +182,16 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Folder Base Resource
 - [x] ~~Items Resource~~ 1/1/21
 - [x] ~~Folders Collection~~ 1/3/21
-- [x] ~~Get Folder Information~~ 1/1/21
-- [x] ~~List items in folder~~ 1/1/21 
+- [x] ~~Get Folder Information~~ 1/1/2
+    - [x] ~~Refactored~~ 2/1/21
+- [x] ~~List items in folder~~ 1/1/21
+    - [x] ~~Refactored~~ 2/1/21
 - [x] ~~Create Folder~~ 1/1/21
+    - [x] ~~Refactored~~ 1/30/21
 - [x] ~~Copy Folder~~ 1/3/21
 - [x] ~~Update Folder~~ 1/3/21
 - [x] ~~Delete Folder~~ 1/2/21
+    - [x] ~~Refactored~~ 1/30/21
 
 ### Group Memberships
 - [x] ~~GroupMembership Resource~~ 1/21/21

@@ -30,9 +30,7 @@ class FoldersCollection extends BaseCollection
 {
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param GetFolderInformationRequest|null $getFolderInformationRequest
+     * @param GenericRequest|GetFolderInformationRequest $request
      * @return FolderResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -40,20 +38,13 @@ class FoldersCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function getFolderInformation(int $id, array $query = [], GetFolderInformationRequest $getFolderInformationRequest = null): FolderResource
+    public function getFolderInformation(GenericRequest|GetFolderInformationRequest $request): FolderResource
     {
-        if (is_null($getFolderInformationRequest)) {
-            $getFolderInformationRequest = new GetFolderInformationRequest(id: $id, query: $query);
-        }
-
-        return $this->sendFolderRequest($getFolderInformationRequest);
-
+        return $this->sendFolderRequest($request);
     }
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param ListItemsInFolderRequest|null $listItemsInFolderRequest
+     * @param GenericRequest|ListItemsInFolderRequest $request
      * @return ItemsResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -61,13 +52,9 @@ class FoldersCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function listItemsInFolder(int $id, array $query = [], ListItemsInFolderRequest $listItemsInFolderRequest = null): ItemsResource
+    public function listItemsInFolder(GenericRequest|ListItemsInFolderRequest $request): ItemsResource
     {
-        if (is_null($listItemsInFolderRequest)) {
-            $listItemsInFolderRequest = new ListItemsInFolderRequest(id: $id, query: $query);
-        }
-
-        return $this->sendItemsRequest($listItemsInFolderRequest);
+        return $this->sendItemsRequest($request);
     }
 
     /**
