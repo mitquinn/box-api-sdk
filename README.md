@@ -447,6 +447,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] User Resource
 - [x] Users Resource 1/1/21
 - [x] Users Collection 1/1/21
+    - [x] Refactored 2/2/21
 - [x] User (Full) Resource 1/1/21
 - [ ] User (Mini) Resource
 - [ ] User (Base) Resource

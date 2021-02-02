@@ -101,25 +101,18 @@ class UsersCollection extends BaseCollection
     }
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param ListUsersGroupsRequest|null $listUsersGroupsRequest
+     * @param GenericRequest|ListUsersGroupsRequest $request
      * @return GroupMembershipsResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
+     * @throws BoxConflictException
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
-     * @throws BoxConflictException
      */
-    public function listUsersGroups(int $id, array $query = [], ListUsersGroupsRequest $listUsersGroupsRequest = null)
+    public function listUsersGroups(GenericRequest|ListUsersGroupsRequest $request): GroupMembershipsResource
     {
-        if (is_null($listUsersGroupsRequest)) {
-            $listUsersGroupsRequest = new ListUsersGroupsRequest(id: $id, query: $query);
-        }
-
-        return $this->sendGroupMembershipsRequest($listUsersGroupsRequest);
-
+        return $this->sendGroupMembershipsRequest($request);
     }
 
 
