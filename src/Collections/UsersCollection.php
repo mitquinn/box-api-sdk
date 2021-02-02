@@ -55,23 +55,17 @@ class UsersCollection extends BaseCollection
     }
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param GetUserRequest|null $getUserRequest
+     * @param GenericRequest|GetUserRequest $request
      * @return UserResource
      * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function getUser(int $id, array $query = [], GetUserRequest $getUserRequest = null): UserResource
+    public function getUser(GenericRequest|GetUserRequest $request): UserResource
     {
-        if (is_null($getUserRequest)) {
-            $getUserRequest = new GetUserRequest(id: $id, query: $query);
-        }
-
-        return $this->sendUserRequest($getUserRequest);
-
+        return $this->sendUserRequest($request);
     }
 
     /**

@@ -23,8 +23,8 @@ class GetUserRequest extends BaseRequest
      */
     public function __construct(int $id, array $query = [])
     {
-        parent::__construct(query: $query);
         $this->setId(id: $id);
+        parent::__construct(query: $query);
     }
 
     /**
