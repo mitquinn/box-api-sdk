@@ -453,6 +453,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] List enterprise users 1/1/21
     - [x] Refactored 2/1/21
 - [x] Get current user 1/1/21
+    - [x] Refactored 2/1/21  
 - [x] Get user 1/1/21
 - [ ] Create user
 - [x] Update user 1/1/21
