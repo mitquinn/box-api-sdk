@@ -18,7 +18,6 @@ class UpdateUserRequest extends BaseRequest
 
     /**
      * UpdateUserRequest constructor.
-     * Todo: I need to validate the body?
      * @param int $id
      * @param array $body
      * @param array $query

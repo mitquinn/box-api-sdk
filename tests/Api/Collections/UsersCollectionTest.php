@@ -5,6 +5,7 @@ namespace Mitquinn\BoxApiSdk\Tests\Api\User;
 use Mitquinn\BoxApiSdk\Requests\Users\GetCurrentUserRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\GetUserRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\ListEnterpriseUsersRequest;
+use Mitquinn\BoxApiSdk\Requests\Users\UpdateUserRequest;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
 use Mitquinn\BoxApiSdk\Resources\UserResource;
 use Mitquinn\BoxApiSdk\Resources\UsersResource;
@@ -87,7 +88,8 @@ class UsersCollectionTest extends BaseTest
 
     public function testUpdateUser()
     {
-        $userResource = $this->getBoxService()->users()->updateUser(id: 13372896237, body: ['address' => '123 Fake Street']);
+        $request = new UpdateUserRequest(id: 13372896237, body: ['address' => '123 Fake Street']);
+        $userResource = $this->getBoxService()->users()->updateUser($request);
         static::assertInstanceOf($userResource::class, $userResource);
     }
 

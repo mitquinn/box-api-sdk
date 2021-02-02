@@ -78,24 +78,17 @@ class UsersCollection extends BaseCollection
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @param array $query
-     * @param UpdateUserRequest|null $updateUserRequest
+     * @param GenericRequest|UpdateUserRequest $request
      * @return UserResource
      * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function updateUser(int $id, array $body, array $query = [], UpdateUserRequest $updateUserRequest = null): UserResource
+    public function updateUser(GenericRequest|UpdateUserRequest $request): UserResource
     {
-        if (is_null($updateUserRequest)) {
-            $updateUserRequest = new UpdateUserRequest(id: $id, body: $body, query: $query);
-        }
-
-        return $this->sendUserRequest($updateUserRequest);
-
+        return $this->sendUserRequest($request);
     }
 
     /**
