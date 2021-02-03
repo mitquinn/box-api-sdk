@@ -16,14 +16,19 @@ class ListFileCollaborationsRequest extends BaseRequest
     /** @var string $method */
     protected string $method = 'GET';
 
-    public function __construct(int $id, array $query = [], array $body = [], array $header = [])
+    /**
+     * ListFileCollaborationsRequest constructor.
+     * @param int $id
+     * @param array $query
+     */
+    public function __construct(int $id, array $query = [])
     {
         $this->setId($id);
-        parent::__construct(query: $query, body:  $body, header: $header);
+        parent::__construct(query: $query);
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getUri(): string
     {

@@ -8,6 +8,7 @@ use Mitquinn\BoxApiSdk\Requests\Files\CopyFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\DeleteFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileInformationRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileThumbnailRequest;
+use Mitquinn\BoxApiSdk\Requests\Files\ListFileCollaborationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UploadFileRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\FileResource;
@@ -171,7 +172,8 @@ class FilesCollectionTest extends BaseTest
     public function testListFileCollaborations()
     {
         $fileResource = $this->uploadFile();
-        $collaborationsResource = $this->getBoxService()->files()->listFileCollaborations($fileResource->getId());
+        $request = new ListFileCollaborationsRequest($fileResource->getId());
+        $collaborationsResource = $this->getBoxService()->files()->listFileCollaborations($request);
         static::assertInstanceOf(CollaborationsResource::class, $collaborationsResource);
 
         //Clean Up

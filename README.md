@@ -58,6 +58,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 
 ### Collaborations (List)
 - [x] List File Collaborations 1/18/21
+    - [x] Refactored 2/3/21
 - [x] List Folder Collaborations 1/17/21
 - [x] List Pending Collaborations 1/18/21
 - [x] List Collaborations for Group 1/18/21

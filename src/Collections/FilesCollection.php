@@ -107,24 +107,18 @@ class FilesCollection extends BaseCollection
     }
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param ListFileCollaborationsRequest|null $listFileCollaborationsRequest
+     * @param GenericRequest|ListFileCollaborationsRequest $request
      * @return CollaborationsResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
+     * @throws BoxConflictException
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
-     * @throws BoxConflictException
      */
-    public function listFileCollaborations(int $id, array $query = [], ListFileCollaborationsRequest $listFileCollaborationsRequest = null): CollaborationsResource
+    public function listFileCollaborations(GenericRequest|ListFileCollaborationsRequest $request): CollaborationsResource
     {
-        if (is_null($listFileCollaborationsRequest)) {
-            $listFileCollaborationsRequest = new ListFileCollaborationsRequest(id: $id, query: $query);
-        }
-
-        return $this->sendCollaborationsRequest($listFileCollaborationsRequest);
+        return $this->sendCollaborationsRequest($request);
     }
 
 
