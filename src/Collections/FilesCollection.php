@@ -58,13 +58,18 @@ class FilesCollection extends BaseCollection
         return $this->sendFileRequest($request);
     }
 
-    public function getFileThumbnail(int $id, string $extension, array $query = [], GetFileThumbnailRequest $getFileThumbnailRequest = null): NoContentResource
+    /**
+     * @param GenericRequest|GetFileThumbnailRequest $request
+     * @return NoContentResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function getFileThumbnail(GenericRequest|GetFileThumbnailRequest $request): NoContentResource
     {
-        if (is_null($getFileThumbnailRequest)) {
-            $getFileThumbnailRequest = new GetFileThumbnailRequest(id: $id, extension: $extension, query: $query);
-        }
-
-        return $this->sendNoContentRequest($getFileThumbnailRequest);
+        return $this->sendNoContentRequest($request);
     }
 
     public function copyFile(int $id, array $body, array $query = [], CopyFileRequest $copyFileRequest = null ): FileResource

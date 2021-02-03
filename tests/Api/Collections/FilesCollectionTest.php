@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\Files\DeleteFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileInformationRequest;
+use Mitquinn\BoxApiSdk\Requests\Files\GetFileThumbnailRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UploadFileRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\FileResource;
@@ -128,7 +129,9 @@ class FilesCollectionTest extends BaseTest
         $filesResource = $this->uploadPng();
         $entriesArray = $filesResource->getEntries();
         $fileResource = $entriesArray[0];
-        $noContentResource = $this->getBoxService()->files()->getFileThumbnail($fileResource->getId(), 'png');
+
+        $request = new GetFileThumbnailRequest($fileResource->getId(), 'png');
+        $noContentResource = $this->getBoxService()->files()->getFileThumbnail($request);
         static::assertInstanceOf(NoContentResource::class, $noContentResource);
         $headers = $noContentResource->getHeaders();
         static::assertArrayHasKey('Location', $headers);

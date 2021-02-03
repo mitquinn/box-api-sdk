@@ -3,13 +3,14 @@
 namespace Mitquinn\BoxApiSdk\Requests\Files;
 
 use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
+use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
 
 /**
  * Class GetFileThumbnailRequest
  * @package Mitquinn\BoxApiSdk\Requests\Files
  */
-class GetFileThumbnailRequest extends \Mitquinn\BoxApiSdk\Requests\BaseRequest
+class GetFileThumbnailRequest extends BaseRequest
 {
     use HasId;
 
@@ -24,19 +25,17 @@ class GetFileThumbnailRequest extends \Mitquinn\BoxApiSdk\Requests\BaseRequest
      * @param int $id
      * @param string $extension
      * @param array $query
-     * @param array $body
-     * @param array $header
      * @throws BoxBadRequestException
      */
-    public function __construct(int $id, string $extension, array $query = [], array $body = [], array $header = [])
+    public function __construct(int $id, string $extension, array $query = [])
     {
         $this->setId(id: $id);
         $this->setExtension(extension: $extension);
-        parent::__construct(query: $query, body: $body, header: $header);
+        parent::__construct(query: $query);
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getUri(): string
     {

@@ -164,6 +164,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] Get File information 1/10/21
     - [x] Refactored 2/3/21
 - [x] Get File Thumbnail 1/10/21
+    - [x] Refactored 2/3/21
 - [x] Copy File 1/11/21
 - [ ] Update File
 - [x] Delete File 1/10/21
