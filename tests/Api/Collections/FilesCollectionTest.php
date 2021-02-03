@@ -9,6 +9,7 @@ use Mitquinn\BoxApiSdk\Requests\Files\DeleteFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileInformationRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileThumbnailRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\ListFileCollaborationsRequest;
+use Mitquinn\BoxApiSdk\Requests\Files\UpdateFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UploadFileRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\FileResource;
@@ -175,6 +176,21 @@ class FilesCollectionTest extends BaseTest
         $request = new ListFileCollaborationsRequest($fileResource->getId());
         $collaborationsResource = $this->getBoxService()->files()->listFileCollaborations($request);
         static::assertInstanceOf(CollaborationsResource::class, $collaborationsResource);
+
+        //Clean Up
+        $deleteRequest = new DeleteFileRequest($fileResource->getId());
+        $noContentResource = $this->getBoxService()->files()->deleteFile($deleteRequest);
+        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+    }
+
+    public function testUpdateFile()
+    {
+        $fileResource = $this->uploadFile();
+        $newName = $this->faker->firstName;
+        $request = new UpdateFileRequest(id: $fileResource->getId(), body: ['name' => $newName]);
+        $updatedFileResource = $this->getBoxService()->files()->updateFile($request);
+        static::assertInstanceOf(FileResource::class, $updatedFileResource);
+        static::assertEquals($newName, $updatedFileResource->getName());
 
         //Clean Up
         $deleteRequest = new DeleteFileRequest($fileResource->getId());

@@ -156,7 +156,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Remove File Version
 
 ### Files
-- [ ] Files Collection
+- [x] Files Collection 2/3/21
 - [x] File Resource 1/7/21
 - [x] File(Full) Resource 1/7/21
 - [ ] File(Mini) Resource
@@ -168,7 +168,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
     - [x] Refactored 2/3/21
 - [x] Copy File 1/11/21
   - [x] Refactored 2/3/21
-- [ ] Update File
+- [x] Update File 2/3/21
 - [x] Delete File 1/10/21
     - [x] Refactored 2/2/21
   

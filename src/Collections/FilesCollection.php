@@ -13,6 +13,7 @@ use Mitquinn\BoxApiSdk\Requests\Files\DeleteFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileInformationRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileThumbnailRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\ListFileCollaborationsRequest;
+use Mitquinn\BoxApiSdk\Requests\Files\UpdateFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UploadFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\CopyFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\GenericRequest;
@@ -87,9 +88,19 @@ class FilesCollection extends BaseCollection
         return $this->sendFileRequest($request);
     }
 
-    public function updateFile()
+    /**
+     * @param GenericRequest|UpdateFileRequest $request
+     * @return FileResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function updateFile(GenericRequest|UpdateFileRequest $request): FileResource
     {
-
+        return $this->sendFileRequest($request);
     }
 
     /**
