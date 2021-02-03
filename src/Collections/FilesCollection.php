@@ -72,13 +72,19 @@ class FilesCollection extends BaseCollection
         return $this->sendNoContentRequest($request);
     }
 
-    public function copyFile(int $id, array $body, array $query = [], CopyFileRequest $copyFileRequest = null ): FileResource
+    /**
+     * @param GenericRequest|CopyFileRequest $request
+     * @return FileResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function copyFile(GenericRequest|CopyFileRequest $request): FileResource
     {
-        if (is_null($copyFileRequest)) {
-            $copyFileRequest = new CopyFileRequest(id: $id, body: $body, query: $query);
-        }
-
-        return $this->sendFileRequest($copyFileRequest);
+        return $this->sendFileRequest($request);
     }
 
     public function updateFile()

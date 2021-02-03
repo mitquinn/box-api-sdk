@@ -2,13 +2,14 @@
 
 namespace Mitquinn\BoxApiSdk\Requests\Files;
 
+use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
 
 /**
  * Class CopyFileRequest
  * @package Mitquinn\BoxApiSdk\Requests\Files
  */
-class CopyFileRequest extends \Mitquinn\BoxApiSdk\Requests\BaseRequest
+class CopyFileRequest extends BaseRequest
 {
     use HasId;
 
@@ -20,16 +21,15 @@ class CopyFileRequest extends \Mitquinn\BoxApiSdk\Requests\BaseRequest
      * @param int $id
      * @param array $body
      * @param array $query
-     * @param array $header
      */
-    public function __construct(int $id, array $body, array $query = [], array $header = [])
+    public function __construct(int $id, array $body, array $query = [])
     {
         $this->setId($id);
-        parent::__construct(query: $query, body: $body, header: $header);
+        parent::__construct(query: $query, body: $body);
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getUri(): string
     {

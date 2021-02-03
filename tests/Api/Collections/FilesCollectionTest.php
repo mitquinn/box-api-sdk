@@ -4,6 +4,7 @@ namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
 
 use Carbon\Carbon;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
+use Mitquinn\BoxApiSdk\Requests\Files\CopyFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\DeleteFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileInformationRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileThumbnailRequest;
@@ -154,7 +155,8 @@ class FilesCollectionTest extends BaseTest
             ]
         ];
 
-        $fileResource = $this->getBoxService()->files()->copyFile($oldFileResource->getId(), $body);
+        $request = new CopyFileRequest($oldFileResource->getId(), $body);
+        $fileResource = $this->getBoxService()->files()->copyFile($request);
         static::assertInstanceOf(FileResource::class, $fileResource);
         static::assertEquals($newFileName, $fileResource->getName());
 
