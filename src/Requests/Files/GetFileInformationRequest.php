@@ -22,10 +22,10 @@ class GetFileInformationRequest extends BaseRequest
      * @param array $body
      * @param array $header
      */
-    public function __construct(int $id, array $query = [], array $body = [], array $header = [])
+    public function __construct(int $id, array $query = [], array $header = [])
     {
         $this->setId(id: $id);
-        parent::__construct(query: $query, body: $body, header: $header);
+        parent::__construct(query: $query, header: $header);
     }
 
     /**

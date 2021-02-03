@@ -4,6 +4,7 @@ namespace Mitquinn\BoxApiSdk\Collections;
 
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
+use Mitquinn\BoxApiSdk\Exceptions\BoxConflictException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
@@ -42,14 +43,19 @@ class FilesCollection extends BaseCollection
         return $this->sendFilesRequest($request);
     }
 
-    public function getFileInformation(int $id, array $query = [], array $header = [], GetFileInformationRequest $getFileInformationRequest = null): FileResource
+    /**
+     * @param GenericRequest|GetFileInformationRequest $request
+     * @return FileResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     * @throws BoxConflictException
+     */
+    public function getFileInformation(GenericRequest|GetFileInformationRequest $request): FileResource
     {
-        if (is_null($getFileInformationRequest)) {
-            $getFileInformationRequest = new GetFileInformationRequest(id: $id, query: $query, header: $header);
-        }
-
-        return $this->sendFileRequest($getFileInformationRequest);
-
+        return $this->sendFileRequest($request);
     }
 
     public function getFileThumbnail(int $id, string $extension, array $query = [], GetFileThumbnailRequest $getFileThumbnailRequest = null): NoContentResource
@@ -99,7 +105,7 @@ class FilesCollection extends BaseCollection
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
-     * @throws \Mitquinn\BoxApiSdk\Exceptions\BoxConflictException
+     * @throws BoxConflictException
      */
     public function listFileCollaborations(int $id, array $query = [], ListFileCollaborationsRequest $listFileCollaborationsRequest = null): CollaborationsResource
     {
@@ -140,7 +146,7 @@ class FilesCollection extends BaseCollection
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
-     * @throws \Mitquinn\BoxApiSdk\Exceptions\BoxConflictException
+     * @throws BoxConflictException
      */
     protected function sendFileRequest(BaseRequest $request): FileResource
     {
