@@ -13,19 +13,18 @@ class DeleteFileRequest extends BaseRequest
 {
     use HasId;
 
+    /** @var string $method */
     protected string $method = 'DELETE';
 
     /**
      * DeleteFileRequest constructor.
      * @param int $id
-     * @param array $query
-     * @param array $body
      * @param array $header
      */
-    public function __construct(int $id, array $query = [], array $body = [], array $header = [])
+    public function __construct(int $id, array $header = [])
     {
         $this->setId(id: $id);
-        parent::__construct(query: $query, body: $body, header: $header);
+        parent::__construct(header: $header);
     }
 
     /**

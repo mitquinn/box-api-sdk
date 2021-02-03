@@ -166,6 +166,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] Copy File 1/11/21
 - [ ] Update File
 - [x] Delete File 1/10/21
+    - [x] Refactored 2/2/21
   
 ### Folder Locks
 - [ ] FolderLock Resource
@@ -424,7 +425,8 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Upload URL Resource
 - [ ] Preflight check before upload
 - [ ] Upload file version
-- [ ] Upload file
+- [x] Upload file
+    - [x] Refactored 2/2/21
   
 ### Uploads (Chunked)
 - [ ] Upload part Resource

@@ -14,6 +14,7 @@ use Mitquinn\BoxApiSdk\Requests\Files\GetFileThumbnailRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\ListFileCollaborationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UploadFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\CopyFolderRequest;
+use Mitquinn\BoxApiSdk\Requests\GenericRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\FileResource;
 use Mitquinn\BoxApiSdk\Resources\FilesResource;
@@ -27,13 +28,18 @@ use Psr\Http\Client\ClientExceptionInterface;
 class FilesCollection extends BaseCollection
 {
 
-    public function uploadFile(array $body, array $query = [], array $header = [], UploadFileRequest $uploadFileRequest = null): FilesResource
+    /**
+     * @param GenericRequest|UploadFileRequest $request
+     * @return FilesResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function uploadFile(GenericRequest|UploadFileRequest $request): FilesResource
     {
-        if (is_null($uploadFileRequest)) {
-            $uploadFileRequest = new UploadFileRequest(query: $query, body: $body, header: $header);
-        }
-
-        return $this->sendFilesRequest($uploadFileRequest);
+        return $this->sendFilesRequest($request);
     }
 
     public function getFileInformation(int $id, array $query = [], array $header = [], GetFileInformationRequest $getFileInformationRequest = null): FileResource
@@ -70,9 +76,7 @@ class FilesCollection extends BaseCollection
     }
 
     /**
-     * @param int $id
-     * @param array $header
-     * @param DeleteFileRequest|null $deleteFileRequest
+     * @param GenericRequest|DeleteFileRequest $request
      * @return NoContentResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -80,13 +84,9 @@ class FilesCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function deleteFile(int $id, array $header = [], DeleteFileRequest $deleteFileRequest = null): NoContentResource
+    public function deleteFile(GenericRequest|DeleteFileRequest $request): NoContentResource
     {
-        if (is_null($deleteFileRequest)) {
-            $deleteFileRequest = new DeleteFileRequest(id: $id, header: $header);
-        }
-
-        return $this->sendNoContentRequest($deleteFileRequest);
+        return $this->sendNoContentRequest($request);
     }
 
     /**
