@@ -9,9 +9,11 @@ use Mitquinn\BoxApiSdk\BoxService;
 use Mitquinn\BoxApiSdk\Interfaces\AuthorizationInterface;
 use Mitquinn\BoxApiSdk\Requests\Folders\CreateFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\CreateGroupRequest;
+use Mitquinn\BoxApiSdk\Requests\Groups\RemoveGroupRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use Mitquinn\BoxApiSdk\Resources\GroupResource;
+use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Dotenv\Dotenv;
 
@@ -117,6 +119,14 @@ abstract class BaseTest extends TestCase
         $groupResource = $this->getBoxService()->groups()->createGroup($request);
         static::assertInstanceOf(GroupResource::class, $groupResource);
         return $groupResource;
+    }
+
+    protected function removeGroup(int $id)
+    {
+        //Clean Up
+        $deleteRequest = new RemoveGroupRequest($id);
+        $noContentResource = $this->getBoxService()->groups()->removeGroup($deleteRequest);
+        static::assertInstanceOf(NoContentResource::class, $noContentResource);
     }
 
 

@@ -205,12 +205,19 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] GroupMembership Resource 1/21/21
 - [x] GroupMemberships Resource 1/20/21
 - [x] GroupMemberships Collection 1/23/21
+    - [x] Refactored 2/4/21
 - [x] List User's Groups 1/20/21
+    - [x] Refactored 2/4/21
 - [x] List members of Group 1/20/21
+    - [x] Refactored 2/4/21
 - [x] Get Group Membership 1/21/21
+    - [x] Refactored 2/4/21  
 - [x] Add user to Group 1/22/21
+    - [x] Refactored 2/4/21
 - [x] Update Group Membership 1/22/21
+    - [x] Refactored 2/4/21
 - [x] Remove user from group 1/23/21
+    - [x] Refactored 2/4/21
 
 ### Groups
 - [x] Group Resource 1/18/21

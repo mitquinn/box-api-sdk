@@ -7,6 +7,7 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxConflictException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
+use Mitquinn\BoxApiSdk\Requests\GenericRequest;
 use Mitquinn\BoxApiSdk\Requests\GroupMemberships\AddUserToGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\GroupMemberships\GetGroupMembershipRequest;
 use Mitquinn\BoxApiSdk\Requests\GroupMemberships\RemoveUserFromGroupRequest;
@@ -23,9 +24,7 @@ class GroupMembershipsCollection extends BaseCollection
 {
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param GetGroupMembershipRequest|null $getGroupMembershipRequest
+     * @param GenericRequest|GetGroupMembershipRequest $request
      * @return GroupMembershipResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -34,20 +33,13 @@ class GroupMembershipsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function getGroupMembership(int $id, array $query = [], GetGroupMembershipRequest $getGroupMembershipRequest = null): GroupMembershipResource
+    public function getGroupMembership(GenericRequest|GetGroupMembershipRequest $request): GroupMembershipResource
     {
-        if (is_null($getGroupMembershipRequest)) {
-            $getGroupMembershipRequest = new GetGroupMembershipRequest(id: $id, query: $query);
-        }
-
-        return $this->sendGroupMembershipRequest($getGroupMembershipRequest);
-
+        return $this->sendGroupMembershipRequest($request);
     }
 
     /**
-     * @param array $body
-     * @param array $query
-     * @param AddUserToGroupRequest|null $addUserToGroupRequest
+     * @param GenericRequest|AddUserToGroupRequest $request
      * @return GroupMembershipResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -56,20 +48,13 @@ class GroupMembershipsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function addUserToGroup(array $body, array $query = [], AddUserToGroupRequest $addUserToGroupRequest = null): GroupMembershipResource
+    public function addUserToGroup(GenericRequest|AddUserToGroupRequest $request): GroupMembershipResource
     {
-        if (is_null($addUserToGroupRequest)) {
-            $addUserToGroupRequest = new AddUserToGroupRequest(body: $body, query: $query);
-        }
-
-        return $this->sendGroupMembershipRequest($addUserToGroupRequest);
+        return $this->sendGroupMembershipRequest($request);
     }
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param array $body
-     * @param UpdateGroupMembershipRequest|null $updateGroupMembershipRequest
+     * @param GenericRequest|UpdateGroupMembershipRequest $request
      * @return GroupMembershipResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -78,18 +63,13 @@ class GroupMembershipsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function updateGroupMembership(int $id, array $query = [], array $body = [], UpdateGroupMembershipRequest $updateGroupMembershipRequest = null): GroupMembershipResource
+    public function updateGroupMembership(GenericRequest|UpdateGroupMembershipRequest $request): GroupMembershipResource
     {
-        if (is_null($updateGroupMembershipRequest)) {
-            $updateGroupMembershipRequest = new UpdateGroupMembershipRequest(id: $id, query: $query, body: $body);
-        }
-
-        return $this->sendGroupMembershipRequest($updateGroupMembershipRequest);
+        return $this->sendGroupMembershipRequest($request);
     }
 
     /**
-     * @param int $id
-     * @param RemoveUserFromGroupRequest|null $removeUserFromGroupRequest
+     * @param GenericRequest|RemoveUserFromGroupRequest $request
      * @return NoContentResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -97,13 +77,9 @@ class GroupMembershipsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function removeUserFromGroup(int $id, RemoveUserFromGroupRequest $removeUserFromGroupRequest = null): NoContentResource
+    public function removeUserFromGroup(GenericRequest|RemoveUserFromGroupRequest $request): NoContentResource
     {
-        if (is_null($removeUserFromGroupRequest)) {
-            $removeUserFromGroupRequest = new RemoveUserFromGroupRequest(id: $id);
-        }
-
-        return $this->sendNoContentRequest($removeUserFromGroupRequest);
+        return $this->sendNoContentRequest($request);
     }
 
 

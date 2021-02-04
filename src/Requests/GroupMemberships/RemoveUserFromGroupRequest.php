@@ -19,16 +19,12 @@ class RemoveUserFromGroupRequest extends BaseRequest
     /**
      * RemoveUserFromGroupRequest constructor.
      * @param int $id
-     * @param array $query
-     * @param array $body
-     * @param array $header
      */
-    public function __construct(int $id,  array $query = [], array $body = [], array $header = [])
+    public function __construct(int $id)
     {
         $this->setId($id);
-        parent::__construct(query: $query, body: $body, header: $header);
+        parent::__construct();
     }
-
 
     /**
      * @inheritDoc

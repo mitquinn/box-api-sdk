@@ -7,11 +7,15 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxConflictException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
+use Mitquinn\BoxApiSdk\Requests\GroupMemberships\AddUserToGroupRequest;
+use Mitquinn\BoxApiSdk\Requests\GroupMemberships\GetGroupMembershipRequest;
+use Mitquinn\BoxApiSdk\Requests\GroupMemberships\RemoveUserFromGroupRequest;
+use Mitquinn\BoxApiSdk\Requests\GroupMemberships\UpdateGroupMembershipRequest;
+use Mitquinn\BoxApiSdk\Requests\Users\GetCurrentUserRequest;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
 use Psr\Http\Client\ClientExceptionInterface;
-use Throwable;
 
 /**
  * Class GroupMembershipsCollection
@@ -33,7 +37,8 @@ class GroupMembershipsCollectionTest extends BaseTest
     protected function createGroupMembership(): GroupMembershipResource
     {
         $groupResource = $this->createGroup();
-        $userResource = $this->getBoxService()->users()->getCurrentUser();
+        $request = new GetCurrentUserRequest();
+        $userResource = $this->getBoxService()->users()->getCurrentUser($request);
         $body = [
             'group' => [
                 'id' => $groupResource->getId()
@@ -43,7 +48,8 @@ class GroupMembershipsCollectionTest extends BaseTest
             ]
         ];
 
-        $groupMembershipResource = $this->getBoxService()->groupMemberships()->addUserToGroup($body);
+        $requestAdd = new AddUserToGroupRequest($body);
+        $groupMembershipResource = $this->getBoxService()->groupMemberships()->addUserToGroup($requestAdd);
         static::assertInstanceOf(GroupMembershipResource::class, $groupMembershipResource);
         return $groupMembershipResource;
     }
@@ -51,16 +57,18 @@ class GroupMembershipsCollectionTest extends BaseTest
     public function testGetGroupMembership()
     {
         $groupMembershipResourceCreated = $this->createGroupMembership();
-        $groupMembershipResource = $this->getBoxService()->groupMemberships()->getGroupMembership($groupMembershipResourceCreated->getId());
+        $request = new GetGroupMembershipRequest($groupMembershipResourceCreated->getId());
+        $groupMembershipResource = $this->getBoxService()->groupMemberships()->getGroupMembership($request);
         static::assertInstanceOf(GroupMembershipResource::class, $groupMembershipResource);
-        $this->getBoxService()->groups()->removeGroup($groupMembershipResource->getGroup()->getId());
+        $this->removeGroup($groupMembershipResource->getGroup()->getId());
     }
 
 
     public function testAddUserToGroup()
     {
         $groupResource = $this->createGroup();
-        $userResource = $this->getBoxService()->users()->getCurrentUser();
+        $currentUserRequest = new GetCurrentUserRequest();
+        $userResource = $this->getBoxService()->users()->getCurrentUser($currentUserRequest);
         $body = [
             'group' => [
                 'id' => $groupResource->getId()
@@ -70,26 +78,29 @@ class GroupMembershipsCollectionTest extends BaseTest
             ]
         ];
 
-        $groupMembershipResource = $this->getBoxService()->groupMemberships()->addUserToGroup($body);
+        $request = new AddUserToGroupRequest(body: $body);
+        $groupMembershipResource = $this->getBoxService()->groupMemberships()->addUserToGroup($request);
         static::assertInstanceOf(GroupMembershipResource::class, $groupMembershipResource);
-        $this->getBoxService()->groups()->removeGroup($groupMembershipResource->getGroup()->getId());
+        $this->removeGroup($groupMembershipResource->getGroup()->getId());
     }
 
     public function testUpdateGroupMembership()
     {
         $groupMembershipResource = $this->createGroupMembership();
-        $updatedGroupMembershipResource = $this->getBoxService()->groupMemberships()->updateGroupMembership($groupMembershipResource->getId());
+        $request = new UpdateGroupMembershipRequest($groupMembershipResource->getId());
+        $updatedGroupMembershipResource = $this->getBoxService()->groupMemberships()->updateGroupMembership($request);
         static::assertInstanceOf(GroupMembershipResource::class, $updatedGroupMembershipResource);
-        $this->getBoxService()->groups()->removeGroup($groupMembershipResource->getGroup()->getId());
+        $this->removeGroup($groupMembershipResource->getGroup()->getId());
     }
 
 
     public function testRemoveUserFromGroup()
     {
         $groupMembershipResource = $this->createGroupMembership();
-        $noContentResource = $this->getBoxService()->groupMemberships()->removeUserFromGroup($groupMembershipResource->getId());
+        $request = new RemoveUserFromGroupRequest($groupMembershipResource->getId());
+        $noContentResource = $this->getBoxService()->groupMemberships()->removeUserFromGroup($request);
         static::assertInstanceOf(NoContentResource::class, $noContentResource);
-        $this->getBoxService()->groups()->removeGroup($groupMembershipResource->getGroup()->getId());
+        $this->removeGroup($groupMembershipResource->getGroup()->getId());
     }
 
 

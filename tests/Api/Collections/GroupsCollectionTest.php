@@ -93,13 +93,4 @@ class GroupsCollectionTest extends BaseTest
         static::assertInstanceOf(GroupMembershipsResource::class, $groupMembershipsResource);
         $this->removeGroup($groupResource->getId());
     }
-
-    protected function removeGroup(int $id)
-    {
-        //Clean Up
-        $deleteRequest = new RemoveGroupRequest($id);
-        $noContentResource = $this->getBoxService()->groups()->removeGroup($deleteRequest);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
-    }
-
 }
