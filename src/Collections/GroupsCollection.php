@@ -8,6 +8,7 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxConflictException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
+use Mitquinn\BoxApiSdk\Requests\GenericRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\CreateGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\GetGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\ListGroupCollaborationsRequest;
@@ -30,8 +31,7 @@ class GroupsCollection extends BaseCollection
 {
 
     /**
-     * @param array $query
-     * @param ListGroupsForEnterpriseRequest|null $listGroupsForEnterpriseRequest
+     * @param GenericRequest|ListGroupsForEnterpriseRequest $request
      * @return GroupsResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -40,14 +40,9 @@ class GroupsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function listGroupsForEnterprise(array $query = [], ListGroupsForEnterpriseRequest $listGroupsForEnterpriseRequest = null)
+    public function listGroupsForEnterprise(GenericRequest|ListGroupsForEnterpriseRequest $request): GroupsResource
     {
-        if (is_null($listGroupsForEnterpriseRequest)) {
-            $listGroupsForEnterpriseRequest = new ListGroupsForEnterpriseRequest(query: $query);
-        }
-
-        return $this->sendGroupsRequest($listGroupsForEnterpriseRequest);
-
+        return $this->sendGroupsRequest($request);
     }
 
     /**

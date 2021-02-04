@@ -13,7 +13,6 @@ class ListGroupsForEnterpriseRequest extends BaseRequest
     /** @var string $method */
     protected string $method = "GET";
 
-
     /**
      * @inheritDoc
      */
