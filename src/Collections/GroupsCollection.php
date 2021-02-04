@@ -46,9 +46,7 @@ class GroupsCollection extends BaseCollection
     }
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param GetGroupRequest|null $getGroupRequest
+     * @param GenericRequest|GetGroupRequest $getGroupRequest
      * @return GroupResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -57,19 +55,13 @@ class GroupsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function getGroup(int $id, array $query = [], GetGroupRequest $getGroupRequest = null): GroupResource
+    public function getGroup(GenericRequest|GetGroupRequest $getGroupRequest): GroupResource
     {
-        if (is_null($getGroupRequest)) {
-            $getGroupRequest = new GetGroupRequest(id: $id, query: $query);
-        }
-
         return $this->sendGroupRequest($getGroupRequest);
     }
 
     /**
-     * @param array $body
-     * @param array $query
-     * @param CreateGroupRequest|null $createGroupRequest
+     * @param GenericRequest|CreateGroupRequest $request
      * @return GroupResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -78,21 +70,14 @@ class GroupsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function createGroup(array $body, array $query = [], CreateGroupRequest $createGroupRequest = null): GroupResource
+    public function createGroup(GenericRequest|CreateGroupRequest $request): GroupResource
     {
-        if (is_null($createGroupRequest)) {
-            $createGroupRequest = new CreateGroupRequest(body: $body, query: $query);
-        }
-
-        return $this->sendGroupRequest($createGroupRequest);
+        return $this->sendGroupRequest($request);
     }
 
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param array $body
-     * @param UpdateGroupRequest|null $updateGroupRequest
+     * @param UpdateGroupRequest $request
      * @return GroupResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -101,18 +86,13 @@ class GroupsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function updateGroup(int $id, array $query = [], array $body = [], UpdateGroupRequest $updateGroupRequest = null): GroupResource
+    public function updateGroup(GenericRequest|UpdateGroupRequest $request): GroupResource
     {
-        if (is_null($updateGroupRequest)) {
-            $updateGroupRequest = new UpdateGroupRequest(id: $id, query: $query, body: $body);
-        }
-
-        return $this->sendGroupRequest($updateGroupRequest);
+        return $this->sendGroupRequest($request);
     }
 
     /**
-     * @param int $id
-     * @param RemoveGroupRequest|null $removeGroupRequest
+     * @param GenericRequest|RemoveGroupRequest $request
      * @return NoContentResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -120,19 +100,13 @@ class GroupsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function removeGroup(int $id, RemoveGroupRequest $removeGroupRequest = null): NoContentResource
+    public function removeGroup(GenericRequest|RemoveGroupRequest $request): NoContentResource
     {
-        if (is_null($removeGroupRequest)) {
-            $removeGroupRequest = new RemoveGroupRequest(id: $id);
-        }
-
-        return $this->sendNoContentRequest($removeGroupRequest);
+        return $this->sendNoContentRequest($request);
     }
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param ListGroupCollaborationsRequest|null $listGroupCollaborationsRequest
+     * @param GenericRequest|ListGroupCollaborationsRequest $request
      * @return CollaborationsResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -141,20 +115,13 @@ class GroupsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function listGroupCollaborations(int $id, array $query = [], ListGroupCollaborationsRequest $listGroupCollaborationsRequest = null): CollaborationsResource
+    public function listGroupCollaborations(GenericRequest|ListGroupCollaborationsRequest $request): CollaborationsResource
     {
-        if (is_null($listGroupCollaborationsRequest)) {
-            $listGroupCollaborationsRequest = new ListGroupCollaborationsRequest(id: $id, query: $query);
-        }
-
-        return $this->sendCollaborationsRequest($listGroupCollaborationsRequest);
+        return $this->sendCollaborationsRequest($request);
     }
 
-
     /**
-     * @param int $id
-     * @param array $query
-     * @param ListMembersOfGroupRequest|null $listMembersOfGroupRequest
+     * @param GenericRequest|ListMembersOfGroupRequest $request
      * @return GroupMembershipsResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -163,13 +130,9 @@ class GroupsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function listMembersOfGroup(int $id, array $query = [], ListMembersOfGroupRequest $listMembersOfGroupRequest = null): GroupMembershipsResource
+    public function listMembersOfGroup(GenericRequest|ListMembersOfGroupRequest $request): GroupMembershipsResource
     {
-        if (is_null($listMembersOfGroupRequest)) {
-            $listMembersOfGroupRequest = new ListMembersOfGroupRequest(id: $id, query: $query);
-        }
-
-        return $this->sendGroupMembershipsRequest($listMembersOfGroupRequest);
+        return $this->sendGroupMembershipsRequest($request);
     }
 
 

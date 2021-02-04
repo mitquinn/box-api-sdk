@@ -216,14 +216,18 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] Group Resource 1/18/21
 - [x] Groups Resource 1/18/21
 - [x] Groups Collection 1/18/21
-- [x] Group Base Resource 1/18/21
-- [x] Group Mini Resource 1/18/21
+    - [x] Refactored 2/4/21
+- [ ] Group Base Resource 1/18/21
+- [ ] Group Mini Resource 1/18/21
 - [x] Group Full Resource 1/18/21
 - [x] List Groups for enterprise 1/18/21
     - [x] Refactored 2/4/21
 - [x] Get Group 1/18/21
+    - [x] Refactored 2/4/21
 - [x] Create Group 1/18/21
+    - [x] Refactored 2/4/21
 - [x] Update Group 1/18/21
+    - [x] Refactored 2/4/21
 - [x] Remove Group 1/18/21
   
 ### Invites

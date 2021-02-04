@@ -21,12 +21,11 @@ class UpdateGroupRequest extends BaseRequest
      * @param int $id
      * @param array $query
      * @param array $body
-     * @param array $header
      */
-    public function __construct(int $id, array $query = [], array $body = [], array $header = [])
+    public function __construct(int $id, array $query = [], array $body = [])
     {
         $this->setId($id);
-        parent::__construct(query: $query, body: $body, header: $header);
+        parent::__construct(query: $query, body: $body);
     }
 
     /**

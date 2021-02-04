@@ -14,6 +14,16 @@ class CreateGroupRequest extends BaseRequest
     protected string $method = 'POST';
 
     /**
+     * CreateGroupRequest constructor.
+     * @param array $body
+     * @param array $query
+     */
+    public function __construct(array $body, array $query = [])
+    {
+        parent::__construct(query: $query, body: $body);
+    }
+
+    /**
      * @inheritDoc
      */
     public function getUri(): string

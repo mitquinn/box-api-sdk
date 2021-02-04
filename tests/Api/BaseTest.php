@@ -8,6 +8,7 @@ use Mitquinn\BoxApiSdk\AuthorizationConfigurations\ServerAuthorization;
 use Mitquinn\BoxApiSdk\BoxService;
 use Mitquinn\BoxApiSdk\Interfaces\AuthorizationInterface;
 use Mitquinn\BoxApiSdk\Requests\Folders\CreateFolderRequest;
+use Mitquinn\BoxApiSdk\Requests\Groups\CreateGroupRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use Mitquinn\BoxApiSdk\Resources\GroupResource;
@@ -112,7 +113,8 @@ abstract class BaseTest extends TestCase
             'name' => $this->faker->name
         ];
 
-        $groupResource = $this->getBoxService()->groups()->createGroup(body: $body);
+        $request = new CreateGroupRequest(body: $body);
+        $groupResource = $this->getBoxService()->groups()->createGroup($request);
         static::assertInstanceOf(GroupResource::class, $groupResource);
         return $groupResource;
     }
