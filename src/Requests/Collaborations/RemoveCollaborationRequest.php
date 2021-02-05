@@ -2,13 +2,14 @@
 
 namespace Mitquinn\BoxApiSdk\Requests\Collaborations;
 
+use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
 
 /**
  * Class RemoveCollaborationRequest
  * @package Mitquinn\BoxApiSdk\Requests\Collaborations
  */
-class RemoveCollaborationRequest extends \Mitquinn\BoxApiSdk\Requests\BaseRequest
+class RemoveCollaborationRequest extends BaseRequest
 {
     use HasId;
 
@@ -18,18 +19,15 @@ class RemoveCollaborationRequest extends \Mitquinn\BoxApiSdk\Requests\BaseReques
     /**
      * RemoveCollaborationRequest constructor.
      * @param int $id
-     * @param array $query
-     * @param array $body
-     * @param array $header
      */
-    public function __construct(int $id, array $query = [], array $body = [], array $header = [])
+    public function __construct(int $id)
     {
         $this->setId($id);
-        parent::__construct(query: $query, body:  $body, header: $header);
+        parent::__construct();
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getUri(): string
     {

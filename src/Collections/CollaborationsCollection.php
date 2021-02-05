@@ -13,6 +13,7 @@ use Mitquinn\BoxApiSdk\Requests\Collaborations\GetCollaborationRequest;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\ListPendingCollaborationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\RemoveCollaborationRequest;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\UpdateCollaborationRequest;
+use Mitquinn\BoxApiSdk\Requests\GenericRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -26,9 +27,7 @@ class CollaborationsCollection extends BaseCollection
 {
 
     /**
-     * @param int $id
-     * @param array $query
-     * @param GetCollaborationRequest|null $getCollaborationRequest
+     * @param GenericRequest|GetCollaborationRequest $request
      * @return CollaborationResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -37,20 +36,14 @@ class CollaborationsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function getCollaboration(int $id, array $query = [], GetCollaborationRequest $getCollaborationRequest = null): CollaborationResource
+    public function getCollaboration(GenericRequest|GetCollaborationRequest $request): CollaborationResource
     {
-        if (is_null($getCollaborationRequest)) {
-            $getCollaborationRequest = new GetCollaborationRequest(id: $id, query: $query);
-        }
-
-        return $this->sendCollaborationRequest($getCollaborationRequest);
+        return $this->sendCollaborationRequest($request);
     }
 
 
     /**
-     * @param array $body
-     * @param array $query
-     * @param CreateCollaborationRequest|null $createCollaborationRequest
+     * @param GenericRequest|CreateCollaborationRequest $request
      * @return CollaborationResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -59,19 +52,13 @@ class CollaborationsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function createCollaboration(array $body, array $query = [], CreateCollaborationRequest $createCollaborationRequest = null): CollaborationResource
+    public function createCollaboration(GenericRequest|CreateCollaborationRequest $request): CollaborationResource
     {
-        if (is_null($createCollaborationRequest)) {
-            $createCollaborationRequest = new CreateCollaborationRequest(query: $query, body: $body);
-        }
-
-        return $this->sendCollaborationRequest($createCollaborationRequest);
+        return $this->sendCollaborationRequest($request);
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @param UpdateCollaborationRequest|null $updateCollaborationRequest
+     * @param GenericRequest|UpdateCollaborationRequest $request
      * @return CollaborationResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -80,18 +67,13 @@ class CollaborationsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function updateCollaboration(int $id, array $body, UpdateCollaborationRequest $updateCollaborationRequest = null): CollaborationResource
+    public function updateCollaboration(GenericRequest|UpdateCollaborationRequest $request): CollaborationResource
     {
-        if (is_null($updateCollaborationRequest)) {
-            $updateCollaborationRequest = new UpdateCollaborationRequest(id: $id, body: $body);
-        }
-
-        return $this->sendCollaborationRequest($updateCollaborationRequest);
+        return $this->sendCollaborationRequest($request);
     }
 
     /**
-     * @param int $id
-     * @param RemoveCollaborationRequest|null $removeCollaborationRequest
+     * @param GenericRequest|RemoveCollaborationRequest $request
      * @return NoContentResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -99,18 +81,13 @@ class CollaborationsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function removeCollaboration(int $id, RemoveCollaborationRequest $removeCollaborationRequest = null): NoContentResource
+    public function removeCollaboration(GenericRequest|RemoveCollaborationRequest $request): NoContentResource
     {
-        if (is_null($removeCollaborationRequest)) {
-            $removeCollaborationRequest = new RemoveCollaborationRequest($id);
-        }
-
-        return $this->sendNoContentRequest($removeCollaborationRequest);
+        return $this->sendNoContentRequest($request);
     }
 
     /**
-     * @param array $query
-     * @param ListPendingCollaborationsRequest|null $listPendingCollaborationsRequest
+     * @param ListPendingCollaborationsRequest $request
      * @return CollaborationsResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -119,19 +96,10 @@ class CollaborationsCollection extends BaseCollection
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function listPendingCollaborations(array $query, ListPendingCollaborationsRequest $listPendingCollaborationsRequest = null): CollaborationsResource
+    public function listPendingCollaborations(ListPendingCollaborationsRequest $request): CollaborationsResource
     {
-
-        if (is_null($listPendingCollaborationsRequest)) {
-            $listPendingCollaborationsRequest = new ListPendingCollaborationsRequest(query: $query);
-        }
-
-        return $this->sendCollaborationsRequest($listPendingCollaborationsRequest);
+        return $this->sendCollaborationsRequest($request);
     }
-
-
-
-
 
     /**
      * @param BaseRequest $request

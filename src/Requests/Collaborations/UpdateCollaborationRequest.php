@@ -20,17 +20,15 @@ class UpdateCollaborationRequest extends BaseRequest
      * UpdateCollaborationRequest constructor.
      * @param int $id
      * @param array $body
-     * @param array $query
-     * @param array $header
      */
-    public function __construct(int $id, array $query = [], array $body = [], array $header = [])
+    public function __construct(int $id, array $body)
     {
         $this->setId($id);
-        parent::__construct(query: $query, body:  $body, header:  $header);
+        parent::__construct(body: $body);
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getUri(): string
     {

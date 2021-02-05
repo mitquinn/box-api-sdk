@@ -7,7 +7,9 @@ use Faker\Generator;
 use Mitquinn\BoxApiSdk\AuthorizationConfigurations\ServerAuthorization;
 use Mitquinn\BoxApiSdk\BoxService;
 use Mitquinn\BoxApiSdk\Interfaces\AuthorizationInterface;
+use Mitquinn\BoxApiSdk\Requests\Collaborations\CreateCollaborationRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\CreateFolderRequest;
+use Mitquinn\BoxApiSdk\Requests\Folders\DeleteFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\CreateGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\RemoveGroupRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
@@ -89,6 +91,13 @@ abstract class BaseTest extends TestCase
         return $folderResource;
     }
 
+    public function deleteFolder($id)
+    {
+        $request = new DeleteFolderRequest(id: $id);
+        $noContentResource = $this->getBoxService()->folders()->deleteFolder($request);
+        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+    }
+
 
     public function createCollaboration(FolderResource $folderResource): CollaborationResource
     {
@@ -104,7 +113,8 @@ abstract class BaseTest extends TestCase
             'role' => 'viewer'
         ];
 
-        $collaborationResource = $this->getBoxService()->collaborations()->createCollaboration($body);
+        $request = new CreateCollaborationRequest(body: $body);
+        $collaborationResource = $this->getBoxService()->collaborations()->createCollaboration($request);
         static::assertInstanceOf(CollaborationResource::class, $collaborationResource);
         return $collaborationResource;
     }

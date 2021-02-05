@@ -49,18 +49,26 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 
 ### Collaborations
 - [x] Collaborations Collection 1/16/21
+    - [x] Refactored 2/5/21
 - [x] Collaboration Resource 1/14/21
 - [x] Collaborations Resource 1/17/21
 - [x] Get Collaboration 1/16/21
+    - [x] Refactored 2/5/21
 - [x] Create Collaboration 1/15/21
+    - [x] Refactored 2/5/21
 - [x] Update Collaboration 1/16/21
+    - [x] Refactored 2/5/21
 - [x] Remove Collaboration 1/16/21
+    - [x] Refactored 2/5/21
+
+
 
 ### Collaborations (List)
 - [x] List File Collaborations 1/18/21
     - [x] Refactored 2/3/21
 - [x] List Folder Collaborations 1/17/21
 - [x] List Pending Collaborations 1/18/21
+    - [x] Refactored 2/5/21
 - [x] List Collaborations for Group 1/18/21
 
 ### Collections

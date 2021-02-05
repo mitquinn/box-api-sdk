@@ -3,6 +3,11 @@
 namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
 
 
+use Mitquinn\BoxApiSdk\Requests\Collaborations\CreateCollaborationRequest;
+use Mitquinn\BoxApiSdk\Requests\Collaborations\GetCollaborationRequest;
+use Mitquinn\BoxApiSdk\Requests\Collaborations\ListPendingCollaborationsRequest;
+use Mitquinn\BoxApiSdk\Requests\Collaborations\RemoveCollaborationRequest;
+use Mitquinn\BoxApiSdk\Requests\Collaborations\UpdateCollaborationRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -17,8 +22,10 @@ class CollaborationsCollectionTest extends BaseTest
 
     public function testCreateCollaboration()
     {
+        //Create the folder
         $folderResource = $this->createFolder();
 
+        //Create Collaboration Request
         $body = [
             'accessible_by' => [
                 'type' => 'user',
@@ -31,10 +38,12 @@ class CollaborationsCollectionTest extends BaseTest
             'role' => 'viewer'
         ];
 
-        $collaborationResource = $this->getBoxService()->collaborations()->createCollaboration($body);
+        $request = new CreateCollaborationRequest(body: $body);
+        $collaborationResource = $this->getBoxService()->collaborations()->createCollaboration($request);
         static::assertInstanceOf(CollaborationResource::class, $collaborationResource);
 
-        $this->getBoxService()->folders()->deleteFolder($folderResource->getId());
+        //Delete the folder
+        $this->deleteFolder($folderResource->getId());
     }
 
 
@@ -47,36 +56,51 @@ class CollaborationsCollectionTest extends BaseTest
         $collaborationResource = $this->createCollaboration($folderResource);
 
         //Get the Collaboration
-        $getCollaborationResource = $this->getBoxService()->collaborations()->getCollaboration($collaborationResource->getId());
+        $request = new GetCollaborationRequest($collaborationResource->getId());
+        $getCollaborationResource = $this->getBoxService()->collaborations()->getCollaboration($request);
         static::assertInstanceOf(CollaborationResource::class, $getCollaborationResource);
 
-        $this->getBoxService()->folders()->deleteFolder($folderResource->getId());
+        //Delete the folder.
+        $this->deleteFolder($folderResource->getId());
     }
 
     public function testUpdateCollaboration()
     {
+        //Create Folder
         $folderResource = $this->createFolder();
 
+        //Create Collaboration
         $collaborationResource = $this->createCollaboration($folderResource);
 
         $body = [
             'role' => 'previewer'
         ];
 
-        $updateCollaborationResource = $this->getBoxService()->collaborations()->updateCollaboration($collaborationResource->getId(), $body);
+        //Update Collaboration
+        $request = new UpdateCollaborationRequest($collaborationResource->getId(), $body);
+        $updateCollaborationResource = $this->getBoxService()->collaborations()->updateCollaboration($request);
         static::assertInstanceOf(CollaborationResource::class, $updateCollaborationResource);
         static::assertEquals($updateCollaborationResource->getRole(), 'previewer');
 
-        $this->getBoxService()->folders()->deleteFolder($folderResource->getId());
+        //Delete Folder
+        $this->deleteFolder($folderResource->getId());
     }
 
     public function testRemoveCollaboration()
     {
+        //Create the folder.
         $folderResource = $this->createFolder();
+
+        //Create the collaboration
         $collaborationResource = $this->createCollaboration($folderResource);
-        $noContentResource = $this->getBoxService()->collaborations()->removeCollaboration($collaborationResource->getId());
+
+        //Remove the collaboration
+        $request = new RemoveCollaborationRequest($collaborationResource->getId());
+        $noContentResource = $this->getBoxService()->collaborations()->removeCollaboration($request);
         static::assertInstanceOf(NoContentResource::class, $noContentResource);
-        $this->getBoxService()->folders()->deleteFolder($folderResource->getId());
+
+        //Delete folder
+        $this->deleteFolder($folderResource->getId());
     }
 
     public function testListPendingCollaborations()
@@ -84,7 +108,9 @@ class CollaborationsCollectionTest extends BaseTest
         $query = [
             'status' => 'pending'
         ];
-        $collaborationsResource = $this->getBoxService()->collaborations()->listPendingCollaborations(query: $query);
+
+        $request = new ListPendingCollaborationsRequest($query);
+        $collaborationsResource = $this->getBoxService()->collaborations()->listPendingCollaborations($request);
         static::assertInstanceOf(CollaborationsResource::class, $collaborationsResource);
     }
 
