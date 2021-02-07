@@ -89,6 +89,9 @@ abstract class BaseCollection
     {
         $response = $this->getClient()->sendRequest($request->generateRequestInterface());
 
+        var_dump($response);
+        exit;
+
         $this->validateResponse($response);
 
         return new NoContentResource($response);

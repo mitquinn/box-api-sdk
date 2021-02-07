@@ -6,6 +6,7 @@ namespace Mitquinn\BoxApiSdk;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Mitquinn\BoxApiSdk\Collections\ClassificationsCollection;
 use Mitquinn\BoxApiSdk\Collections\CollaborationsCollection;
 use Mitquinn\BoxApiSdk\Collections\FilesCollection;
 use Mitquinn\BoxApiSdk\Collections\FoldersCollection;
@@ -38,9 +39,11 @@ class BoxService
     /** @var GroupsCollection $groupsCollection */
     protected GroupsCollection $groupsCollection;
 
-    /** @var GroupMembershipsCollection $groupMembershipCollection */
-    protected GroupMembershipsCollection $groupMembershipCollection;
+    /** @var GroupMembershipsCollection $groupMembershipsCollection */
+    protected GroupMembershipsCollection $groupMembershipsCollection;
 
+    /** @var ClassificationsCollection $classificationsCollection */
+    protected ClassificationsCollection $classificationsCollection;
 
     /** @var AuthorizationInterface $authorizationConfiguration */
     protected AuthorizationInterface $authorizationConfiguration;
@@ -108,7 +111,6 @@ class BoxService
 
 
     /*** Start Collection Accessors ***/
-
     protected function initializeCollectionAccessors(): void
     {
         $this->usersCollection = new UsersCollection($this->getClient());
@@ -116,16 +118,24 @@ class BoxService
         $this->filesCollection = new FilesCollection($this->getClient());
         $this->collaborationsCollection = new CollaborationsCollection($this->getClient());
         $this->groupsCollection = new GroupsCollection($this->getClient());
-        $this->groupMembershipCollection = new GroupMembershipsCollection($this->getClient());
+        $this->groupMembershipsCollection = new GroupMembershipsCollection($this->getClient());
+        $this->classificationsCollection = new ClassificationsCollection($this->getClient());
     }
 
+    /**
+     * @return ClassificationsCollection
+     */
+    public function classifications(): ClassificationsCollection
+    {
+        return $this->classificationsCollection;
+    }
 
     /**
      * @return GroupMembershipsCollection
      */
     public function groupMemberships(): GroupMembershipsCollection
     {
-        return $this->groupMembershipCollection;
+        return $this->groupMembershipsCollection;
     }
 
     /**

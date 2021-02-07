@@ -11,7 +11,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 ### General
 - [x] Create shared property traits - 1/9/21
 - [x] add shared traits to folder/files resources - 1/10/21
-- [ ] Rename Collections to something else
+- [ ] Rename Collections to something else?
 - [x] Write ReadMe 1/27/21
 - [ ] Create Technical Overview
 - [x] Copy over things that have been done to the new ReadMe 1/28/21 
@@ -25,15 +25,17 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Revoke Access Token
 
 ### Classifications
-- [ ] Classification Collection
-- [ ] Classification Resource
-- [ ] Classification Template
-- [ ] List All Classifications
-- [ ] Add Initial Classification
-- [ ] Add Classification
-- [ ] Update Classification
-- [ ] Delete Classification
-- [ ] Delete All Classifications
+- [ ] Add support for Classification Requests
+- [ ] Add tests for Classification Requests  
+- [x] Classification Collection 2/5/21
+- [ ] Classification Resource 
+- [x] Classification Template 2/7/21
+- [x] List All Classifications 2/7/21
+- [x] Add Initial Classification 2/7/21
+- [x] Add Classification 2/7/21
+- [x] Update Classification 2/7/21
+- [x] Delete Classification 2/7/21
+- [x] Delete All Classifications 2/7/21
 
 ### Classifications on Files
 - [ ] Get Classification on File
