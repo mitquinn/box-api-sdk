@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Tests\Api\User;
+namespace Mitquinn\BoxApiSdk\Tests\Integration\Api;
 
 use Mitquinn\BoxApiSdk\Requests\Users\GetCurrentUserRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\GetUserRequest;
@@ -10,13 +10,14 @@ use Mitquinn\BoxApiSdk\Requests\Users\UpdateUserRequest;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
 use Mitquinn\BoxApiSdk\Resources\UserResource;
 use Mitquinn\BoxApiSdk\Resources\UsersResource;
-use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
+use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
+
 
 /**
  * Class BoxApiSdkUserTest
  * @package Mitquinn\BoxApiSdk\Tests\Api\User
  */
-class UsersCollectionTest extends BaseTest
+class UsersApiTest extends BaseTest
 {
 
     public function testGetCurrentUser()

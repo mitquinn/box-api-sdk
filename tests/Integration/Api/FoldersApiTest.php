@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
+namespace Mitquinn\BoxApiSdk\Tests\Integration\Api;
 
 use Mitquinn\BoxApiSdk\Requests\Folders\CopyFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\CreateFolderRequest;
@@ -14,7 +14,7 @@ use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Mitquinn\BoxApiSdk\Resources\UserResource;
-use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
+use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
 /**
  * Class FoldersCollectionTest

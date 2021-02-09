@@ -1,20 +1,20 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
+namespace Mitquinn\BoxApiSdk\Tests\Integration\Api;
 
 use Mitquinn\BoxApiSdk\Requests\Classifications\AddInitialClassificationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Classifications\DeleteAllClassificationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Classifications\ListAllClassificationsRequest;
 use Mitquinn\BoxApiSdk\Resources\ClassificationTemplateResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
-use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
+use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
 /**
  * Class ClassificationsCollectionTest
  * @package Api\Collections
  * Todo: This API doesnt seem to work. I do not understand it.
  */
-class ClassificationsCollectionTest extends BaseTest
+class ClassificationsApiTest extends BaseTest
 {
 
 //    public function testAddInitialClassificationRequest()

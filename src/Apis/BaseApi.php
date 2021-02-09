@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Collections;
+namespace Mitquinn\BoxApiSdk\Apis;
 
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
@@ -22,7 +22,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class BaseCollection
  * @package Mitquinn\BoxApiSdk\Collections
  */
-abstract class BaseCollection
+abstract class BaseApi
 {
     use CanValidateHttpResponse;
 
@@ -89,13 +89,9 @@ abstract class BaseCollection
     {
         $response = $this->getClient()->sendRequest($request->generateRequestInterface());
 
-        var_dump($response);
-        exit;
-
         $this->validateResponse($response);
 
         return new NoContentResource($response);
-
     }
 
     /**
@@ -158,9 +154,9 @@ abstract class BaseCollection
 
     /**
      * @param ClientInterface $client
-     * @return BaseCollection
+     * @return BaseApi
      */
-    public function setClient(ClientInterface $client): BaseCollection
+    public function setClient(ClientInterface $client): BaseApi
     {
         $this->client = $client;
         return $this;

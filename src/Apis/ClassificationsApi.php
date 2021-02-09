@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mitquinn\BoxApiSdk\Collections;
+namespace Mitquinn\BoxApiSdk\Apis;
 
 
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
@@ -26,7 +26,7 @@ use Psr\Http\Client\ClientExceptionInterface;
  * @package Mitquinn\BoxApiSdk\Collections
  * Todo: I do not understand how this API works. I will only offer access support. Please use Generic Requests.
  */
-class ClassificationsCollection extends BaseCollection
+class ClassificationsApi extends BaseApi
 {
 
     /**

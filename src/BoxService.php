@@ -6,13 +6,14 @@ namespace Mitquinn\BoxApiSdk;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Mitquinn\BoxApiSdk\Collections\ClassificationsCollection;
-use Mitquinn\BoxApiSdk\Collections\CollaborationsCollection;
-use Mitquinn\BoxApiSdk\Collections\FilesCollection;
-use Mitquinn\BoxApiSdk\Collections\FoldersCollection;
-use Mitquinn\BoxApiSdk\Collections\GroupMembershipsCollection;
-use Mitquinn\BoxApiSdk\Collections\GroupsCollection;
-use Mitquinn\BoxApiSdk\Collections\UsersCollection;
+use Mitquinn\BoxApiSdk\Apis\ClassificationsApi;
+use Mitquinn\BoxApiSdk\Apis\CollaborationsApi;
+use Mitquinn\BoxApiSdk\Apis\CollectionsApi;
+use Mitquinn\BoxApiSdk\Apis\FilesApi;
+use Mitquinn\BoxApiSdk\Apis\FoldersApi;
+use Mitquinn\BoxApiSdk\Apis\GroupMembershipsApi;
+use Mitquinn\BoxApiSdk\Apis\GroupsApi;
+use Mitquinn\BoxApiSdk\Apis\UsersApi;
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Interfaces\AuthorizationInterface;
 use Psr\Http\Client\ClientInterface;
@@ -24,26 +25,29 @@ use Psr\Http\Client\ClientInterface;
 class BoxService
 {
 
-    /** @var FilesCollection $filesCollection */
-    protected FilesCollection $filesCollection;
+    /** @var FilesApi $filesApi */
+    protected FilesApi $filesApi;
 
-    /** @var FoldersCollection $foldersCollection */
-    protected FoldersCollection $foldersCollection;
+    /** @var FoldersApi $foldersApi */
+    protected FoldersApi $foldersApi;
 
-    /** @var UsersCollection $usersCollection */
-    protected UsersCollection $usersCollection;
+    /** @var UsersApi $usersApi */
+    protected UsersApi $usersApi;
 
-    /** @var CollaborationsCollection $collaborationsCollection */
-    protected CollaborationsCollection $collaborationsCollection;
+    /** @var CollaborationsApi $collaborationsApi */
+    protected CollaborationsApi $collaborationsApi;
 
-    /** @var GroupsCollection $groupsCollection */
-    protected GroupsCollection $groupsCollection;
+    /** @var GroupsApi $groupsApi */
+    protected GroupsApi $groupsApi;
 
-    /** @var GroupMembershipsCollection $groupMembershipsCollection */
-    protected GroupMembershipsCollection $groupMembershipsCollection;
+    /** @var GroupMembershipsApi $groupMembershipsApi */
+    protected GroupMembershipsApi $groupMembershipsApi;
 
-    /** @var ClassificationsCollection $classificationsCollection */
-    protected ClassificationsCollection $classificationsCollection;
+    /** @var ClassificationsApi $classificationsApi */
+    protected ClassificationsApi $classificationsApi;
+
+    /** @var CollectionsApi $collectionsApi */
+    protected CollectionsApi $collectionsApi;
 
     /** @var AuthorizationInterface $authorizationConfiguration */
     protected AuthorizationInterface $authorizationConfiguration;
@@ -113,69 +117,78 @@ class BoxService
     /*** Start Collection Accessors ***/
     protected function initializeCollectionAccessors(): void
     {
-        $this->usersCollection = new UsersCollection($this->getClient());
-        $this->foldersCollection = new FoldersCollection($this->getClient());
-        $this->filesCollection = new FilesCollection($this->getClient());
-        $this->collaborationsCollection = new CollaborationsCollection($this->getClient());
-        $this->groupsCollection = new GroupsCollection($this->getClient());
-        $this->groupMembershipsCollection = new GroupMembershipsCollection($this->getClient());
-        $this->classificationsCollection = new ClassificationsCollection($this->getClient());
+        $this->usersApi = new UsersApi($this->getClient());
+        $this->foldersApi = new FoldersApi($this->getClient());
+        $this->filesApi = new FilesApi($this->getClient());
+        $this->collaborationsApi = new CollaborationsApi($this->getClient());
+        $this->groupsApi = new GroupsApi($this->getClient());
+        $this->groupMembershipsApi = new GroupMembershipsApi($this->getClient());
+        $this->classificationsApi = new ClassificationsApi($this->getClient());
+        $this->collectionsApi = new CollectionsApi($this->getClient());
     }
 
     /**
-     * @return ClassificationsCollection
+     * @return CollectionsApi
      */
-    public function classifications(): ClassificationsCollection
+    public function collections(): CollectionsApi
     {
-        return $this->classificationsCollection;
+        return $this->collectionsApi;
     }
 
     /**
-     * @return GroupMembershipsCollection
+     * @return ClassificationsApi
      */
-    public function groupMemberships(): GroupMembershipsCollection
+    public function classifications(): ClassificationsApi
     {
-        return $this->groupMembershipsCollection;
+        return $this->classificationsApi;
     }
 
     /**
-     * @return GroupsCollection
+     * @return GroupMembershipsApi
      */
-    public function groups(): GroupsCollection
+    public function groupMemberships(): GroupMembershipsApi
     {
-        return $this->groupsCollection;
+        return $this->groupMembershipsApi;
     }
 
     /**
-     * @return CollaborationsCollection
+     * @return GroupsApi
      */
-    public function collaborations(): CollaborationsCollection
+    public function groups(): GroupsApi
     {
-        return $this->collaborationsCollection;
+        return $this->groupsApi;
     }
 
     /**
-     * @return UsersCollection
+     * @return CollaborationsApi
      */
-    public function users(): UsersCollection
+    public function collaborations(): CollaborationsApi
     {
-        return $this->usersCollection;
+        return $this->collaborationsApi;
     }
 
     /**
-     * @return FoldersCollection
+     * @return UsersApi
      */
-    public function folders(): FoldersCollection
+    public function users(): UsersApi
     {
-        return $this->foldersCollection;
+        return $this->usersApi;
     }
 
     /**
-     * @return FilesCollection
+     * @return FoldersApi
      */
-    public function files(): FilesCollection
+    public function folders(): FoldersApi
     {
-        return $this->filesCollection;
+        return $this->foldersApi;
+    }
+
+    /**
+     * @return FilesApi
+     */
+    public function files(): FilesApi
+    {
+        return $this->filesApi;
     }
 
     /*** End Collection Accessors ***/

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
+namespace Mitquinn\BoxApiSdk\Tests\Integration\Api;
 
 use Carbon\Carbon;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
@@ -15,7 +15,7 @@ use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\FileResource;
 use Mitquinn\BoxApiSdk\Resources\FilesResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
-use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
+use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
 /**
  * Class FilesCollectionTest

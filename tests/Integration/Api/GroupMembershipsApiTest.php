@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
+namespace Mitquinn\BoxApiSdk\Tests\Integration\Api;
 
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
@@ -14,14 +14,14 @@ use Mitquinn\BoxApiSdk\Requests\GroupMemberships\UpdateGroupMembershipRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\GetCurrentUserRequest;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
-use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
+use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 use Psr\Http\Client\ClientExceptionInterface;
 
 /**
  * Class GroupMembershipsCollection
  * @package Mitquinn\BoxApiSdk\Tests\Api\Collections
  */
-class GroupMembershipsCollectionTest extends BaseTest
+class GroupMembershipsApiTest extends BaseTest
 {
 
 

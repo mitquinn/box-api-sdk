@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Tests\Api;
+namespace Mitquinn\BoxApiSdk\Tests\Integration;
 
 use Faker\Factory;
 use Faker\Generator;
@@ -20,8 +20,8 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Dotenv\Dotenv;
 
 /**
- * Class BoxApiSdkBaseTest
- * @package Mitquinn\BoxApiSdk\Tests\Api
+ * Class BaseTest
+ * @package Mitquinn\BoxApiSdk\Tests\Integration\Api
  */
 abstract class BaseTest extends TestCase
 {

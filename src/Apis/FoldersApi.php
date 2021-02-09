@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Collections;
+namespace Mitquinn\BoxApiSdk\Apis;
 
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
@@ -27,7 +27,7 @@ use Psr\Http\Client\ClientExceptionInterface;
  * Class FoldersCollection
  * @package Mitquinn\BoxApiSdk\Collections
  */
-class FoldersCollection extends BaseCollection
+class FoldersApi extends BaseApi
 {
 
     /**

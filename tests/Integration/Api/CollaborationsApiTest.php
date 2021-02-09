@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Tests\Api\Collections;
+namespace Mitquinn\BoxApiSdk\Tests\Integration\Api;
 
 
 use Mitquinn\BoxApiSdk\Requests\Collaborations\CreateCollaborationRequest;
@@ -11,13 +11,13 @@ use Mitquinn\BoxApiSdk\Requests\Collaborations\UpdateCollaborationRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
-use Mitquinn\BoxApiSdk\Tests\Api\BaseTest;
+use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
 /**
  * Class CollaborationsCollectionTest
  * @package Mitquinn\BoxApiSdk\Tests\Api\Collections
  */
-class CollaborationsCollectionTest extends BaseTest
+class CollaborationsApiTest extends BaseTest
 {
 
     public function testCreateCollaboration()

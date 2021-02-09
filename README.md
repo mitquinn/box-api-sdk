@@ -11,7 +11,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 ### General
 - [x] Create shared property traits - 1/9/21
 - [x] add shared traits to folder/files resources - 1/10/21
-- [ ] Rename Collections to something else?
+- [x] Rename Collections to something else? 2/9/21
 - [x] Write ReadMe 1/27/21
 - [ ] Create Technical Overview
 - [x] Copy over things that have been done to the new ReadMe 1/28/21 
@@ -74,11 +74,11 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] List Collaborations for Group 1/18/21
 
 ### Collections
-- [ ] Collections Collection
-- [ ] Collection Resource
-- [ ] Collections Resource
-- [ ] List all Collections
-- [ ] List Collection items
+- [x] Collections Collection
+- [x] Collection Resource
+- [x] Collections Resource
+- [x] List all Collections
+- [x] List Collection items
 
 ### Comments
 - [ ] Comments Collection

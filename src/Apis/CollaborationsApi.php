@@ -1,6 +1,6 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Collections;
+namespace Mitquinn\BoxApiSdk\Apis;
 
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
@@ -23,7 +23,7 @@ use Psr\Http\Client\ClientExceptionInterface;
  * Class CollaborationsCollection
  * @package Mitquinn\BoxApiSdk\Collections
  */
-class CollaborationsCollection extends BaseCollection
+class CollaborationsApi extends BaseApi
 {
 
     /**
