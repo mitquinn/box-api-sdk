@@ -74,21 +74,21 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] List Collaborations for Group 1/18/21
 
 ### Collections
-- [x] Collections Collection
-- [x] Collection Resource
-- [x] Collections Resource
-- [x] List all Collections
-- [x] List Collection items
+- [x] Collections Collection 2/9/21 
+- [x] Collection Resource 2/9/21
+- [x] Collections Resource 2/9/21
+- [x] List all Collections 2/9/21
+- [x] List Collection items 2/9/21
 
 ### Comments
-- [ ] Comments Collection
-- [ ] Comment Resource
-- [ ] Comments Resource
-- [ ] List File Comments
-- [ ] Get Comment
-- [ ] Create Comment
-- [ ] Update Comment
-- [ ] Remove Comment
+- [x] Comments Collection 2/11/21
+- [x] Comment Resource 2/11/21
+- [x] Comments Resource 2/11/21
+- [x] List File Comments 2/11/21
+- [x] Get Comment 2/11/21
+- [x] Create Comment 2/11/21
+- [x] Update Comment 2/11/21
+- [x] Remove Comment 2/11/21
 
 ### Device Pinners 
 - [ ] DevicePinners Collection

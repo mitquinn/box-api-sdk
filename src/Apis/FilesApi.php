@@ -13,11 +13,12 @@ use Mitquinn\BoxApiSdk\Requests\Files\DeleteFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileInformationRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileThumbnailRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\ListFileCollaborationsRequest;
+use Mitquinn\BoxApiSdk\Requests\Files\ListFileCommentsRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UpdateFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UploadFileRequest;
-use Mitquinn\BoxApiSdk\Requests\Folders\CopyFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\GenericRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
+use Mitquinn\BoxApiSdk\Resources\CommentsResource;
 use Mitquinn\BoxApiSdk\Resources\FileResource;
 use Mitquinn\BoxApiSdk\Resources\FilesResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -130,6 +131,21 @@ class FilesApi extends BaseApi
     public function listFileCollaborations(GenericRequest|ListFileCollaborationsRequest $request): CollaborationsResource
     {
         return $this->sendCollaborationsRequest($request);
+    }
+
+    /**
+     * @param GenericRequest|ListFileCommentsRequest $request
+     * @return CommentsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function listFileComments(GenericRequest|ListFileCommentsRequest $request): CommentsResource
+    {
+        return $this->sendCommentsRequest($request);
     }
 
 

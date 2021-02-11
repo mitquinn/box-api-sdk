@@ -9,6 +9,7 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
+use Mitquinn\BoxApiSdk\Resources\CommentsResource;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipResource;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
@@ -141,6 +142,25 @@ abstract class BaseApi
     protected function sendGroupMembershipsRequest(BaseRequest $request): GroupMembershipsResource
     {
         return new GroupMembershipsResource($this->sendRequest($request));
+    }
+
+    /**
+     * @param BaseRequest $request
+     * @return CommentsResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    protected function sendCommentsRequest(BaseRequest $request): CommentsResource
+    {
+        $response = $this->getClient()->sendRequest($request->generateRequestInterface());
+
+        $this->validateResponse($response);
+
+        return new CommentsResource($response);
     }
 
 
