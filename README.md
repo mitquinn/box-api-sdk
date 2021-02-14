@@ -121,12 +121,13 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Download file
   
 ### Email Aliases
-- [ ] EmailAlias Resource
-- [ ] EmailAliases Resource
-- [ ] EmailAliases Collection
-- [ ] List user's email aliases
-- [ ] Create email alias
-- [ ] Remove email alias
+- [x] EmailAlias Resource 2/14/21
+- [x] EmailAliases Resource 2/14/21
+- [x] EmailAliases Collection 2/14/21
+- [x] List user's email aliases 2/14/21
+- [x] Create email alias 2/14/21
+- [x] Remove email alias 2/14/21
+- [ ] Test Email Aliases API 
 
 ### Events
 - [ ] Event Resource

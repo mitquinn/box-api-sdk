@@ -8,13 +8,19 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxConflictException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
+use Mitquinn\BoxApiSdk\Requests\EmailAliases\CreateEmailAliasRequest;
+use Mitquinn\BoxApiSdk\Requests\EmailAliases\ListUsersEmailAliasesRequest;
+use Mitquinn\BoxApiSdk\Requests\EmailAliases\RemoveEmailAliasRequest;
 use Mitquinn\BoxApiSdk\Requests\GenericRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\GetCurrentUserRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\GetUserRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\ListEnterpriseUsersRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\ListUsersGroupsRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\UpdateUserRequest;
+use Mitquinn\BoxApiSdk\Resources\EmailAliasesResource;
+use Mitquinn\BoxApiSdk\Resources\EmailAliasResource;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
+use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Mitquinn\BoxApiSdk\Resources\UserResource;
 use Mitquinn\BoxApiSdk\Resources\UsersResource;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -115,6 +121,84 @@ class UsersApi extends BaseApi
         return $this->sendGroupMembershipsRequest($request);
     }
 
+    /**
+     * @param GenericRequest|ListUsersEmailAliasesRequest $request
+     * @return EmailAliasesResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function listUsersEmailAliases(GenericRequest|ListUsersEmailAliasesRequest $request): EmailAliasesResource
+    {
+        return $this->sendEmailAliasesRequest($request);
+    }
+
+    /**
+     * @param GenericRequest|CreateEmailAliasRequest $request
+     * @return EmailAliasResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function createEmailAlias(GenericRequest|CreateEmailAliasRequest $request): EmailAliasResource
+    {
+        return $this->sendEmailAliasRequest($request);
+    }
+
+    /**
+     * @param GenericRequest|RemoveEmailAliasRequest $request
+     * @return NoContentResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function removeEmailAlias(GenericRequest|RemoveEmailAliasRequest $request): NoContentResource
+    {
+        return $this->sendNoContentRequest($request);
+    }
+
+
+    /**
+     * @param BaseRequest $request
+     * @return EmailAliasResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    protected function sendEmailAliasRequest(BaseRequest $request): EmailAliasResource
+    {
+        $response = $this->getClient()->sendRequest($request->generateRequestInterface());
+        $this->validateResponse($response);
+        return new EmailAliasResource($response);
+    }
+
+    /**
+     * @param BaseRequest $request
+     * @return EmailAliasesResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    protected function sendEmailAliasesRequest(BaseRequest $request): EmailAliasesResource
+    {
+        $response = $this->getClient()->sendRequest($request->generateRequestInterface());
+        $this->validateResponse($response);
+        return new EmailAliasesResource($response);
+    }
 
     /**
      * @param BaseRequest $request
