@@ -39,6 +39,8 @@ trait CanValidateHttpResponse
             return true;
         }
 
+        var_dump($response->getBody()->getContents());
+
         if ($response->getStatusCode() === 400) {
             throw new BoxBadRequestException(response: $response);
         }

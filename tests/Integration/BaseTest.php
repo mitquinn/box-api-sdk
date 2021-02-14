@@ -2,21 +2,32 @@
 
 namespace Mitquinn\BoxApiSdk\Tests\Integration;
 
+use Carbon\Carbon;
 use Faker\Factory;
 use Faker\Generator;
+use GuzzleHttp\Exception\GuzzleException;
 use Mitquinn\BoxApiSdk\AuthorizationConfigurations\ServerAuthorization;
 use Mitquinn\BoxApiSdk\BoxService;
+use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
+use Mitquinn\BoxApiSdk\Exceptions\BoxBadRequestException;
+use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
+use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Interfaces\AuthorizationInterface;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\CreateCollaborationRequest;
+use Mitquinn\BoxApiSdk\Requests\Files\DeleteFileRequest;
+use Mitquinn\BoxApiSdk\Requests\Files\UploadFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\CreateFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\DeleteFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\CreateGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\RemoveGroupRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
+use Mitquinn\BoxApiSdk\Resources\FileResource;
+use Mitquinn\BoxApiSdk\Resources\FilesResource;
 use Mitquinn\BoxApiSdk\Resources\FolderResource;
 use Mitquinn\BoxApiSdk\Resources\GroupResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Client\ClientExceptionInterface;
 use Symfony\Component\Dotenv\Dotenv;
 
 /**
@@ -40,8 +51,8 @@ abstract class BaseTest extends TestCase
      * @param string|null $name
      * @param array $data
      * @param string $dataName
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException
+     * @throws GuzzleException
+     * @throws BoxAuthorizationException
      */
     public function __construct(?string $name = null, array $data = [], $dataName = '')
     {
@@ -138,6 +149,63 @@ abstract class BaseTest extends TestCase
         $noContentResource = $this->getBoxService()->groups()->removeGroup($deleteRequest);
         static::assertInstanceOf(NoContentResource::class, $noContentResource);
     }
+
+    /**
+     * @return FileResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function uploadFile(): FileResource
+    {
+        $name = $this->faker->firstName;
+        $path = "tests/TestingData/TestingFile.txt";
+        $dateTimeString = Carbon::now()->toRfc3339String();
+        $body = [
+            'attributes' => [
+                'content_created_at' => $dateTimeString,
+                'content_modified_at' => $dateTimeString,
+                'name' => $name,
+                'parent' => [
+                    'id' => 0
+                ]
+            ],
+            'file' => [
+                'name' => 'file',
+                'contents' => file_get_contents($path),
+                'filename' => $name
+            ]
+        ];
+
+        $request = new UploadFileRequest(body: $body);
+        $filesResource = $this->getBoxService()->files()->uploadFile($request);
+        static::assertInstanceOf(FilesResource::class, $filesResource);
+        static::assertIsArray($filesResource->getEntries());
+        static::assertIsInt($filesResource->getTotalCount());
+        $entriesArray = $filesResource->getEntries();
+        return $entriesArray[0];
+    }
+
+
+    /**
+     * @param int $id
+     * @return NoContentResource
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function deleteFile(int $id): NoContentResource
+    {
+        $request = new DeleteFileRequest($id);
+        $noContentResource = $this->getBoxService()->files()->deleteFile($request);
+        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        return $noContentResource;
+    }
+
 
 
     /**

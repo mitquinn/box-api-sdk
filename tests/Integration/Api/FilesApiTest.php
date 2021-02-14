@@ -9,9 +9,11 @@ use Mitquinn\BoxApiSdk\Requests\Files\DeleteFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileInformationRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileThumbnailRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\ListFileCollaborationsRequest;
+use Mitquinn\BoxApiSdk\Requests\Files\ListFileCommentsRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UpdateFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UploadFileRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
+use Mitquinn\BoxApiSdk\Resources\CommentsResource;
 use Mitquinn\BoxApiSdk\Resources\FileResource;
 use Mitquinn\BoxApiSdk\Resources\FilesResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
@@ -21,38 +23,8 @@ use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
  * Class FilesCollectionTest
  * @package Api\Collections
  */
-class FilesCollectionTest extends BaseTest
+class FilesApiTest extends BaseTest
 {
-
-    public function uploadFile(): FileResource
-    {
-        $name = $this->faker->firstName;
-        $path = "tests/TestingData/TestingFile.txt";
-        $dateTimeString = Carbon::now()->toRfc3339String();
-        $body = [
-            'attributes' => [
-                'content_created_at' => $dateTimeString,
-                'content_modified_at' => $dateTimeString,
-                'name' => $name,
-                'parent' => [
-                    'id' => 0
-                ]
-            ],
-            'file' => [
-                'name' => 'file',
-                'contents' => file_get_contents($path),
-                'filename' => $name
-            ]
-        ];
-
-        $request = new UploadFileRequest(body: $body);
-        $filesResource = $this->getBoxService()->files()->uploadFile($request);
-        static::assertInstanceOf(FilesResource::class, $filesResource);
-        static::assertIsArray($filesResource->getEntries());
-        static::assertIsInt($filesResource->getTotalCount());
-        $entriesArray = $filesResource->getEntries();
-        return $entriesArray[0];
-    }
 
     public function uploadPng(): FilesResource
     {
@@ -196,6 +168,15 @@ class FilesCollectionTest extends BaseTest
         $deleteRequest = new DeleteFileRequest($fileResource->getId());
         $noContentResource = $this->getBoxService()->files()->deleteFile($deleteRequest);
         static::assertInstanceOf(NoContentResource::class, $noContentResource);
+    }
+
+    public function testListFileComments()
+    {
+        $fileResource = $this->uploadFile();
+        $request = new ListFileCommentsRequest($fileResource->getId());
+        $commentsResource = $this->getBoxService()->files()->listFileComments($request);
+        static::assertInstanceOf(CommentsResource::class, $commentsResource);
+        $this->deleteFile($fileResource->getId());
     }
 
 

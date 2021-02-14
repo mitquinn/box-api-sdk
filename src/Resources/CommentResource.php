@@ -72,6 +72,8 @@ class CommentResource extends BaseResource
         if ($dot->has('tagged_message')) {
             $this->setTaggedMessage($dot->get('tagged_message'));
         }
+
+        return $this;
     }
 
     /*** Start Getters and Setters ***/

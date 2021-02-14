@@ -9,6 +9,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mitquinn\BoxApiSdk\Apis\ClassificationsApi;
 use Mitquinn\BoxApiSdk\Apis\CollaborationsApi;
 use Mitquinn\BoxApiSdk\Apis\CollectionsApi;
+use Mitquinn\BoxApiSdk\Apis\CommentsApi;
 use Mitquinn\BoxApiSdk\Apis\FilesApi;
 use Mitquinn\BoxApiSdk\Apis\FoldersApi;
 use Mitquinn\BoxApiSdk\Apis\GroupMembershipsApi;
@@ -48,6 +49,9 @@ class BoxService
 
     /** @var CollectionsApi $collectionsApi */
     protected CollectionsApi $collectionsApi;
+
+    /** @var CommentsApi $commentsApi */
+    protected CommentsApi $commentsApi;
 
     /** @var AuthorizationInterface $authorizationConfiguration */
     protected AuthorizationInterface $authorizationConfiguration;
@@ -125,6 +129,15 @@ class BoxService
         $this->groupMembershipsApi = new GroupMembershipsApi($this->getClient());
         $this->classificationsApi = new ClassificationsApi($this->getClient());
         $this->collectionsApi = new CollectionsApi($this->getClient());
+        $this->commentsApi = new CommentsApi($this->getClient());
+    }
+
+    /**
+     * @return CommentsApi
+     */
+    public function comments(): CommentsApi
+    {
+        return $this->commentsApi;
     }
 
     /**

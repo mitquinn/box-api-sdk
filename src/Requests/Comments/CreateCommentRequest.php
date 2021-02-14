@@ -16,11 +16,12 @@ class CreateCommentRequest extends BaseRequest
 
     /**
      * CreateCommentRequest constructor.
+     * @param array $body
      * @param array $query
      */
-    public function __construct(array $query = [])
+    public function __construct(array $body, array $query = [])
     {
-        parent::__construct(query: $query);
+        parent::__construct(query: $query, body: $body);
     }
 
     /**

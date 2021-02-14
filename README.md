@@ -89,6 +89,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] Create Comment 2/11/21
 - [x] Update Comment 2/11/21
 - [x] Remove Comment 2/11/21
+- [x] Add Tests for Comments 2/12/21
 
 ### Device Pinners 
 - [ ] DevicePinners Collection
