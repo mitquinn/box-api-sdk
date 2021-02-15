@@ -127,7 +127,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] List user's email aliases 2/14/21
 - [x] Create email alias 2/14/21
 - [x] Remove email alias 2/14/21
-- [ ] Test Email Aliases API 
+- [x] Test Email Aliases API 2/15/21
 
 ### Events
 - [ ] Event Resource

@@ -2,12 +2,18 @@
 
 namespace Mitquinn\BoxApiSdk\Tests\Integration\Api;
 
+use Mitquinn\BoxApiSdk\Requests\EmailAliases\CreateEmailAliasRequest;
+use Mitquinn\BoxApiSdk\Requests\EmailAliases\ListUsersEmailAliasesRequest;
+use Mitquinn\BoxApiSdk\Requests\EmailAliases\RemoveEmailAliasRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\GetCurrentUserRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\GetUserRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\ListEnterpriseUsersRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\ListUsersGroupsRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\UpdateUserRequest;
+use Mitquinn\BoxApiSdk\Resources\EmailAliasesResource;
+use Mitquinn\BoxApiSdk\Resources\EmailAliasResource;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
+use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Mitquinn\BoxApiSdk\Resources\UserResource;
 use Mitquinn\BoxApiSdk\Resources\UsersResource;
 use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
@@ -104,6 +110,41 @@ class UsersApiTest extends BaseTest
         $groupMembershipsResource = $this->getBoxService()->users()->listUsersGroups($request);
         static::assertInstanceOf(GroupMembershipsResource::class, $groupMembershipsResource);
     }
+
+
+    public function testListUsersEmailAliases()
+    {
+        $request = new GetUserRequest(13372896237);
+        $userResource = $this->getBoxService()->users()->getUser($request);
+
+        $request2 = new ListUsersEmailAliasesRequest($userResource->getId());
+        $emailAliasesResource = $this->getBoxService()->users()->listUsersEmailAliases($request2);
+        static::assertInstanceOf(EmailAliasesResource::class, $emailAliasesResource);
+    }
+
+    /**
+     * Todo: Need enterprise account for this.
+     */
+    public function testCreateAndRemoveEmailAlias()
+    {
+//        $request = new GetCurrentUserRequest();
+//        $userResource = $this->getBoxService()->users()->getCurrentUser($request);
+//
+//
+//        $body = [
+//            'email' => 'serviceaccount123@box.com'
+//        ];
+//        $request2 = new CreateEmailAliasRequest($userResource->getId(), $body);
+//        $emailAliasResource = $this->getBoxService()->users()->createEmailAlias($request2);
+//        static::assertInstanceOf(EmailAliasResource::class, $emailAliasResource);
+//
+//        $request3 = new RemoveEmailAliasRequest($userResource->getId(), $emailAliasResource->getId());
+//        $noContentResource = $this->getBoxService()->users()->removeEmailAlias($request3);
+//        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+    }
+
+
+
 
 
 }

@@ -135,9 +135,6 @@ class ClassificationsApi extends BaseApi
 
         $response = $this->getClient()->sendRequest($request);
 
-        var_dump($response->getBody()->getContents());
-        exit;
-
         $this->validateResponse($response);
 
         return new ClassificationTemplateResource($response);
