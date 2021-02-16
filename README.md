@@ -130,10 +130,11 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] Test Email Aliases API 2/15/21
 
 ### Events
-- [ ] Event Resource
-- [ ] Events Resource
+- [x] Event Resource 2/16/21
+- [x] Events Resource 2/16/21
+- [ ] Event Source Resource
 - [ ] Real-time servers
-- [ ] List user and enterprise events
+- [x] List user and enterprise events 2/16/21
 - [ ] Get events long pool endpoint
 
 ### File Requests

@@ -10,6 +10,7 @@ use Mitquinn\BoxApiSdk\Apis\ClassificationsApi;
 use Mitquinn\BoxApiSdk\Apis\CollaborationsApi;
 use Mitquinn\BoxApiSdk\Apis\CollectionsApi;
 use Mitquinn\BoxApiSdk\Apis\CommentsApi;
+use Mitquinn\BoxApiSdk\Apis\EventsApi;
 use Mitquinn\BoxApiSdk\Apis\FilesApi;
 use Mitquinn\BoxApiSdk\Apis\FoldersApi;
 use Mitquinn\BoxApiSdk\Apis\GroupMembershipsApi;
@@ -53,8 +54,13 @@ class BoxService
     /** @var CommentsApi $commentsApi */
     protected CommentsApi $commentsApi;
 
+    /** @var EventsApi $eventsApi */
+    protected EventsApi $eventsApi;
+
     /** @var AuthorizationInterface $authorizationConfiguration */
     protected AuthorizationInterface $authorizationConfiguration;
+
+
 
     /** @var ClientInterface $client */
     protected ClientInterface $client;
@@ -130,6 +136,12 @@ class BoxService
         $this->classificationsApi = new ClassificationsApi($this->getClient());
         $this->collectionsApi = new CollectionsApi($this->getClient());
         $this->commentsApi = new CommentsApi($this->getClient());
+        $this->eventsApi = new EventsApi($this->getClient());
+    }
+
+    public function events(): EventsApi
+    {
+        return $this->eventsApi;
     }
 
     /**
