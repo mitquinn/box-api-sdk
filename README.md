@@ -138,12 +138,13 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Get events long pool endpoint
 
 ### File Requests
-- [ ] FileRequest Resource
-- [ ] File Request Collection
-- [ ] Get file request
-- [ ] Copy file request
-- [ ] Update file request
-- [ ] Delete file request
+- [x] FileRequest Resource 2/17/21
+- [x] File Request Collection 2/17/21
+- [x] Get file request 2/17/21
+- [x] Copy file request 2/17/21
+- [x] Update file request 2/17/21
+- [x] Delete file request 2/17/21
+- [ ] Test File Request Api
 
 ### File Version Legal Holds
 - [ ] FileVersionLegalHold Resource

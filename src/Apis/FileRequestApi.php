@@ -8,25 +8,25 @@ use Mitquinn\BoxApiSdk\Exceptions\BoxConflictException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxForbiddenException;
 use Mitquinn\BoxApiSdk\Exceptions\BoxNotFoundException;
 use Mitquinn\BoxApiSdk\Requests\BaseRequest;
-use Mitquinn\BoxApiSdk\Requests\Comments\CreateCommentRequest;
-use Mitquinn\BoxApiSdk\Requests\Comments\GetCommentRequest;
-use Mitquinn\BoxApiSdk\Requests\Comments\RemoveCommentRequest;
-use Mitquinn\BoxApiSdk\Requests\Comments\UpdateCommentRequest;
+use Mitquinn\BoxApiSdk\Requests\FileRequests\CopyFileRequestRequest;
+use Mitquinn\BoxApiSdk\Requests\FileRequests\DeleteFileRequestRequest;
+use Mitquinn\BoxApiSdk\Requests\FileRequests\GetFileRequestRequest;
+use Mitquinn\BoxApiSdk\Requests\FileRequests\UpdateFileRequestRequest;
 use Mitquinn\BoxApiSdk\Requests\GenericRequest;
-use Mitquinn\BoxApiSdk\Resources\CommentResource;
+use Mitquinn\BoxApiSdk\Resources\FileRequestResource;
 use Mitquinn\BoxApiSdk\Resources\NoContentResource;
 use Psr\Http\Client\ClientExceptionInterface;
 
 /**
- * Class CommentsApi
+ * Class FileRequestApi
  * @package Mitquinn\BoxApiSdk\Apis
  */
-class CommentsApi extends BaseApi
+class FileRequestApi extends BaseApi
 {
 
     /**
-     * @param GenericRequest|GetCommentRequest $request
-     * @return CommentResource
+     * @param GenericRequest|GetFileRequestRequest $request
+     * @return FileRequestResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
      * @throws BoxConflictException
@@ -34,14 +34,14 @@ class CommentsApi extends BaseApi
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function getComment(GenericRequest|GetCommentRequest $request): CommentResource
+    public function getFileRequest(GenericRequest|GetFileRequestRequest $request): FileRequestResource
     {
-        return $this->sendCommentRequest($request);
+        return $this->sendFileRequestRequest($request);
     }
 
     /**
-     * @param GenericRequest|CreateCommentRequest $request
-     * @return CommentResource
+     * @param GenericRequest|CopyFileRequestRequest $request
+     * @return FileRequestResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
      * @throws BoxConflictException
@@ -49,14 +49,14 @@ class CommentsApi extends BaseApi
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function createComment(GenericRequest|CreateCommentRequest $request): CommentResource
+    public function copyFileRequest(GenericRequest|CopyFileRequestRequest $request): FileRequestResource
     {
-        return $this->sendCommentRequest($request);
+        return $this->sendFileRequestRequest($request);
     }
 
     /**
-     * @param GenericRequest|UpdateCommentRequest $request
-     * @return CommentResource
+     * @param GenericRequest|UpdateFileRequestRequest $request
+     * @return FileRequestResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
      * @throws BoxConflictException
@@ -64,14 +64,13 @@ class CommentsApi extends BaseApi
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function updateComment(GenericRequest|UpdateCommentRequest $request): CommentResource
+    public function updateFileRequest(GenericRequest|UpdateFileRequestRequest $request): FileRequestResource
     {
-        return $this->sendCommentRequest($request);
+        return $this->sendFileRequestRequest($request);
     }
 
-
     /**
-     * @param GenericRequest|RemoveCommentRequest $request
+     * @param GenericRequest|DeleteFileRequestRequest $request
      * @return NoContentResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
@@ -79,15 +78,14 @@ class CommentsApi extends BaseApi
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function removeComment(GenericRequest|RemoveCommentRequest $request): NoContentResource
+    public function deleteFileRequest(GenericRequest|DeleteFileRequestRequest $request): NoContentResource
     {
         return $this->sendNoContentRequest($request);
     }
 
-
     /**
      * @param BaseRequest $request
-     * @return CommentResource
+     * @return FileRequestResource
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
      * @throws BoxConflictException
@@ -95,11 +93,11 @@ class CommentsApi extends BaseApi
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    protected function sendCommentRequest(BaseRequest $request): CommentResource
+    protected function sendFileRequestRequest(BaseRequest $request): FileRequestResource
     {
         $response = $this->getClient()->sendRequest($request->generateRequestInterface());
         $this->validateResponse($response);
-        return new CommentResource($response);
+        return new FileRequestResource($response);
     }
 
 }
