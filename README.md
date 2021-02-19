@@ -15,6 +15,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] Write ReadMe 1/27/21
 - [ ] Create Technical Overview
 - [x] Copy over things that have been done to the new ReadMe 1/28/21 
+- [ ] Convert Dot -> Collections, Remove Dot
 
 ### Authorization Api
 - [ ] AccessToken Resource
@@ -187,9 +188,9 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
     - [x] Refactored 2/2/21
   
 ### Folder Locks
-- [ ] FolderLock Resource
+- [x] FolderLock Resource
 - [ ] FolderLocks Resource
-- [ ] FolderLocks Collection
+- [x] FolderLocks Collection
 - [ ] List Folder locks on folder
 - [ ] Create Folder lock on folder
 - [ ] Delete Folder lock

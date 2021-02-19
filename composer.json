@@ -15,7 +15,8 @@
         "guzzlehttp/guzzle": "^7.2",
         "ext-json": "*",
         "ext-openssl": "*",
-        "adbario/php-dot-notation": "^2.2"
+        "adbario/php-dot-notation": "^2.2",
+        "illuminate/collections": "^8.28"
     },
     "autoload": {
         "psr-4": {
