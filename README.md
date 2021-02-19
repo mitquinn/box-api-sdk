@@ -189,11 +189,11 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
   
 ### Folder Locks
 - [x] FolderLock Resource
-- [ ] FolderLocks Resource
+- [x] FolderLocks Resource
 - [x] FolderLocks Collection
-- [ ] List Folder locks on folder
-- [ ] Create Folder lock on folder
-- [ ] Delete Folder lock
+- [x] List Folder locks on folder
+- [x] Create Folder lock on folder
+- [x] Delete Folder lock
   
 ### Folders
 - [x] Folder Resource 1/1/21
