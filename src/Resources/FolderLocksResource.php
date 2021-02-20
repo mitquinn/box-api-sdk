@@ -17,11 +17,11 @@ class FolderLocksResource extends BaseResource
     /** @var int $limit */
     protected int $limit;
 
-    /** @var int $next_marker */
-    protected int $next_marker;
+    /** @var int|null $next_marker */
+    protected int|null $next_marker;
 
-    /** @var int $prev_marker */
-    protected int $prev_marker;
+    /** @var int|null $prev_marker */
+    protected int|null $prev_marker;
 
 
     /**
@@ -94,36 +94,36 @@ class FolderLocksResource extends BaseResource
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getNextMarker(): int
+    public function getNextMarker(): ?int
     {
         return $this->next_marker;
     }
 
     /**
-     * @param int $next_marker
+     * @param int|null $next_marker
      * @return FolderLocksResource
      */
-    public function setNextMarker(int $next_marker): FolderLocksResource
+    public function setNextMarker(?int $next_marker): FolderLocksResource
     {
         $this->next_marker = $next_marker;
         return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPrevMarker(): int
+    public function getPrevMarker(): ?int
     {
         return $this->prev_marker;
     }
 
     /**
-     * @param int $prev_marker
+     * @param int|null $prev_marker
      * @return FolderLocksResource
      */
-    public function setPrevMarker(int $prev_marker): FolderLocksResource
+    public function setPrevMarker(?int $prev_marker): FolderLocksResource
     {
         $this->prev_marker = $prev_marker;
         return $this;

@@ -194,6 +194,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] List Folder locks on folder
 - [x] Create Folder lock on folder
 - [x] Delete Folder lock
+- [ ] Test Folder Locks Api
   
 ### Folders
 - [x] Folder Resource 1/1/21

@@ -12,6 +12,7 @@ use Mitquinn\BoxApiSdk\Apis\CollectionsApi;
 use Mitquinn\BoxApiSdk\Apis\CommentsApi;
 use Mitquinn\BoxApiSdk\Apis\EventsApi;
 use Mitquinn\BoxApiSdk\Apis\FilesApi;
+use Mitquinn\BoxApiSdk\Apis\FolderLocksApi;
 use Mitquinn\BoxApiSdk\Apis\FoldersApi;
 use Mitquinn\BoxApiSdk\Apis\GroupMembershipsApi;
 use Mitquinn\BoxApiSdk\Apis\GroupsApi;
@@ -56,6 +57,9 @@ class BoxService
 
     /** @var EventsApi $eventsApi */
     protected EventsApi $eventsApi;
+
+    /** @var FolderLocksApi $folderLocksApi */
+    protected FolderLocksApi $folderLocksApi;
 
     /** @var AuthorizationInterface $authorizationConfiguration */
     protected AuthorizationInterface $authorizationConfiguration;
@@ -137,8 +141,17 @@ class BoxService
         $this->collectionsApi = new CollectionsApi($this->getClient());
         $this->commentsApi = new CommentsApi($this->getClient());
         $this->eventsApi = new EventsApi($this->getClient());
+        $this->folderLocksApi = new FolderLocksApi($this->getClient());
     }
 
+    public function folderLocks(): FolderLocksApi
+    {
+        return $this->folderLocksApi;
+    }
+
+    /**
+     * @return EventsApi
+     */
     public function events(): EventsApi
     {
         return $this->eventsApi;
