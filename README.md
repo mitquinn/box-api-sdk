@@ -16,6 +16,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Create Technical Overview
 - [x] Copy over things that have been done to the new ReadMe 1/28/21 
 - [ ] Convert Dot -> Collections, Remove Dot
+- [ ] Extract RecentItemsResource into a simple Entries abstract
 
 ### Authorization Api
 - [ ] AccessToken Resource
@@ -188,13 +189,13 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
     - [x] Refactored 2/2/21
   
 ### Folder Locks
-- [x] FolderLock Resource
-- [x] FolderLocks Resource
-- [x] FolderLocks Collection
-- [x] List Folder locks on folder
-- [x] Create Folder lock on folder
-- [x] Delete Folder lock
-- [ ] Test Folder Locks Api
+- [x] FolderLock Resource 2/18/21
+- [x] FolderLocks Resource 2/19/21
+- [x] FolderLocks Collection 2/18/21
+- [x] List Folder locks on folder 2/19/21
+- [x] Create Folder lock on folder 2/19/21
+- [x] Delete Folder lock 2/19/21
+- [x] Test Folder Locks Api 2/20/21
   
 ### Folders
 - [x] Folder Resource 1/1/21
@@ -314,8 +315,9 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Remove metadata template 
   
 ### Recent Items
-- [ ] Recent Items Resource
-- [ ] Recent Items Collection
+- [x] Recent Item Resource
+- [x] Recent Items Resource
+- [x] Recent Items Collection
 - [ ] List Recently access items
   
 ### Retention Polices
