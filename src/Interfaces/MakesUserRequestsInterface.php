@@ -4,20 +4,20 @@
 namespace Mitquinn\BoxApiSdk\Interfaces;
 
 
-use Mitquinn\BoxApiSdk\Resources\UserResource;
+use Mitquinn\BoxApiSdk\Resources\User;
 
 interface MakesUserRequestsInterface
 {
     public function listEnterpriseUsers(): array;
 
-    public function getCurrentUser(): UserResource;
+    public function getCurrentUser(): User;
 
-    public function getUser(int $userId): UserResource;
+    public function getUser(int $userId): User;
 
-    public function createUser(): UserResource;
+    public function createUser(): User;
 
-    public function updateUser(): UserResource;
+    public function updateUser(): User;
 
-    public function deleteUser(): UserResource;
+    public function deleteUser(): User;
 
 }

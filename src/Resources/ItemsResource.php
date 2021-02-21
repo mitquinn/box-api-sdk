@@ -23,7 +23,7 @@ class ItemsResource extends EntriesResource
                 if (array_key_exists('type', $entry)) {
 
                     if ($entry['type'] === 'folder') {
-                        $items[] = new FolderResource($entry);
+                        $items[] = new Folder($entry);
                     }
 
                     //Todo: Need to add File and Weblink here as well.

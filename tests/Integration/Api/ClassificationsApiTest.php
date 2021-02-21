@@ -5,8 +5,8 @@ namespace Mitquinn\BoxApiSdk\Tests\Integration\Api;
 use Mitquinn\BoxApiSdk\Requests\Classifications\AddInitialClassificationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Classifications\DeleteAllClassificationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Classifications\ListAllClassificationsRequest;
-use Mitquinn\BoxApiSdk\Resources\ClassificationTemplateResource;
-use Mitquinn\BoxApiSdk\Resources\NoContentResource;
+use Mitquinn\BoxApiSdk\Resources\ClassificationTemplate;
+use Mitquinn\BoxApiSdk\Resources\NoContent;
 use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
 /**

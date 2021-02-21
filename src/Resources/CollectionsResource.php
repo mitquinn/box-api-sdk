@@ -19,7 +19,7 @@ class CollectionsResource extends EntriesResource
         if (array_key_exists('entries', $response)) {
             $collections = [];
             foreach ($response['entries'] as $entry) {
-                $collections[] = new CollectionResource($entry);
+                $collections[] = new Collection($entry);
             }
             $this->setEntries($collections);
         }
@@ -29,7 +29,7 @@ class CollectionsResource extends EntriesResource
 
 
     /**
-     * @return CollectionResource[]
+     * @return Collection[]
      */
     public function getEntries(): array
     {

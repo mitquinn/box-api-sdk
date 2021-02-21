@@ -2,7 +2,7 @@
 
 namespace Mitquinn\BoxApiSdk\Traits\Properties;
 
-use Mitquinn\BoxApiSdk\Resources\FolderResource;
+use Mitquinn\BoxApiSdk\Resources\Folder;
 
 /**
  * Trait HasParent
@@ -10,22 +10,22 @@ use Mitquinn\BoxApiSdk\Resources\FolderResource;
  */
 trait HasParent
 {
-    /** @var FolderResource|null $parent */
-    protected FolderResource|null $parent;
+    /** @var Folder|null $parent */
+    protected Folder|null $parent;
 
     /**
-     * @return FolderResource|null
+     * @return Folder|null
      */
-    public function getParent(): ?FolderResource
+    public function getParent(): ?Folder
     {
         return $this->parent;
     }
 
     /**
-     * @param FolderResource|null $parent
+     * @param Folder|null $parent
      * @return HasParent
      */
-    public function setParent(?FolderResource $parent): static
+    public function setParent(?Folder $parent): static
     {
         $this->parent = $parent;
         return $this;

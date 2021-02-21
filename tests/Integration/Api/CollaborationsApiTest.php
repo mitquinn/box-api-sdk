@@ -8,9 +8,9 @@ use Mitquinn\BoxApiSdk\Requests\Collaborations\GetCollaborationRequest;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\ListPendingCollaborationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\RemoveCollaborationRequest;
 use Mitquinn\BoxApiSdk\Requests\Collaborations\UpdateCollaborationRequest;
-use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
+use Mitquinn\BoxApiSdk\Resources\Collaboration;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
-use Mitquinn\BoxApiSdk\Resources\NoContentResource;
+use Mitquinn\BoxApiSdk\Resources\NoContent;
 use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
 /**
@@ -40,7 +40,7 @@ class CollaborationsApiTest extends BaseTest
 
         $request = new CreateCollaborationRequest(body: $body);
         $collaborationResource = $this->getBoxService()->collaborations()->createCollaboration($request);
-        static::assertInstanceOf(CollaborationResource::class, $collaborationResource);
+        static::assertInstanceOf(Collaboration::class, $collaborationResource);
 
         //Delete the folder
         $this->deleteFolder($folderResource->getId());
@@ -58,7 +58,7 @@ class CollaborationsApiTest extends BaseTest
         //Get the Collaboration
         $request = new GetCollaborationRequest($collaborationResource->getId());
         $getCollaborationResource = $this->getBoxService()->collaborations()->getCollaboration($request);
-        static::assertInstanceOf(CollaborationResource::class, $getCollaborationResource);
+        static::assertInstanceOf(Collaboration::class, $getCollaborationResource);
 
         //Delete the folder.
         $this->deleteFolder($folderResource->getId());
@@ -79,7 +79,7 @@ class CollaborationsApiTest extends BaseTest
         //Update Collaboration
         $request = new UpdateCollaborationRequest($collaborationResource->getId(), $body);
         $updateCollaborationResource = $this->getBoxService()->collaborations()->updateCollaboration($request);
-        static::assertInstanceOf(CollaborationResource::class, $updateCollaborationResource);
+        static::assertInstanceOf(Collaboration::class, $updateCollaborationResource);
         static::assertEquals($updateCollaborationResource->getRole(), 'previewer');
 
         //Delete Folder
@@ -97,7 +97,7 @@ class CollaborationsApiTest extends BaseTest
         //Remove the collaboration
         $request = new RemoveCollaborationRequest($collaborationResource->getId());
         $noContentResource = $this->getBoxService()->collaborations()->removeCollaboration($request);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
 
         //Delete folder
         $this->deleteFolder($folderResource->getId());

@@ -20,7 +20,7 @@ class GroupsResource extends EntriesResource
         if (array_key_exists('entries', $response)) {
             $groups = [];
             foreach ($response['entries'] as $entry) {
-                $groups[] = new GroupResource($entry);
+                $groups[] = new Group($entry);
             }
             $this->setEntries($groups);
         }

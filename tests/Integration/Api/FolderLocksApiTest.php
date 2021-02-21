@@ -5,9 +5,9 @@ namespace Mitquinn\BoxApiSdk\Tests\Integration\Api;
 use Mitquinn\BoxApiSdk\Requests\FolderLocks\CreateFolderLockOnFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\FolderLocks\DeleteFolderLockRequest;
 use Mitquinn\BoxApiSdk\Requests\FolderLocks\ListFolderLocksOnFolderRequest;
-use Mitquinn\BoxApiSdk\Resources\FolderLockResource;
-use Mitquinn\BoxApiSdk\Resources\FolderLocksResource;
-use Mitquinn\BoxApiSdk\Resources\NoContentResource;
+use Mitquinn\BoxApiSdk\Resources\FolderLock;
+use Mitquinn\BoxApiSdk\Resources\FolderLocks;
+use Mitquinn\BoxApiSdk\Resources\NoContent;
 use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
 /**
@@ -28,7 +28,7 @@ class FolderLocksApiTest extends BaseTest
         $request = new ListFolderLocksOnFolderRequest($query);
 
         $folderLocksResource = $this->getBoxService()->folderLocks()->listFolderLocksOnFolder($request);
-        static::assertInstanceOf(FolderLocksResource::class, $folderLocksResource);
+        static::assertInstanceOf(FolderLocks::class, $folderLocksResource);
 
         $this->deleteFolder($folderResource->getId());
     }
@@ -47,12 +47,12 @@ class FolderLocksApiTest extends BaseTest
         //Create the Lock
         $request = new CreateFolderLockOnFolderRequest($body);
         $folderLockResource = $this->getBoxService()->folderLocks()->createFolderLockOnFolder($request);
-        static::assertInstanceOf(FolderLockResource::class, $folderLockResource);
+        static::assertInstanceOf(FolderLock::class, $folderLockResource);
 
         //Deletes the lock
         $request2 = new DeleteFolderLockRequest($folderLockResource->getId());
         $noContentResource = $this->getBoxService()->folderLocks()->deleteFolderLock($request2);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
 
         $this->deleteFolder($folderResource->getId());
 

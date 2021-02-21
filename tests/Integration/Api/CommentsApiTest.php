@@ -6,8 +6,8 @@ use Mitquinn\BoxApiSdk\Requests\Comments\CreateCommentRequest;
 use Mitquinn\BoxApiSdk\Requests\Comments\GetCommentRequest;
 use Mitquinn\BoxApiSdk\Requests\Comments\RemoveCommentRequest;
 use Mitquinn\BoxApiSdk\Requests\Comments\UpdateCommentRequest;
-use Mitquinn\BoxApiSdk\Resources\CommentResource;
-use Mitquinn\BoxApiSdk\Resources\NoContentResource;
+use Mitquinn\BoxApiSdk\Resources\Comment;
+use Mitquinn\BoxApiSdk\Resources\NoContent;
 use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
 /**
@@ -21,7 +21,7 @@ class CommentsApiTest extends BaseTest
     {
         $request = new RemoveCommentRequest($id);
         $noContentResource = $this->getBoxService()->comments()->removeComment($request);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
     }
 
     public function testCreateComment()
@@ -36,7 +36,7 @@ class CommentsApiTest extends BaseTest
         ];
         $request = new CreateCommentRequest($body);
         $commentResource = $this->getBoxService()->comments()->createComment($request);
-        static::assertInstanceOf(CommentResource::class, $commentResource);
+        static::assertInstanceOf(Comment::class, $commentResource);
         $this->removeComment($commentResource->getId());
         $this->deleteFile($fileResource->getId());
     }
@@ -53,11 +53,11 @@ class CommentsApiTest extends BaseTest
         ];
         $request = new CreateCommentRequest($body);
         $commentResource = $this->getBoxService()->comments()->createComment($request);
-        static::assertInstanceOf(CommentResource::class, $commentResource);
+        static::assertInstanceOf(Comment::class, $commentResource);
 
         $request2 = new GetCommentRequest($commentResource->getId());
         $newCommentResource = $this->getBoxService()->comments()->getComment($request2);
-        static::assertInstanceOf(CommentResource::class, $newCommentResource);
+        static::assertInstanceOf(Comment::class, $newCommentResource);
 
         $this->removeComment($commentResource->getId());
         $this->deleteFile($fileResource->getId());
@@ -75,7 +75,7 @@ class CommentsApiTest extends BaseTest
         ];
         $request = new CreateCommentRequest($body);
         $commentResource = $this->getBoxService()->comments()->createComment($request);
-        static::assertInstanceOf(CommentResource::class, $commentResource);
+        static::assertInstanceOf(Comment::class, $commentResource);
 
         $body2 = [
             'message' => 'updated message'
@@ -83,7 +83,7 @@ class CommentsApiTest extends BaseTest
 
         $request2 = new UpdateCommentRequest($commentResource->getId(), body: $body2);
         $newCommentResource = $this->getBoxService()->comments()->updateComment($request2);
-        static::assertInstanceOf(CommentResource::class, $newCommentResource);
+        static::assertInstanceOf(Comment::class, $newCommentResource);
         static::assertEquals('updated message', $newCommentResource->getMessage());
 
         $this->removeComment($commentResource->getId());

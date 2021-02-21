@@ -19,7 +19,7 @@ class CollaborationsResource extends EntriesResource
         if (array_key_exists('entries', $response)) {
             $collaborations = [];
             foreach ($response['entries'] as $entry) {
-                $collaborations[] = new CollaborationResource($entry);
+                $collaborations[] = new Collaboration($entry);
             }
             $this->setEntries($collaborations);
         }

@@ -10,10 +10,10 @@ use Mitquinn\BoxApiSdk\Requests\Folders\ListFolderCollaborationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\ListItemsInFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\UpdateFolderRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
-use Mitquinn\BoxApiSdk\Resources\FolderResource;
+use Mitquinn\BoxApiSdk\Resources\Folder;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
-use Mitquinn\BoxApiSdk\Resources\NoContentResource;
-use Mitquinn\BoxApiSdk\Resources\UserResource;
+use Mitquinn\BoxApiSdk\Resources\NoContent;
+use Mitquinn\BoxApiSdk\Resources\User;
 use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
 /**
@@ -27,7 +27,7 @@ class FoldersCollectionTest extends BaseTest
     {
         $request = new GetFolderInformationRequest(0);
         $folderResource = $this->getBoxService()->folders()->getFolderInformation($request);
-        static::assertInstanceOf(FolderResource::class, $folderResource);
+        static::assertInstanceOf(Folder::class, $folderResource);
     }
 
 
@@ -43,7 +43,7 @@ class FoldersCollectionTest extends BaseTest
 
         $folderResource = $this->getBoxService()->folders()->getFolderInformation($request);
 
-        static::assertInstanceOf(FolderResource::class, $folderResource);
+        static::assertInstanceOf(Folder::class, $folderResource);
         static::assertIsInt($folderResource->getId());
         static::assertIsString($folderResource->getType());
         static::assertIsArray($folderResource->getAllowedInviteeRoles());
@@ -54,7 +54,7 @@ class FoldersCollectionTest extends BaseTest
         static::assertNull($folderResource->getContentCreatedAt());
         static::assertNull($folderResource->getContentModifiedAt());
         static::assertNull($folderResource->getCreatedAt());
-        static::assertInstanceOf(UserResource::class, $folderResource->getCreatedBy());
+        static::assertInstanceOf(User::class, $folderResource->getCreatedBy());
         static::assertIsString($folderResource->getDescription());
         static::assertNull($folderResource->getEtag());
         static::assertNull($folderResource->getExpiresAt());
@@ -69,9 +69,9 @@ class FoldersCollectionTest extends BaseTest
         //static::assertIsArray($folderResource->getMetadata());
 
         static::assertNull($folderResource->getModifiedAt());
-        static::assertInstanceOf(UserResource::class, $folderResource->getModifiedBy());
+        static::assertInstanceOf(User::class, $folderResource->getModifiedBy());
         static::assertIsString($folderResource->getName());
-        static::assertInstanceOf(UserResource::class, $folderResource->getOwnedBy());
+        static::assertInstanceOf(User::class, $folderResource->getOwnedBy());
         static::assertNull($folderResource->getParent());
         static::assertIsArray($folderResource->getPathCollection());
         static::assertIsArray($folderResource->getPermissions());
@@ -103,7 +103,7 @@ class FoldersCollectionTest extends BaseTest
 
         $request = new CreateFolderRequest(body: $body);
         $folderResource = $this->getBoxService()->folders()->createFolder($request);
-        static::assertInstanceOf(FolderResource::class, $folderResource);
+        static::assertInstanceOf(Folder::class, $folderResource);
     }
 
     public function testDeleteFolder()
@@ -116,7 +116,7 @@ class FoldersCollectionTest extends BaseTest
         ];
         $createFolderRequest = new CreateFolderRequest(body: $body);
         $folderResource = $this->getBoxService()->folders()->createFolder($createFolderRequest);
-        static::assertInstanceOf(FolderResource::class, $folderResource);
+        static::assertInstanceOf(Folder::class, $folderResource);
 
 
         $deleteThisId = $folderResource->getId();
@@ -124,7 +124,7 @@ class FoldersCollectionTest extends BaseTest
         //This works
         //$deleteFolderRequest = new GenericRequest('DELETE', "folders/$deleteThisId");
         $noContentResource = $this->getBoxService()->folders()->deleteFolder($deleteFolderRequest);
-        static::assertInstanceOf(NoContentResource::class ,$noContentResource);
+        static::assertInstanceOf(NoContent::class ,$noContentResource);
 
     }
 
@@ -140,7 +140,7 @@ class FoldersCollectionTest extends BaseTest
         ];
         $createRequest = new CreateFolderRequest($createBody);
         $folderResource = $this->getBoxService()->folders()->createFolder($createRequest);
-        static::assertInstanceOf(FolderResource::class, $folderResource);
+        static::assertInstanceOf(Folder::class, $folderResource);
 
         // Update the Folder
         $updateBody = [
@@ -148,14 +148,14 @@ class FoldersCollectionTest extends BaseTest
         ];
         $updateRequest = new UpdateFolderRequest(id: $folderResource->getId(), body: $updateBody);
         $updateFolderResource = $this->getBoxService()->folders()->updateFolder($updateRequest);
-        static::assertInstanceOf(FolderResource::class, $updateFolderResource);
+        static::assertInstanceOf(Folder::class, $updateFolderResource);
         static::assertEquals("Updated $name", $updateFolderResource->getName());
 
         //Delete the Folder
         $deleteThisId = $folderResource->getId();
         $deleteRequest = new DeleteFolderRequest($deleteThisId);
         $noContentResource = $this->getBoxService()->folders()->deleteFolder($deleteRequest);
-        static::assertInstanceOf(NoContentResource::class ,$noContentResource);
+        static::assertInstanceOf(NoContent::class ,$noContentResource);
     }
 
     public function testCopyFolder()
@@ -171,7 +171,7 @@ class FoldersCollectionTest extends BaseTest
 
         $createRequest = new CreateFolderRequest($createBody);
         $folderResource = $this->getBoxService()->folders()->createFolder($createRequest);
-        static::assertInstanceOf(FolderResource::class, $folderResource);
+        static::assertInstanceOf(Folder::class, $folderResource);
 
         // Copy the Folder
         $copyBody = [
@@ -182,19 +182,19 @@ class FoldersCollectionTest extends BaseTest
         ];
         $copyRequest = new CopyFolderRequest(id: $folderResource->getId(), body: $copyBody);
         $copyFolderResource = $this->getBoxService()->folders()->copyFolder($copyRequest);
-        static::assertInstanceOf(FolderResource::class, $copyFolderResource);
+        static::assertInstanceOf(Folder::class, $copyFolderResource);
         static::assertEquals("Copy $name", $copyFolderResource->getName());
         static::assertNotEquals($folderResource->getId(), $copyFolderResource->getId());
 
         //Delete the Folder
         $deleteRequest = new DeleteFolderRequest($folderResource->getId());
         $noContentResource = $this->getBoxService()->folders()->deleteFolder($deleteRequest);
-        static::assertInstanceOf(NoContentResource::class ,$noContentResource);
+        static::assertInstanceOf(NoContent::class ,$noContentResource);
 
         //Delete the copy folder
         $deleteCopyRequest = new DeleteFolderRequest($copyFolderResource->getId());
         $noContentResource2 = $this->getBoxService()->folders()->deleteFolder($deleteCopyRequest);
-        static::assertInstanceOf(NoContentResource::class ,$noContentResource2);
+        static::assertInstanceOf(NoContent::class ,$noContentResource2);
     }
 
     public function testListFolderCollaborations()
@@ -207,7 +207,7 @@ class FoldersCollectionTest extends BaseTest
         //Deleting
         $deleteRequest = new DeleteFolderRequest($folderResource->getId());
         $noContentResource = $this->getBoxService()->folders()->deleteFolder($deleteRequest);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
     }
 
 

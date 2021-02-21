@@ -6,17 +6,18 @@ namespace Mitquinn\BoxApiSdk;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Mitquinn\BoxApiSdk\Apis\ClassificationsApi;
-use Mitquinn\BoxApiSdk\Apis\CollaborationsApi;
-use Mitquinn\BoxApiSdk\Apis\CollectionsApi;
-use Mitquinn\BoxApiSdk\Apis\CommentsApi;
-use Mitquinn\BoxApiSdk\Apis\EventsApi;
-use Mitquinn\BoxApiSdk\Apis\FilesApi;
-use Mitquinn\BoxApiSdk\Apis\FolderLocksApi;
-use Mitquinn\BoxApiSdk\Apis\FoldersApi;
-use Mitquinn\BoxApiSdk\Apis\GroupMembershipsApi;
-use Mitquinn\BoxApiSdk\Apis\GroupsApi;
-use Mitquinn\BoxApiSdk\Apis\UsersApi;
+use Mitquinn\BoxApiSdk\Api\Classifications;
+use Mitquinn\BoxApiSdk\Api\Collaborations;
+use Mitquinn\BoxApiSdk\Api\Collections;
+use Mitquinn\BoxApiSdk\Api\Comments;
+use Mitquinn\BoxApiSdk\Api\Events;
+use Mitquinn\BoxApiSdk\Api\Files;
+use Mitquinn\BoxApiSdk\Api\FolderLocks;
+use Mitquinn\BoxApiSdk\Api\Folders;
+use Mitquinn\BoxApiSdk\Api\GroupMemberships;
+use Mitquinn\BoxApiSdk\Api\Groups;
+use Mitquinn\BoxApiSdk\Api\Users;
+use Mitquinn\BoxApiSdk\Api\WebLinks;
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
 use Mitquinn\BoxApiSdk\Interfaces\AuthorizationInterface;
 use Psr\Http\Client\ClientInterface;
@@ -28,38 +29,41 @@ use Psr\Http\Client\ClientInterface;
 class BoxService
 {
 
-    /** @var FilesApi $filesApi */
-    protected FilesApi $filesApi;
+    /** @var Files $filesApi */
+    protected Files $filesApi;
 
-    /** @var FoldersApi $foldersApi */
-    protected FoldersApi $foldersApi;
+    /** @var Folders $foldersApi */
+    protected Folders $foldersApi;
 
-    /** @var UsersApi $usersApi */
-    protected UsersApi $usersApi;
+    /** @var Users $usersApi */
+    protected Users $usersApi;
 
-    /** @var CollaborationsApi $collaborationsApi */
-    protected CollaborationsApi $collaborationsApi;
+    /** @var Collaborations $collaborationsApi */
+    protected Collaborations $collaborationsApi;
 
-    /** @var GroupsApi $groupsApi */
-    protected GroupsApi $groupsApi;
+    /** @var Groups $groupsApi */
+    protected Groups $groupsApi;
 
-    /** @var GroupMembershipsApi $groupMembershipsApi */
-    protected GroupMembershipsApi $groupMembershipsApi;
+    /** @var GroupMemberships $groupMembershipsApi */
+    protected GroupMemberships $groupMembershipsApi;
 
-    /** @var ClassificationsApi $classificationsApi */
-    protected ClassificationsApi $classificationsApi;
+    /** @var Classifications $classificationsApi */
+    protected Classifications $classificationsApi;
 
-    /** @var CollectionsApi $collectionsApi */
-    protected CollectionsApi $collectionsApi;
+    /** @var Collections $collectionsApi */
+    protected Collections $collectionsApi;
 
-    /** @var CommentsApi $commentsApi */
-    protected CommentsApi $commentsApi;
+    /** @var Comments $commentsApi */
+    protected Comments $commentsApi;
 
-    /** @var EventsApi $eventsApi */
-    protected EventsApi $eventsApi;
+    /** @var Events $eventsApi */
+    protected Events $eventsApi;
 
-    /** @var FolderLocksApi $folderLocksApi */
-    protected FolderLocksApi $folderLocksApi;
+    /** @var FolderLocks $folderLocksApi */
+    protected FolderLocks $folderLocksApi;
+
+    /** @var WebLinks $webLinks */
+    protected WebLinks $webLinks;
 
     /** @var AuthorizationInterface $authorizationConfiguration */
     protected AuthorizationInterface $authorizationConfiguration;
@@ -131,100 +135,106 @@ class BoxService
     /*** Start Collection Accessors ***/
     protected function initializeCollectionAccessors(): void
     {
-        $this->usersApi = new UsersApi($this->getClient());
-        $this->foldersApi = new FoldersApi($this->getClient());
-        $this->filesApi = new FilesApi($this->getClient());
-        $this->collaborationsApi = new CollaborationsApi($this->getClient());
-        $this->groupsApi = new GroupsApi($this->getClient());
-        $this->groupMembershipsApi = new GroupMembershipsApi($this->getClient());
-        $this->classificationsApi = new ClassificationsApi($this->getClient());
-        $this->collectionsApi = new CollectionsApi($this->getClient());
-        $this->commentsApi = new CommentsApi($this->getClient());
-        $this->eventsApi = new EventsApi($this->getClient());
-        $this->folderLocksApi = new FolderLocksApi($this->getClient());
+        $this->usersApi = new Users($this->getClient());
+        $this->foldersApi = new Folders($this->getClient());
+        $this->filesApi = new Files($this->getClient());
+        $this->collaborationsApi = new Collaborations($this->getClient());
+        $this->groupsApi = new Groups($this->getClient());
+        $this->groupMembershipsApi = new GroupMemberships($this->getClient());
+        $this->classificationsApi = new Classifications($this->getClient());
+        $this->collectionsApi = new Collections($this->getClient());
+        $this->commentsApi = new Comments($this->getClient());
+        $this->eventsApi = new Events($this->getClient());
+        $this->folderLocksApi = new FolderLocks($this->getClient());
+        $this->webLinks = new WebLinks($this->getClient());
     }
 
-    public function folderLocks(): FolderLocksApi
+    public function webLinks(): WebLinks
+    {
+        return $this->webLinks;
+    }
+
+    public function folderLocks(): FolderLocks
     {
         return $this->folderLocksApi;
     }
 
     /**
-     * @return EventsApi
+     * @return Events
      */
-    public function events(): EventsApi
+    public function events(): Events
     {
         return $this->eventsApi;
     }
 
     /**
-     * @return CommentsApi
+     * @return Comments
      */
-    public function comments(): CommentsApi
+    public function comments(): Comments
     {
         return $this->commentsApi;
     }
 
     /**
-     * @return CollectionsApi
+     * @return Collections
      */
-    public function collections(): CollectionsApi
+    public function collections(): Collections
     {
         return $this->collectionsApi;
     }
 
     /**
-     * @return ClassificationsApi
+     * @return Classifications
      */
-    public function classifications(): ClassificationsApi
+    public function classifications(): Classifications
     {
         return $this->classificationsApi;
     }
 
     /**
-     * @return GroupMembershipsApi
+     * @return GroupMemberships
      */
-    public function groupMemberships(): GroupMembershipsApi
+    public function groupMemberships(): GroupMemberships
     {
         return $this->groupMembershipsApi;
     }
 
     /**
-     * @return GroupsApi
+     * @return Groups
      */
-    public function groups(): GroupsApi
+    public function groups(): Groups
     {
         return $this->groupsApi;
     }
 
     /**
-     * @return CollaborationsApi
+     * @return Collaborations
      */
-    public function collaborations(): CollaborationsApi
+    public function collaborations(): Collaborations
     {
         return $this->collaborationsApi;
     }
 
     /**
-     * @return UsersApi
+     * @return Users
      */
-    public function users(): UsersApi
+    public function users(): Users
     {
         return $this->usersApi;
     }
 
     /**
-     * @return FoldersApi
+     * @return Folders
      */
-    public function folders(): FoldersApi
+    public function folders(): Folders
     {
         return $this->foldersApi;
     }
 
     /**
-     * @return FilesApi
+     * @return Files
      */
-    public function files(): FilesApi
+    public function files(): Files
     {
         return $this->filesApi;
     }

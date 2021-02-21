@@ -19,7 +19,7 @@ class GroupMembershipsResource extends EntriesResource
         if (array_key_exists('entries', $response)) {
             $groups = [];
             foreach ($response['entries'] as $entry) {
-                $groups[] = new GroupMembershipResource($entry);
+                $groups[] = new GroupMembership($entry);
             }
             $this->setEntries($groups);
         }

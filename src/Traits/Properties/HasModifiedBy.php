@@ -2,7 +2,7 @@
 
 namespace Mitquinn\BoxApiSdk\Traits\Properties;
 
-use Mitquinn\BoxApiSdk\Resources\UserResource;
+use Mitquinn\BoxApiSdk\Resources\User;
 
 /**
  * Trait HasContentModifiedBy
@@ -10,22 +10,22 @@ use Mitquinn\BoxApiSdk\Resources\UserResource;
  */
 trait HasModifiedBy
 {
-    /** @var UserResource $modified_by */
-    protected UserResource $modified_by;
+    /** @var User $modified_by */
+    protected User $modified_by;
 
     /**
-     * @return UserResource
+     * @return User
      */
-    public function getModifiedBy(): UserResource
+    public function getModifiedBy(): User
     {
         return $this->modified_by;
     }
 
     /**
-     * @param UserResource $modified_by
+     * @param User $modified_by
      * @return HasModifiedBy
      */
-    public function setModifiedBy(UserResource $modified_by): static
+    public function setModifiedBy(User $modified_by): static
     {
         $this->modified_by = $modified_by;
         return $this;

@@ -24,7 +24,7 @@ class EmailAliasesResource extends EntriesResource
         if (array_key_exists('entries', $response)) {
             $emailAliases = [];
             foreach ($response['entries'] as $emailAlias) {
-                $emailAliases[] = new EmailAliasResource($emailAlias);
+                $emailAliases[] = new EmailAlias($emailAlias);
             }
             $this->setEntries($emailAliases);
         }
@@ -33,7 +33,7 @@ class EmailAliasesResource extends EntriesResource
     }
 
     /**
-     * @return EmailAliasResource[]
+     * @return EmailAlias[]
      */
     public function getEntries(): array
     {

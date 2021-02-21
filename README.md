@@ -5,8 +5,9 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 
 ## High Level Todo: 
 * Total Api Requests Included
-* 27/188 Requests
-* Estimated time for completion April 6th
+* 60/188 Requests
+* Estimated time for completion April ~~6th~~ 25th
+  * At a rate of 2 apis a day
 
 ### General
 - [x] Create shared property traits - 1/9/21
@@ -17,6 +18,8 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] Copy over things that have been done to the new ReadMe 1/28/21 
 - [ ] Convert Dot -> Collections, Remove Dot
 - [ ] Extract RecentItemsResource into a simple Entries abstract
+- [x] Refactored Resources to just be names of resources (removing "Resource" from class names)
+- [ ] Need to refactor UseId to be not null AND string 
 
 ### Authorization Api
 - [ ] AccessToken Resource
@@ -318,7 +321,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] Recent Item Resource
 - [x] Recent Items Resource
 - [x] Recent Items Collection
-- [ ] List Recently access items
+- [x] List Recently access items
   
 ### Retention Polices
 - [ ] Retention policies Resource
@@ -511,15 +514,15 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Remove watermark from folder
   
 ### Web Links
-- [ ] Web link Resource
-- [ ] Web link Collection
-- [ ] Web link (Base) Resource
-- [ ] Web link (Mini) Resource
-- [ ] Get web link
-- [ ] Create web link
-- [ ] Update web link
-- [ ] Remove web link
-  
+- [x] WebLink Resource 2/21/21
+- [x] Web link Api 2/21/21
+- [x] WebLinkMini Resource 2/21/21
+- [x] Get web link 2/21/21
+- [x] Create web link 2/21/21
+- [x] Update web link 2/21/21
+- [x] Remove web link 2/21/21
+- [ ] Test Web Links 
+
 ### Webhooks
 - [ ] Webhook (V2) payload Resource
 - [ ] Webhook Resource

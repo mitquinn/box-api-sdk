@@ -12,8 +12,8 @@ use Mitquinn\BoxApiSdk\Requests\GroupMemberships\GetGroupMembershipRequest;
 use Mitquinn\BoxApiSdk\Requests\GroupMemberships\RemoveUserFromGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\GroupMemberships\UpdateGroupMembershipRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\GetCurrentUserRequest;
-use Mitquinn\BoxApiSdk\Resources\GroupMembershipResource;
-use Mitquinn\BoxApiSdk\Resources\NoContentResource;
+use Mitquinn\BoxApiSdk\Resources\GroupMembership;
+use Mitquinn\BoxApiSdk\Resources\NoContent;
 use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 use Psr\Http\Client\ClientExceptionInterface;
 
@@ -26,7 +26,7 @@ class GroupMembershipsApiTest extends BaseTest
 
 
     /**
-     * @return GroupMembershipResource
+     * @return GroupMembership
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
      * @throws BoxConflictException
@@ -34,7 +34,7 @@ class GroupMembershipsApiTest extends BaseTest
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    protected function createGroupMembership(): GroupMembershipResource
+    protected function createGroupMembership(): GroupMembership
     {
         $groupResource = $this->createGroup();
         $request = new GetCurrentUserRequest();
@@ -50,7 +50,7 @@ class GroupMembershipsApiTest extends BaseTest
 
         $requestAdd = new AddUserToGroupRequest($body);
         $groupMembershipResource = $this->getBoxService()->groupMemberships()->addUserToGroup($requestAdd);
-        static::assertInstanceOf(GroupMembershipResource::class, $groupMembershipResource);
+        static::assertInstanceOf(GroupMembership::class, $groupMembershipResource);
         return $groupMembershipResource;
     }
 
@@ -59,7 +59,7 @@ class GroupMembershipsApiTest extends BaseTest
         $groupMembershipResourceCreated = $this->createGroupMembership();
         $request = new GetGroupMembershipRequest($groupMembershipResourceCreated->getId());
         $groupMembershipResource = $this->getBoxService()->groupMemberships()->getGroupMembership($request);
-        static::assertInstanceOf(GroupMembershipResource::class, $groupMembershipResource);
+        static::assertInstanceOf(GroupMembership::class, $groupMembershipResource);
         $this->removeGroup($groupMembershipResource->getGroup()->getId());
     }
 
@@ -80,7 +80,7 @@ class GroupMembershipsApiTest extends BaseTest
 
         $request = new AddUserToGroupRequest(body: $body);
         $groupMembershipResource = $this->getBoxService()->groupMemberships()->addUserToGroup($request);
-        static::assertInstanceOf(GroupMembershipResource::class, $groupMembershipResource);
+        static::assertInstanceOf(GroupMembership::class, $groupMembershipResource);
         $this->removeGroup($groupMembershipResource->getGroup()->getId());
     }
 
@@ -89,7 +89,7 @@ class GroupMembershipsApiTest extends BaseTest
         $groupMembershipResource = $this->createGroupMembership();
         $request = new UpdateGroupMembershipRequest($groupMembershipResource->getId());
         $updatedGroupMembershipResource = $this->getBoxService()->groupMemberships()->updateGroupMembership($request);
-        static::assertInstanceOf(GroupMembershipResource::class, $updatedGroupMembershipResource);
+        static::assertInstanceOf(GroupMembership::class, $updatedGroupMembershipResource);
         $this->removeGroup($groupMembershipResource->getGroup()->getId());
     }
 
@@ -99,7 +99,7 @@ class GroupMembershipsApiTest extends BaseTest
         $groupMembershipResource = $this->createGroupMembership();
         $request = new RemoveUserFromGroupRequest($groupMembershipResource->getId());
         $noContentResource = $this->getBoxService()->groupMemberships()->removeUserFromGroup($request);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
         $this->removeGroup($groupMembershipResource->getGroup()->getId());
     }
 

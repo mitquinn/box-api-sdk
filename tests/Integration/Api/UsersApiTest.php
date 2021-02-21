@@ -11,10 +11,10 @@ use Mitquinn\BoxApiSdk\Requests\Users\ListEnterpriseUsersRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\ListUsersGroupsRequest;
 use Mitquinn\BoxApiSdk\Requests\Users\UpdateUserRequest;
 use Mitquinn\BoxApiSdk\Resources\EmailAliasesResource;
-use Mitquinn\BoxApiSdk\Resources\EmailAliasResource;
+use Mitquinn\BoxApiSdk\Resources\EmailAlias;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
-use Mitquinn\BoxApiSdk\Resources\NoContentResource;
-use Mitquinn\BoxApiSdk\Resources\UserResource;
+use Mitquinn\BoxApiSdk\Resources\NoContent;
+use Mitquinn\BoxApiSdk\Resources\User;
 use Mitquinn\BoxApiSdk\Resources\UsersResource;
 use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
@@ -30,14 +30,14 @@ class UsersApiTest extends BaseTest
     {
         $request = new GetCurrentUserRequest();
         $userResource = $this->getBoxService()->users()->getCurrentUser($request);
-        static::assertInstanceOf(UserResource::class, $userResource);
+        static::assertInstanceOf(User::class, $userResource);
     }
 
     public function testGetCurrentUserWithFullFields()
     {
         $request = new GetCurrentUserRequest(['fields' => 'id,type,address,avatar_url,can_see_managed_users,created_at,enterprise,external_app_user_id,hostname,is_exempt_from_device_limits,is_exempt_from_login_verification,is_external_collab_restricted,is_platform_access_only,is_sync_enabled,job_title,language,login,max_upload_size,modified_at,my_tags,name,notification_email,phone,role,space_amount,space_used,status,timezone,tracking_codes']);
         $userResource = $this->getBoxService()->users()->getCurrentUser($request);
-        static::assertInstanceOf(UserResource::class, $userResource);
+        static::assertInstanceOf(User::class, $userResource);
         static::assertIsInt($userResource->getId());
         static::assertIsString($userResource->getType());
         static::assertIsString($userResource->getAddress());
@@ -91,7 +91,7 @@ class UsersApiTest extends BaseTest
     {
         $request = new GetUserRequest(13372896237);
         $userResource = $this->getBoxService()->users()->getUser($request);
-        static::assertInstanceOf(UserResource::class, $userResource);
+        static::assertInstanceOf(User::class, $userResource);
     }
 
     public function testUpdateUser()

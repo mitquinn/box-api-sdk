@@ -3,7 +3,7 @@
 namespace Mitquinn\BoxApiSdk\Tests\Integration\Api;
 
 use Mitquinn\BoxApiSdk\Requests\Events\ListUserAndEnterpriseEventsRequest;
-use Mitquinn\BoxApiSdk\Resources\EventsResource;
+use Mitquinn\BoxApiSdk\Resources\Events;
 use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
 /**
@@ -17,7 +17,7 @@ class EventsApiTest extends BaseTest
     {
         $request = new ListUserAndEnterpriseEventsRequest();
         $eventsResource = $this->getBoxService()->events()->listUserAndEnterpriseEvents($request);
-        static::assertInstanceOf(EventsResource::class, $eventsResource);
+        static::assertInstanceOf(Events::class, $eventsResource);
     }
 
 

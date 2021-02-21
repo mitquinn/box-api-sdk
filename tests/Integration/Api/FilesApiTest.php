@@ -14,9 +14,9 @@ use Mitquinn\BoxApiSdk\Requests\Files\UpdateFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UploadFileRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\CommentsResource;
-use Mitquinn\BoxApiSdk\Resources\FileResource;
-use Mitquinn\BoxApiSdk\Resources\FilesResource;
-use Mitquinn\BoxApiSdk\Resources\NoContentResource;
+use Mitquinn\BoxApiSdk\Resources\File;
+use Mitquinn\BoxApiSdk\Resources\Files;
+use Mitquinn\BoxApiSdk\Resources\NoContent;
 use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
 /**
@@ -26,7 +26,7 @@ use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 class FilesApiTest extends BaseTest
 {
 
-    public function uploadPng(): FilesResource
+    public function uploadPng(): Files
     {
         $name = $this->faker->firstName;
         $path = "tests/TestingData/bulbasaur.png";
@@ -55,14 +55,14 @@ class FilesApiTest extends BaseTest
     public function testUploadImage()
     {
         $filesResource = $this->uploadPng();
-        static::assertInstanceOf(FilesResource::class, $filesResource);
+        static::assertInstanceOf(Files::class, $filesResource);
         $entriesArray = $filesResource->getEntries();
         $fileResource = $entriesArray[0];
 
         //Clean up
         $deleteRequest = new DeleteFileRequest($fileResource->getId());
         $noContentResource = $this->getBoxService()->files()->deleteFile($deleteRequest);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
     }
 
 
@@ -73,7 +73,7 @@ class FilesApiTest extends BaseTest
 
         $deleteRequest = new DeleteFileRequest($fileResource->getId());
         $noContentResource = $this->getBoxService()->files()->deleteFile($deleteRequest);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
     }
 
     public function testGetFileInformation()
@@ -81,12 +81,12 @@ class FilesApiTest extends BaseTest
         $oldFileResource = $this->uploadFile();
         $request = new GetFileInformationRequest($oldFileResource->getId());
         $fileResource = $this->getBoxService()->files()->getFileInformation($request);
-        static::assertInstanceOf(FileResource::class, $fileResource);
+        static::assertInstanceOf(File::class, $fileResource);
 
         //Clean up
         $deleteRequest = new DeleteFileRequest($fileResource->getId());
         $noContentResource = $this->getBoxService()->files()->deleteFile($deleteRequest);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
     }
 
     public function testDeleteFile()
@@ -94,7 +94,7 @@ class FilesApiTest extends BaseTest
         $fileResource = $this->uploadFile();
         $request = new DeleteFileRequest($fileResource->getId());
         $noContentResource = $this->getBoxService()->files()->deleteFile($request);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
         static::expectException(BoxNotFoundException::class);
         $this->getBoxService()->files()->getFileInformation($fileResource->getId());
     }
@@ -107,7 +107,7 @@ class FilesApiTest extends BaseTest
 
         $request = new GetFileThumbnailRequest($fileResource->getId(), 'png');
         $noContentResource = $this->getBoxService()->files()->getFileThumbnail($request);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
         $headers = $noContentResource->getHeaders();
         static::assertArrayHasKey('Location', $headers);
         //Todo: Maybe I want to validate the url of the Location?
@@ -131,7 +131,7 @@ class FilesApiTest extends BaseTest
 
         $request = new CopyFileRequest($oldFileResource->getId(), $body);
         $fileResource = $this->getBoxService()->files()->copyFile($request);
-        static::assertInstanceOf(FileResource::class, $fileResource);
+        static::assertInstanceOf(File::class, $fileResource);
         static::assertEquals($newFileName, $fileResource->getName());
 
         // Clean up
@@ -152,7 +152,7 @@ class FilesApiTest extends BaseTest
         //Clean Up
         $deleteRequest = new DeleteFileRequest($fileResource->getId());
         $noContentResource = $this->getBoxService()->files()->deleteFile($deleteRequest);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
     }
 
     public function testUpdateFile()
@@ -161,13 +161,13 @@ class FilesApiTest extends BaseTest
         $newName = $this->faker->firstName;
         $request = new UpdateFileRequest(id: $fileResource->getId(), body: ['name' => $newName]);
         $updatedFileResource = $this->getBoxService()->files()->updateFile($request);
-        static::assertInstanceOf(FileResource::class, $updatedFileResource);
+        static::assertInstanceOf(File::class, $updatedFileResource);
         static::assertEquals($newName, $updatedFileResource->getName());
 
         //Clean Up
         $deleteRequest = new DeleteFileRequest($fileResource->getId());
         $noContentResource = $this->getBoxService()->files()->deleteFile($deleteRequest);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
     }
 
     public function testListFileComments()

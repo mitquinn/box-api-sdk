@@ -11,9 +11,9 @@ use Mitquinn\BoxApiSdk\Requests\Groups\RemoveGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\UpdateGroupRequest;
 use Mitquinn\BoxApiSdk\Resources\CollaborationsResource;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
-use Mitquinn\BoxApiSdk\Resources\GroupResource;
+use Mitquinn\BoxApiSdk\Resources\Group;
 use Mitquinn\BoxApiSdk\Resources\GroupsResource;
-use Mitquinn\BoxApiSdk\Resources\NoContentResource;
+use Mitquinn\BoxApiSdk\Resources\NoContent;
 use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 
 
@@ -32,7 +32,7 @@ class GroupsApiTest extends BaseTest
 
         $request = new CreateGroupRequest(body: $body);
         $groupResource = $this->getBoxService()->groups()->createGroup($request);
-        static::assertInstanceOf(GroupResource::class, $groupResource);
+        static::assertInstanceOf(Group::class, $groupResource);
         $this->removeGroup($groupResource->getId());
     }
 
@@ -41,7 +41,7 @@ class GroupsApiTest extends BaseTest
         $groupResource = $this->createGroup();
         $request = new RemoveGroupRequest($groupResource->getId());
         $noContentResource = $this->getBoxService()->groups()->removeGroup($request);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
     }
 
     public function testGetGroup()
@@ -49,7 +49,7 @@ class GroupsApiTest extends BaseTest
         $groupResource = $this->createGroup();
         $request = new GetGroupRequest($groupResource->getId());
         $getGroupRequestResource = $this->getBoxService()->groups()->getGroup($request);
-        static::assertInstanceOf(GroupResource::class, $getGroupRequestResource);
+        static::assertInstanceOf(Group::class, $getGroupRequestResource);
         $this->removeGroup($groupResource->getId());
     }
 
@@ -64,7 +64,7 @@ class GroupsApiTest extends BaseTest
 
         $updateRequest = new UpdateGroupRequest(id: $groupResource->getId(), body:$updateBody);
         $updateGroupResource = $this->getBoxService()->groups()->updateGroup($updateRequest);
-        static::assertInstanceOf(GroupResource::class, $updateGroupResource);
+        static::assertInstanceOf(Group::class, $updateGroupResource);
         static::assertEquals($name, $updateGroupResource->getName() );
         $this->removeGroup($groupResource->getId());
     }

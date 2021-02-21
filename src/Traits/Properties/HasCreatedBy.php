@@ -2,7 +2,7 @@
 
 namespace Mitquinn\BoxApiSdk\Traits\Properties;
 
-use Mitquinn\BoxApiSdk\Resources\UserResource;
+use Mitquinn\BoxApiSdk\Resources\User;
 
 /**
  * Trait HasCreatedBy
@@ -10,22 +10,22 @@ use Mitquinn\BoxApiSdk\Resources\UserResource;
  */
 trait HasCreatedBy
 {
-    /** @var UserResource $created_by */
-    protected UserResource $created_by;
+    /** @var User $created_by */
+    protected User $created_by;
 
     /**
-     * @return UserResource
+     * @return User
      */
-    public function getCreatedBy(): UserResource
+    public function getCreatedBy(): User
     {
         return $this->created_by;
     }
 
     /**
-     * @param UserResource $created_by
+     * @param User $created_by
      * @return HasCreatedBy
      */
-    public function setCreatedBy(UserResource $created_by): static
+    public function setCreatedBy(User $created_by): static
     {
         $this->created_by = $created_by;
         return $this;

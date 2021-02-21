@@ -23,7 +23,7 @@ class UsersResource extends EntriesResource
         if (array_key_exists('entries', $response)) {
             $users = [];
             foreach ($response['entries'] as $entry) {
-                $users[] = new UserResource($entry);
+                $users[] = new User($entry);
             }
             $this->setEntries($users);
         }

@@ -19,7 +19,7 @@ class CommentsResource extends EntriesResource
         if (array_key_exists('entries', $response)) {
             $comments = [];
             foreach ($response['entries'] as $comment) {
-                $comments[] = new CommentResource($comment);
+                $comments[] = new Comment($comment);
             }
             $this->setEntries($comments);
         }
@@ -28,7 +28,7 @@ class CommentsResource extends EntriesResource
     }
 
     /**
-     * @return CommentResource[]
+     * @return Comment[]
      */
     public function getEntries(): array
     {

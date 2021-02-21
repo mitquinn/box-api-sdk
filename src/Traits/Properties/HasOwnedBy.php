@@ -2,7 +2,7 @@
 
 namespace Mitquinn\BoxApiSdk\Traits\Properties;
 
-use Mitquinn\BoxApiSdk\Resources\UserResource;
+use Mitquinn\BoxApiSdk\Resources\User;
 
 /**
  * Trait HasOwnedBy
@@ -10,22 +10,22 @@ use Mitquinn\BoxApiSdk\Resources\UserResource;
  */
 trait HasOwnedBy
 {
-    /** @var UserResource $owned_by */
-    protected UserResource $owned_by;
+    /** @var User $owned_by */
+    protected User $owned_by;
 
     /**
-     * @return UserResource
+     * @return User
      */
-    public function getOwnedBy(): UserResource
+    public function getOwnedBy(): User
     {
         return $this->owned_by;
     }
 
     /**
-     * @param UserResource $owned_by
+     * @param User $owned_by
      * @return HasOwnedBy
      */
-    public function setOwnedBy(UserResource $owned_by): static
+    public function setOwnedBy(User $owned_by): static
     {
         $this->owned_by = $owned_by;
         return $this;

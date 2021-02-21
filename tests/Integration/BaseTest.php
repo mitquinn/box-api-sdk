@@ -20,12 +20,12 @@ use Mitquinn\BoxApiSdk\Requests\Folders\CreateFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Folders\DeleteFolderRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\CreateGroupRequest;
 use Mitquinn\BoxApiSdk\Requests\Groups\RemoveGroupRequest;
-use Mitquinn\BoxApiSdk\Resources\CollaborationResource;
-use Mitquinn\BoxApiSdk\Resources\FileResource;
-use Mitquinn\BoxApiSdk\Resources\FilesResource;
-use Mitquinn\BoxApiSdk\Resources\FolderResource;
-use Mitquinn\BoxApiSdk\Resources\GroupResource;
-use Mitquinn\BoxApiSdk\Resources\NoContentResource;
+use Mitquinn\BoxApiSdk\Resources\Collaboration;
+use Mitquinn\BoxApiSdk\Resources\File;
+use Mitquinn\BoxApiSdk\Resources\Files;
+use Mitquinn\BoxApiSdk\Resources\Folder;
+use Mitquinn\BoxApiSdk\Resources\Group;
+use Mitquinn\BoxApiSdk\Resources\NoContent;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Symfony\Component\Dotenv\Dotenv;
@@ -87,7 +87,7 @@ abstract class BaseTest extends TestCase
     }
 
 
-    public function createFolder(): FolderResource
+    public function createFolder(): Folder
     {
         $folderBody = [
             'name' => $this->faker->name,
@@ -98,7 +98,7 @@ abstract class BaseTest extends TestCase
 
         $request = new CreateFolderRequest($folderBody);
         $folderResource = $this->getBoxService()->folders()->createFolder($request);
-        static::assertInstanceOf(FolderResource::class, $folderResource);
+        static::assertInstanceOf(Folder::class, $folderResource);
         return $folderResource;
     }
 
@@ -106,11 +106,11 @@ abstract class BaseTest extends TestCase
     {
         $request = new DeleteFolderRequest(id: $id);
         $noContentResource = $this->getBoxService()->folders()->deleteFolder($request);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
     }
 
 
-    public function createCollaboration(FolderResource $folderResource): CollaborationResource
+    public function createCollaboration(Folder $folderResource): Collaboration
     {
         $body = [
             'accessible_by' => [
@@ -126,11 +126,11 @@ abstract class BaseTest extends TestCase
 
         $request = new CreateCollaborationRequest(body: $body);
         $collaborationResource = $this->getBoxService()->collaborations()->createCollaboration($request);
-        static::assertInstanceOf(CollaborationResource::class, $collaborationResource);
+        static::assertInstanceOf(Collaboration::class, $collaborationResource);
         return $collaborationResource;
     }
 
-    public function createGroup(): GroupResource
+    public function createGroup(): Group
     {
         $body = [
             'name' => $this->faker->name
@@ -138,7 +138,7 @@ abstract class BaseTest extends TestCase
 
         $request = new CreateGroupRequest(body: $body);
         $groupResource = $this->getBoxService()->groups()->createGroup($request);
-        static::assertInstanceOf(GroupResource::class, $groupResource);
+        static::assertInstanceOf(Group::class, $groupResource);
         return $groupResource;
     }
 
@@ -147,18 +147,18 @@ abstract class BaseTest extends TestCase
         //Clean Up
         $deleteRequest = new RemoveGroupRequest($id);
         $noContentResource = $this->getBoxService()->groups()->removeGroup($deleteRequest);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
     }
 
     /**
-     * @return FileResource
+     * @return File
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function uploadFile(): FileResource
+    public function uploadFile(): File
     {
         $name = $this->faker->firstName;
         $path = "tests/TestingData/TestingFile.txt";
@@ -181,7 +181,7 @@ abstract class BaseTest extends TestCase
 
         $request = new UploadFileRequest(body: $body);
         $filesResource = $this->getBoxService()->files()->uploadFile($request);
-        static::assertInstanceOf(FilesResource::class, $filesResource);
+        static::assertInstanceOf(Files::class, $filesResource);
         static::assertIsArray($filesResource->getEntries());
         static::assertIsInt($filesResource->getTotalCount());
         $entriesArray = $filesResource->getEntries();
@@ -191,18 +191,18 @@ abstract class BaseTest extends TestCase
 
     /**
      * @param int $id
-     * @return NoContentResource
+     * @return NoContent
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function deleteFile(int $id): NoContentResource
+    public function deleteFile(int $id): NoContent
     {
         $request = new DeleteFileRequest($id);
         $noContentResource = $this->getBoxService()->files()->deleteFile($request);
-        static::assertInstanceOf(NoContentResource::class, $noContentResource);
+        static::assertInstanceOf(NoContent::class, $noContentResource);
         return $noContentResource;
     }
 
