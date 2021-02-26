@@ -409,14 +409,15 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Unassign task 
   
 ### Tasks
-- [ ] Task Resource 
-- [ ] Tasks Resource
-- [ ] Tasks Collection
-- [ ] List tasks on file 
-- [ ] Get task 
-- [ ] Create task 
-- [ ] Update task 
-- [ ] Remove task 
+- [x] Task Resource 2/26/21
+- [x] Tasks Resource 2/26/21
+- [x] Tasks Api 2/23/21
+- [x] List tasks on file 2/23/21
+- [x] Get task 2/23/21
+- [x] Create task 2/23/21
+- [x] Update task 2/23/21
+- [x] Remove task 2/23/21
+- [ ] Tests for Tasks Api
   
 ### Terms of Service
 - [ ] Terms of service Resource

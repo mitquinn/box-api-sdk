@@ -14,6 +14,7 @@ use Mitquinn\BoxApiSdk\Resources\GroupMembership;
 use Mitquinn\BoxApiSdk\Resources\GroupMembershipsResource;
 use Mitquinn\BoxApiSdk\Resources\ItemsResource;
 use Mitquinn\BoxApiSdk\Resources\NoContent;
+use Mitquinn\BoxApiSdk\Resources\Tasks\Tasks;
 use Mitquinn\BoxApiSdk\Traits\CanValidateHttpResponse;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
@@ -161,6 +162,23 @@ abstract class Api
         $this->validateResponse($response);
 
         return new CommentsResource($response);
+    }
+
+    /**
+     * @param BaseRequest $request
+     * @return Tasks
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    protected function sendTasksRequest(BaseRequest $request): Tasks
+    {
+        $response = $this->getClient()->sendRequest($request->generateRequestInterface());
+        $this->validateResponse($response);
+        return new Tasks($response);
     }
 
 

@@ -14,6 +14,7 @@ use Mitquinn\BoxApiSdk\Requests\Files\GetFileInformationRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\GetFileThumbnailRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\ListFileCollaborationsRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\ListFileCommentsRequest;
+use Mitquinn\BoxApiSdk\Requests\Files\ListTasksOnFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UpdateFileRequest;
 use Mitquinn\BoxApiSdk\Requests\Files\UploadFileRequest;
 use Mitquinn\BoxApiSdk\Requests\GenericRequest;
@@ -22,6 +23,7 @@ use Mitquinn\BoxApiSdk\Resources\CommentsResource;
 use Mitquinn\BoxApiSdk\Resources\File;
 use Mitquinn\BoxApiSdk\Resources\Files as FilesResource;
 use Mitquinn\BoxApiSdk\Resources\NoContent;
+use Mitquinn\BoxApiSdk\Resources\Tasks\Tasks;
 use Psr\Http\Client\ClientExceptionInterface;
 
 /**
@@ -146,6 +148,21 @@ class Files extends Api
     public function listFileComments(GenericRequest|ListFileCommentsRequest $request): CommentsResource
     {
         return $this->sendCommentsRequest($request);
+    }
+
+    /**
+     * @param GenericRequest|ListTasksOnFileRequest $request
+     * @return Tasks
+     * @throws BoxAuthorizationException
+     * @throws BoxBadRequestException
+     * @throws BoxConflictException
+     * @throws BoxForbiddenException
+     * @throws BoxNotFoundException
+     * @throws ClientExceptionInterface
+     */
+    public function listTasksOnFile(GenericRequest|ListTasksOnFileRequest $request): Tasks
+    {
+        return $this->sendTasksRequest($request);
     }
 
 

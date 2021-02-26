@@ -16,6 +16,7 @@ use Mitquinn\BoxApiSdk\Api\FolderLocks;
 use Mitquinn\BoxApiSdk\Api\Folders;
 use Mitquinn\BoxApiSdk\Api\GroupMemberships;
 use Mitquinn\BoxApiSdk\Api\Groups;
+use Mitquinn\BoxApiSdk\Api\Tasks;
 use Mitquinn\BoxApiSdk\Api\Users;
 use Mitquinn\BoxApiSdk\Api\WebLinks;
 use Mitquinn\BoxApiSdk\Exceptions\BoxAuthorizationException;
@@ -64,6 +65,9 @@ class BoxService
 
     /** @var WebLinks $webLinks */
     protected WebLinks $webLinks;
+
+    /** @var Tasks $tasks */
+    protected Tasks $tasks;
 
     /** @var AuthorizationInterface $authorizationConfiguration */
     protected AuthorizationInterface $authorizationConfiguration;
@@ -147,13 +151,28 @@ class BoxService
         $this->eventsApi = new Events($this->getClient());
         $this->folderLocksApi = new FolderLocks($this->getClient());
         $this->webLinks = new WebLinks($this->getClient());
+        $this->tasks = new Tasks($this->getClient());
     }
 
+    /**
+     * @return Tasks
+     */
+    public function tasks(): Tasks
+    {
+        return $this->tasks;
+    }
+
+    /**
+     * @return WebLinks
+     */
     public function webLinks(): WebLinks
     {
         return $this->webLinks;
     }
 
+    /**
+     * @return FolderLocks
+     */
     public function folderLocks(): FolderLocks
     {
         return $this->folderLocksApi;
