@@ -25,8 +25,6 @@ use Psr\Http\Client\ClientExceptionInterface;
 class Tasks extends Api
 {
 
-
-
     /**
      * @param GenericRequest|GetTaskRequest $request
      * @return Task
@@ -103,7 +101,5 @@ class Tasks extends Api
         $this->validateResponse($response);
         return new Task($response);
     }
-
-
 
 }
