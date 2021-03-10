@@ -18,11 +18,11 @@ class UpdateGroupMembershipRequest extends BaseRequest
 
     /**
      * UpdateGroupMembershipRequest constructor.
-     * @param int $id
+     * @param string $id
      * @param array $query
      * @param array $body
      */
-    public function __construct(int $id, array $query = [], array $body = [])
+    public function __construct(string $id, array $query = [], array $body = [])
     {
         $this->setId($id);
         parent::__construct(query: $query, body: $body);

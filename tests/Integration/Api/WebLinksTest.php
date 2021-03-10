@@ -25,16 +25,16 @@ class WebLinksTest extends BaseTest
 
 
     /**
-     * @param int $web_link_id
+     * @param string $webLinkId
      * @throws BoxAuthorizationException
      * @throws BoxBadRequestException
      * @throws BoxForbiddenException
      * @throws BoxNotFoundException
      * @throws ClientExceptionInterface
      */
-    public function deleteWebLink(int $web_link_id): void
+    public function deleteWebLink(string $webLinkId): void
     {
-        $request = new RemoveWebLinkRequest($web_link_id);
+        $request = new RemoveWebLinkRequest($webLinkId);
         $noContent = $this->getBoxService()->webLinks()->removeWebLink($request);
         static::assertInstanceOf(NoContent::class, $noContent);
     }
@@ -53,7 +53,7 @@ class WebLinksTest extends BaseTest
         $body = [
             'name' => 'testing',
             'parent' => [
-                'id' => '0'
+                'id' => "0"
             ],
             'url' => 'https://mitchellquinn.net'
         ];

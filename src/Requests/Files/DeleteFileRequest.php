@@ -18,10 +18,10 @@ class DeleteFileRequest extends BaseRequest
 
     /**
      * DeleteFileRequest constructor.
-     * @param int $id
+     * @param string $id
      * @param array $header
      */
-    public function __construct(int $id, array $header = [])
+    public function __construct(string $id, array $header = [])
     {
         $this->setId(id: $id);
         parent::__construct(header: $header);

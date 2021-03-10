@@ -18,12 +18,12 @@ class GetWebLinkRequest extends BaseRequest
 
     /**
      * GetWebLinkRequest constructor.
-     * @param int $web_link_id
+     * @param string $webLinkId
      * @param array $header
      */
-    public function __construct(int $web_link_id, array $header = [])
+    public function __construct(string $webLinkId, array $header = [])
     {
-        $this->setId($web_link_id);
+        $this->setId($webLinkId);
         parent::__construct(header: $header);
     }
 

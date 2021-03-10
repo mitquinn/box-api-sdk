@@ -18,11 +18,11 @@ class ListTasksOnFileRequest extends BaseRequest
 
     /**
      * ListTasksOnFileRequest constructor.
-     * @param int $file_id
+     * @param string $fileId
      */
-    public function __construct(int $file_id)
+    public function __construct(string $fileId)
     {
-        $this->setId($file_id);
+        $this->setId($fileId);
         parent::__construct();
     }
 

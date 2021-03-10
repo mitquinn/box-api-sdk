@@ -38,7 +38,7 @@ class UsersApiTest extends BaseTest
         $request = new GetCurrentUserRequest(['fields' => 'id,type,address,avatar_url,can_see_managed_users,created_at,enterprise,external_app_user_id,hostname,is_exempt_from_device_limits,is_exempt_from_login_verification,is_external_collab_restricted,is_platform_access_only,is_sync_enabled,job_title,language,login,max_upload_size,modified_at,my_tags,name,notification_email,phone,role,space_amount,space_used,status,timezone,tracking_codes']);
         $userResource = $this->getBoxService()->users()->getCurrentUser($request);
         static::assertInstanceOf(User::class, $userResource);
-        static::assertIsInt($userResource->getId());
+        static::assertIsString($userResource->getId());
         static::assertIsString($userResource->getType());
         static::assertIsString($userResource->getAddress());
         static::assertIsString($userResource->getAvatarUrl());
@@ -125,8 +125,8 @@ class UsersApiTest extends BaseTest
     /**
      * Todo: Need enterprise account for this.
      */
-    public function testCreateAndRemoveEmailAlias()
-    {
+    //public function testCreateAndRemoveEmailAlias()
+    //{
 //        $request = new GetCurrentUserRequest();
 //        $userResource = $this->getBoxService()->users()->getCurrentUser($request);
 //
@@ -141,10 +141,6 @@ class UsersApiTest extends BaseTest
 //        $request3 = new RemoveEmailAliasRequest($userResource->getId(), $emailAliasResource->getId());
 //        $noContentResource = $this->getBoxService()->users()->removeEmailAlias($request3);
 //        static::assertInstanceOf(NoContentResource::class, $noContentResource);
-    }
-
-
-
-
+    //}
 
 }

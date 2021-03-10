@@ -18,12 +18,12 @@ class UpdateTaskRequest extends BaseRequest
 
     /**
      * UpdateTaskRequest constructor.
-     * @param int $task_id
+     * @param string $taskId
      * @param array $body
      */
-    public function __construct(int $task_id, array $body = [])
+    public function __construct(string $taskId, array $body = [])
     {
-        $this->setId($task_id);
+        $this->setId($taskId);
         parent::__construct(body:  $body);
     }
 

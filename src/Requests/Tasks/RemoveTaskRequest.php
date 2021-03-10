@@ -18,11 +18,11 @@ class RemoveTaskRequest extends BaseRequest
 
     /**
      * RemoveTaskRequest constructor.
-     * @param int $task_id
+     * @param string $taskId
      */
-    public function __construct(int $task_id)
+    public function __construct(string $taskId)
     {
-        $this->setId($task_id);
+        $this->setId($taskId);
         parent::__construct();
     }
 

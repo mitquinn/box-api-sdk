@@ -22,12 +22,12 @@ class GetFileThumbnailRequest extends BaseRequest
 
     /**
      * GetFileThumbnailRequest constructor.
-     * @param int $id
+     * @param string $id
      * @param string $extension
      * @param array $query
      * @throws BoxBadRequestException
      */
-    public function __construct(int $id, string $extension, array $query = [])
+    public function __construct(string $id, string $extension, array $query = [])
     {
         $this->setId(id: $id);
         $this->setExtension(extension: $extension);

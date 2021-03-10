@@ -25,7 +25,7 @@ class FoldersCollectionTest extends BaseTest
 
     public function testGetFolderInformation()
     {
-        $request = new GetFolderInformationRequest(0);
+        $request = new GetFolderInformationRequest("0");
         $folderResource = $this->getBoxService()->folders()->getFolderInformation($request);
         static::assertInstanceOf(Folder::class, $folderResource);
     }
@@ -36,7 +36,7 @@ class FoldersCollectionTest extends BaseTest
      */
     public function testGetFolderInformationFillFields()
     {
-        $request = new GetFolderInformationRequest(id: 0,
+        $request = new GetFolderInformationRequest(id: "0",
             query: ['fields' => 'id,type,allowed_invitee_roles,allowed_shared_link_access_levels,can_non_owners_invite,can_non_owners_view_collaborators,classification,content_created_at,content_modified_at,created_at,created_by,description,etag,expires_at,folder_upload_email,has_collaborations,is_collaboration_restricted_to_enterprise,is_externally_owned,item_collection,item_status,metadata,modified_at,modified_by,name,owned_by,parent,path_collection,permissions,purged_at,sequence_id,shared_link,size,sync_state,tags,trashed_at,watermark_info']
         );
 
@@ -44,7 +44,7 @@ class FoldersCollectionTest extends BaseTest
         $folderResource = $this->getBoxService()->folders()->getFolderInformation($request);
 
         static::assertInstanceOf(Folder::class, $folderResource);
-        static::assertIsInt($folderResource->getId());
+        static::assertIsString($folderResource->getId());
         static::assertIsString($folderResource->getType());
         static::assertIsArray($folderResource->getAllowedInviteeRoles());
         static::assertIsArray($folderResource->getAllowedSharedLinkAccessLevels());
@@ -87,7 +87,7 @@ class FoldersCollectionTest extends BaseTest
 
     public function testListItemsInFolderTest()
     {
-        $request = new ListItemsInFolderRequest(0);
+        $request = new ListItemsInFolderRequest("0");
         $itemsResource = $this->getBoxService()->folders()->listItemsInFolder($request);
         static::assertInstanceOf(ItemsResource::class, $itemsResource);
     }
@@ -97,7 +97,7 @@ class FoldersCollectionTest extends BaseTest
         $body = [
             'name' => $this->faker->name,
             'parent' => [
-                'id' => 0
+                'id' => "0"
             ]
         ];
 
@@ -111,7 +111,7 @@ class FoldersCollectionTest extends BaseTest
         $body = [
             'name' => $this->faker->name,
             'parent' => [
-                'id' => 0
+                'id' => "0"
             ]
         ];
         $createFolderRequest = new CreateFolderRequest(body: $body);
@@ -135,7 +135,7 @@ class FoldersCollectionTest extends BaseTest
         $createBody = [
             'name' => $name,
             'parent' => [
-                'id' => 0
+                'id' => "0"
             ]
         ];
         $createRequest = new CreateFolderRequest($createBody);
@@ -165,7 +165,7 @@ class FoldersCollectionTest extends BaseTest
         $createBody = [
             'name' => $name,
             'parent' => [
-                'id' => 0
+                'id' => "0"
             ]
         ];
 
@@ -177,7 +177,7 @@ class FoldersCollectionTest extends BaseTest
         $copyBody = [
             'name' => "Copy $name",
             'parent' => [
-                'id' => 0
+                'id' => "0"
             ]
         ];
         $copyRequest = new CopyFolderRequest(id: $folderResource->getId(), body: $copyBody);

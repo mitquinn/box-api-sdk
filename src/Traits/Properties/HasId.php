@@ -8,22 +8,22 @@ namespace Mitquinn\BoxApiSdk\Traits\Properties;
  */
 trait HasId
 {
-    /** @var int|null  */
-    protected int|null $id;
+    /** @var string  */
+    protected string $id;
 
     /**
-     * @return int|null
+     * @return string
      */
-    public function getId(): int|null
+    public function getId(): string
     {
         return $this->id;
     }
 
     /**
-     * @param int|null $id
+     * @param string $id
      * @return static
      */
-    public function setId(int|null $id): static
+    public function setId(string $id): static
     {
         $this->id = $id;
         return $this;

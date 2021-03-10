@@ -17,12 +17,11 @@ class GetFileInformationRequest extends BaseRequest
 
     /**
      * GetFileInformationRequest constructor.
-     * @param int $id
+     * @param string $id
      * @param array $query
-     * @param array $body
      * @param array $header
      */
-    public function __construct(int $id, array $query = [], array $header = [])
+    public function __construct(string $id, array $query = [], array $header = [])
     {
         $this->setId(id: $id);
         parent::__construct(query: $query, header: $header);

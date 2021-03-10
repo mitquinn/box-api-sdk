@@ -15,7 +15,13 @@ class DeleteFolderRequest extends BaseRequest
 
     protected string $method = 'DELETE';
 
-    public function __construct(int $id, array $query = [], array $header = [])
+    /**
+     * DeleteFolderRequest constructor.
+     * @param string $id
+     * @param array $query
+     * @param array $header
+     */
+    public function __construct(string $id, array $query = [], array $header = [])
     {
         $this->setId($id);
         parent::__construct(query: $query, header: $header);

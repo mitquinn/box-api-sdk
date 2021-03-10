@@ -18,11 +18,11 @@ class GetFolderInformationRequest extends BaseRequest
 
     /**
      * GetFolderInformationRequest constructor.
-     * @param int $id
+     * @param string $id
      * @param array $query
      * @param array $header
      */
-    public function __construct(int $id, array $query = [], array $header = [])
+    public function __construct(string $id, array $query = [], array $header = [])
     {
         $this->setId(id: $id);
         parent::__construct(query: $query, header: $header);

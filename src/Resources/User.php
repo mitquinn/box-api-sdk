@@ -111,12 +111,7 @@ class User extends Resource
     protected function mapResource(array $response): static
     {
         if (array_key_exists('id', $response)) {
-            /** @info There are situations where the id of a user is "". (Example: Trash or Root Folder) In these situations we will set the value to null. */
-            if ($response['id'] === "") {
-                $this->setId(id: null);
-            } else {
-                $this->setId($response['id']);
-            }
+            $this->setId($response['id']);
         }
 
         if (array_key_exists('type', $response)) {

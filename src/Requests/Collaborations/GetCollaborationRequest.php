@@ -18,10 +18,10 @@ class GetCollaborationRequest extends BaseRequest
 
     /**
      * GetCollaborationRequest constructor.
-     * @param int $id
+     * @param string $id
      * @param array $query
      */
-    public function __construct(int $id, array $query = [])
+    public function __construct(string $id, array $query = [])
     {
         $this->setId($id);
         parent::__construct(query: $query);

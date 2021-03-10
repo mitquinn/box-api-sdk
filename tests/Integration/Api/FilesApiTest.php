@@ -37,7 +37,7 @@ class FilesApiTest extends BaseTest
                 'content_modified_at' => $dateTimeString,
                 'name' => $name,
                 'parent' => [
-                    'id' => 0
+                    'id' => "0"
                 ]
             ],
             'file' => [
@@ -96,7 +96,8 @@ class FilesApiTest extends BaseTest
         $noContentResource = $this->getBoxService()->files()->deleteFile($request);
         static::assertInstanceOf(NoContent::class, $noContentResource);
         static::expectException(BoxNotFoundException::class);
-        $this->getBoxService()->files()->getFileInformation($fileResource->getId());
+        $request2 = new GetFileInformationRequest($fileResource->getId());
+        $this->getBoxService()->files()->getFileInformation($request2);
     }
 
     public function testGetFileThumbnail()

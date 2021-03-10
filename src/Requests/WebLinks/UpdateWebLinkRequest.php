@@ -16,9 +16,14 @@ class UpdateWebLinkRequest extends BaseRequest
     /** @var string $method */
     protected string $method = 'PUT';
 
-    public function __construct(int $web_link_id, array $body = [])
+    /**
+     * UpdateWebLinkRequest constructor.
+     * @param string $webLinkId
+     * @param array $body
+     */
+    public function __construct(string $webLinkId, array $body = [])
     {
-        $this->setId($web_link_id);
+        $this->setId($webLinkId);
         parent::__construct(body: $body);
     }
 

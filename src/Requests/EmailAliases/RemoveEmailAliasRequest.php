@@ -13,18 +13,18 @@ class RemoveEmailAliasRequest extends BaseRequest
 {
     use HasId;
 
-    /** @var int $emailAliasId */
-    protected int $emailAliasId;
+    /** @var string $emailAliasId */
+    protected string $emailAliasId;
 
     /** @var string $method */
     protected string $method = 'DELETE';
 
     /**
      * RemoveEmailAliasRequest constructor.
-     * @param int $userId
-     * @param int $emailAliasId
+     * @param string $userId
+     * @param string $emailAliasId
      */
-    public function __construct(int $userId, int $emailAliasId)
+    public function __construct(string $userId, string $emailAliasId)
     {
         $this->setId($userId);
         $this->setEmailAliasId($emailAliasId);
@@ -44,18 +44,18 @@ class RemoveEmailAliasRequest extends BaseRequest
     /*** Start Getters and Setters ***/
 
     /**
-     * @return int
+     * @return string
      */
-    public function getEmailAliasId(): int
+    public function getEmailAliasId(): string
     {
         return $this->emailAliasId;
     }
 
     /**
-     * @param int $emailAliasId
+     * @param string $emailAliasId
      * @return RemoveEmailAliasRequest
      */
-    public function setEmailAliasId(int $emailAliasId): RemoveEmailAliasRequest
+    public function setEmailAliasId(string $emailAliasId): RemoveEmailAliasRequest
     {
         $this->emailAliasId = $emailAliasId;
         return $this;

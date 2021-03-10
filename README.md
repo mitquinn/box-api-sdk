@@ -417,7 +417,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [x] Create task 2/23/21
 - [x] Update task 2/23/21
 - [x] Remove task 2/23/21
-- [ ] Tests for Tasks Api
+- [x] Tests for Tasks Api 3/9/21
   
 ### Terms of Service
 - [ ] Terms of service Resource

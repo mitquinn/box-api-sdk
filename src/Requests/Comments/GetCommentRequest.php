@@ -2,13 +2,14 @@
 
 namespace Mitquinn\BoxApiSdk\Requests\Comments;
 
+use Mitquinn\BoxApiSdk\Requests\BaseRequest;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
 
 /**
  * Class GetCommentRequest
  * @package Mitquinn\BoxApiSdk\Requests\Comments
  */
-class GetCommentRequest extends \Mitquinn\BoxApiSdk\Requests\BaseRequest
+class GetCommentRequest extends BaseRequest
 {
     use HasId;
 
@@ -17,10 +18,10 @@ class GetCommentRequest extends \Mitquinn\BoxApiSdk\Requests\BaseRequest
 
     /**
      * GetCommentRequest constructor.
-     * @param int $id
+     * @param string $id
      * @param array $query
      */
-    public function __construct(int $id, array $query = [])
+    public function __construct(string $id, array $query = [])
     {
         $this->setId($id);
         parent::__construct(query: $query);

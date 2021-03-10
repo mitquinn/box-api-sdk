@@ -18,9 +18,9 @@ class DeleteFileRequestRequest extends BaseRequest
 
     /**
      * DeleteFileRequestRequest constructor.
-     * @param int $id
+     * @param string $id
      */
-    public function __construct(int $id)
+    public function __construct(string $id)
     {
         $this->setId($id);
         parent::__construct();

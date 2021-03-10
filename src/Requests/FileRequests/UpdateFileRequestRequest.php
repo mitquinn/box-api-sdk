@@ -16,7 +16,7 @@ class UpdateFileRequestRequest extends BaseRequest
     /** @var string $method */
     protected string $method = 'PUT';
 
-    public function __construct(int $id, array $body = [], array $header = [])
+    public function __construct(string $id, array $body = [], array $header = [])
     {
         $this->setId($id);
         parent::__construct(body: $body, header: $header);

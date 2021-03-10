@@ -18,9 +18,9 @@ use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 class TasksApiTest extends BaseTest
 {
 
-    public function deleteTask($task_id)
+    public function deleteTask(string $taskId)
     {
-        $request = new RemoveTaskRequest($task_id);
+        $request = new RemoveTaskRequest($taskId);
         $noContent = $this->getBoxService()->tasks()->removeTask($request);
         static::assertInstanceOf(NoContent::class, $noContent);
     }
@@ -32,7 +32,7 @@ class TasksApiTest extends BaseTest
 
         $body = [
             'item' => [
-                'id' => (string)$file->getId(),
+                'id' => $file->getId(),
                 'type' => 'file'
             ]
         ];
@@ -52,7 +52,7 @@ class TasksApiTest extends BaseTest
 
         $body = [
             'item' => [
-                'id' => (string)$file->getId(),
+                'id' => $file->getId(),
                 'type' => 'file'
             ]
         ];
@@ -79,7 +79,7 @@ class TasksApiTest extends BaseTest
         $body = [
             'message' => 'original message',
             'item' => [
-                'id' => (string)$file->getId(),
+                'id' => $file->getId(),
                 'type' => 'file'
             ]
         ];
@@ -101,8 +101,6 @@ class TasksApiTest extends BaseTest
         $this->deleteTask($task->getId());
         $this->deleteFile($file->getId());
     }
-
-
 
 
 }

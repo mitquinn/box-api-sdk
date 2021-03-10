@@ -17,7 +17,7 @@ use Mitquinn\BoxApiSdk\Tests\Integration\BaseTest;
 class CommentsApiTest extends BaseTest
 {
 
-    public function removeComment(int $id)
+    public function removeComment(string $id)
     {
         $request = new RemoveCommentRequest($id);
         $noContentResource = $this->getBoxService()->comments()->removeComment($request);
