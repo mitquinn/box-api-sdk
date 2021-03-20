@@ -19,7 +19,8 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Convert Dot -> Collections, Remove Dot
 - [ ] Extract RecentItemsResource into a simple Entries abstract
 - [x] Refactored Resources to just be names of resources (removing "Resource" from class names)
-- [ ] Need to refactor UseId to be not null AND string 
+- [x] Need to refactor UseId to be not null AND string 3/10/21
+- [ ] Extract all the resource mapping checks into a single static function?
 
 ### Authorization Api
 - [ ] AccessToken Resource
@@ -399,7 +400,7 @@ Author: Mitchell Quinn <mitchell.david.quinn@gmail.com>
 - [ ] Unassign storage policy
   
 ### Task Assignments
-- [ ] Task assignment Resource
+- [x] Task assignment Resource 3/19/21
 - [ ] Task assignments Resource
 - [ ] Task assignments Collection
 - [ ] List task assignments 
