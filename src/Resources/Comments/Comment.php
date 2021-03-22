@@ -1,8 +1,9 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Resources;
+namespace Mitquinn\BoxApiSdk\Resources\Comments;
 
 use Illuminate\Support\Collection;
+use Mitquinn\BoxApiSdk\Resources\Resource;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasCreatedAt;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasCreatedBy;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
@@ -37,40 +38,11 @@ class Comment extends Resource
     {
         $collection = new Collection($response);
 
-        if ($collection->has('id')) {
-            $this->setId($collection->get('id'));
-        }
+        $this->setProperties($collection);
 
-        if ($collection->has('type')) {
-            $this->setType($collection->get('type'));
-        }
-
-        if ($collection->has('created_at')) {
-            $this->setCreatedAt($collection->get('created_at'));
-        }
-
-        if ($collection->has('created_by')) {
-            $this->setCreatedBy(new User($collection->get('created_by')));
-        }
-
-        if ($collection->has('is_reply_comment')) {
-            $this->setIsReplyComment($collection->get('is_reply_comment'));
-        }
-
+        //Todo: Check to see if this an object
         if ($collection->has('item')) {
             $this->setItem($collection->get('item'));
-        }
-
-        if ($collection->has('message')) {
-            $this->setMessage($collection->get('message'));
-        }
-
-        if ($collection->has('modified_at')) {
-            $this->setModifiedAt($collection->get('modified_at'));
-        }
-
-        if ($collection->has('tagged_message')) {
-            $this->setTaggedMessage($collection->get('tagged_message'));
         }
 
         return $this;

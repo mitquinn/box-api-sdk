@@ -28,34 +28,10 @@ class WebLinkMini extends Resource
     {
         $collection = new Collection($response);
 
-        if ($collection->has('id')) {
-            $this->setId($collection->get('id'));
-        }
-
-        if ($collection->has('type')) {
-            $this->setType($collection->get('type'));
-        }
-
-        if ($collection->has('etag')) {
-            $this->setEtag($collection->get('etag'));
-        }
-
-        if ($collection->has('name')) {
-            $this->setName($collection->get('name'));
-        }
-
-        if ($collection->has('sequence_id')) {
-            $this->setSequenceId($collection->get('sequence_id'));
-        }
-
-        if ($collection->has('url')) {
-            $this->setUrl($collection->get('url'));
-        }
+        $this->setProperties($collection);
 
         return $this;
     }
-
-
 
     /*** Start Getters and Setters ***/
 

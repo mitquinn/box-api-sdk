@@ -1,7 +1,13 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Resources;
+namespace Mitquinn\BoxApiSdk\Resources\Collaborations;
 
+use Illuminate\Support\Collection;
+use Mitquinn\BoxApiSdk\Resources\File;
+use Mitquinn\BoxApiSdk\Resources\Folder;
+use Mitquinn\BoxApiSdk\Resources\Resource;
+use Mitquinn\BoxApiSdk\Resources\User;
+use Mitquinn\BoxApiSdk\Resources\WebLinks\WebLink;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasCreatedAt;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasCreatedBy;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasExpiresAt;
@@ -29,9 +35,8 @@ class Collaboration extends Resource
     /** @var string|null $invite_email */
     protected string|null $invite_email;
 
-    //Todo: Need to add weblink here as well.
-    /** @var File|Folder|null $item */
-    protected File|Folder|null $item;
+    /** @var File|Folder|WebLink|null $item */
+    protected File|Folder|WebLink|null $item;
 
     /** @var string $role */
     protected string $role;
@@ -45,74 +50,34 @@ class Collaboration extends Resource
      */
     protected function mapResource(array $response): static
     {
-        if (array_key_exists('id', $response)) {
-            $this->setId($response['id']);
-        }
+        $collection = new Collection($response);
 
-        if (array_key_exists('type', $response)) {
-            $this->setType($response['type']);
-        }
+        $this->setProperties($collection);
 
-        if (array_key_exists('acceptance_requirements_status', $response)) {
-            $this->setAcceptanceRequirementsStatus($response['acceptance_requirements_status']);
-        }
+        if ($collection->has('item')) {
 
-        if (array_key_exists('accessible_by', $response)) {
-            $this->setAccessibleBy(new User($response['accessible_by']));
-        }
+            $item = $collection->get('item');
 
-        if (array_key_exists('acknowledged_at', $response)) {
-            $this->setAcknowledgedAt($response['acknowledged_at']);
-        }
-
-        if (array_key_exists('created_at', $response)) {
-            $this->setCreatedAt($response['created_at']);
-        }
-
-        if (array_key_exists('created_by', $response)) {
-            $this->setCreatedBy(new User($response['created_by']));
-        }
-
-        if (array_key_exists('expires_at', $response)) {
-            $this->setExpiresAt($response['expires_at']);
-        }
-
-        if (array_key_exists('invite_email', $response)) {
-            $this->setInviteEmail($response['invite_email']);
-        }
-
-        if (array_key_exists('item', $response)) {
-            if (is_null($response['item'])) {
-                $this->setItem($response['item']);
+            if (is_null($item)) {
+                $this->setItem($item);
             }
 
-            if (array_key_exists('type', $response['item'])) {
+            if (array_key_exists('type', $item)) {
 
-                if ($response['item']['type'] === 'file') {
-                    $this->setItem(new File($response['item']));
+                $type = $item['type'];
+
+                if ($type === 'file') {
+                    $this->setItem(new File($item));
                 }
 
-                if ($response['item']['type'] === 'folder') {
-                    $this->setItem(new Folder($response['item']));
+                if ($type === 'folder') {
+                    $this->setItem(new Folder($item));
                 }
 
-                //Todo: Add weblink here
-                //if ($response['item']['type'] === 'weblink') {
-                //$this->setItem(new WeblinkResource($response['item']));
-                //}
+                if ($type === 'weblink') {
+                $this->setItem(new WebLink($item));
+                }
             }
-        }
-
-        if (array_key_exists('modified_at', $response)) {
-            $this->setModifiedAt($response['modified_at']);
-        }
-
-        if (array_key_exists('role', $response)) {
-            $this->setRole($response['role']);
-        }
-
-        if (array_key_exists('status', $response)) {
-            $this->setStatus($response['status']);
         }
 
         return $this;
@@ -175,7 +140,7 @@ class Collaboration extends Resource
     }
 
     /**
-     * @return File|Folder|null
+     * @return File|Folder|WebLink|null
      */
     public function getItem(): File|Folder|null
     {
@@ -183,10 +148,10 @@ class Collaboration extends Resource
     }
 
     /**
-     * @param File|Folder|null $item
+     * @param File|Folder|WebLink|null $item
      * @return Collaboration
      */
-    public function setItem(File|Folder|null $item): Collaboration
+    public function setItem(File|Folder|WebLink|null $item): Collaboration
     {
         $this->item = $item;
         return $this;

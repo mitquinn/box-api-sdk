@@ -1,14 +1,15 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Resources;
+namespace Mitquinn\BoxApiSdk\Resources\EmailAliases;
 
-use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
-use Mitquinn\BoxApiSdk\Traits\Properties\HasType;
+use Mitquinn\BoxApiSdk\Resources\EntriesResource;
+
 
 /**
  * Class EmailAliasesResource
  * @package Mitquinn\BoxApiSdk\Resources
  * Todo: This class doesnt seem to have a limit or other properties. Perhaps need to create subentry?
+ * Todo: Convert to resource
  */
 class EmailAliasesResource extends EntriesResource
 {

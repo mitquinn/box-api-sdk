@@ -1,10 +1,13 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Resources;
+namespace Mitquinn\BoxApiSdk\Resources\Files;
+
+use Mitquinn\BoxApiSdk\Resources\Resource;
 
 /**
  * Class FileResource
  * @package Mitquinn\BoxApiSdk\Resources
+ * Todo: Convert to Resource
  */
 class Files extends Resource
 {

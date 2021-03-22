@@ -1,6 +1,8 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Resources;
+namespace Mitquinn\BoxApiSdk\Resources\Comments;
+
+use Mitquinn\BoxApiSdk\Resources\EntriesResource;
 
 /**
  * Class CommentsResource

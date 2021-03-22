@@ -1,14 +1,18 @@
 <?php
 
 
-namespace Mitquinn\BoxApiSdk\Resources;
+namespace Mitquinn\BoxApiSdk\Resources\Collections;
 
 
-use Adbar\Dot;
+use Mitquinn\BoxApiSdk\Resources\Resource;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasName;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasType;
 
+/**
+ * Class Collection
+ * @package Mitquinn\BoxApiSdk\Resources\Collections
+ */
 class Collection extends Resource
 {
     use HasId, HasType, HasName;
@@ -21,23 +25,10 @@ class Collection extends Resource
      */
     protected function mapResource(array $response): static
     {
-        $dot = new Dot($response);
 
-        if ($dot->has('id')) {
-            $this->setId($dot->get('id'));
-        }
+        $collection = new \Illuminate\Support\Collection($response);
 
-        if ($dot->has('type')) {
-            $this->setType($dot->get('type'));
-        }
-
-        if ($dot->has('collection_type')) {
-            $this->setCollectionType($dot->get('collection_type'));
-        }
-
-        if ($dot->has('name')) {
-            $this->setName($dot->get('name'));
-        }
+        $this->setProperties($collection);
 
         return $this;
     }

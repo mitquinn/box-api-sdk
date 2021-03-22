@@ -1,6 +1,9 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Resources;
+namespace Mitquinn\BoxApiSdk\Resources\Events;
+
+use Illuminate\Support\Collection;
+use Mitquinn\BoxApiSdk\Resources\Resource;
 
 /**
  * Class EventsResource
@@ -23,20 +26,16 @@ class Events extends Resource
      */
     protected function mapResource(array $response): static
     {
-        if (array_key_exists('chunk_size', $response)) {
-            $this->setChunkSize($response['chunk_size']);
-        }
+        $collection = new Collection($response);
 
-        if (array_key_exists('entries', $response)) {
+        $this->setProperties($collection);
+
+        if ($collection->has('entries')) {
             $entries = [];
-            foreach ($response['entries'] as $entry) {
+            foreach ($collection->get($entries) as $entry) {
                 $entries[] = new Event($entry);
             }
             $this->setEntries($entries);
-        }
-
-        if (array_key_exists('next_stream_position', $response)) {
-            $this->setNextStreamPosition($response['next_stream_position']);
         }
 
         return $this;

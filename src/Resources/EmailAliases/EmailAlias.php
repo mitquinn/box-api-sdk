@@ -1,8 +1,9 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Resources;
+namespace Mitquinn\BoxApiSdk\Resources\EmailAliases;
 
-use Adbar\Dot;
+use Illuminate\Support\Collection;
+use Mitquinn\BoxApiSdk\Resources\Resource;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasType;
 
@@ -26,26 +27,11 @@ class EmailAlias extends Resource
      */
     protected function mapResource(array $response): static
     {
-        $dot = new Dot($response);
+        $collection = new Collection($response);
 
-        if ($dot->has('id')) {
-            $this->setId($dot->get('id'));
-        }
-
-        if ($dot->has('type')) {
-            $this->setType($dot->get('type'));
-        }
-
-        if ($dot->has('email')) {
-            $this->setEmail($dot->get('email'));
-        }
-
-        if ($dot->has('is_confirmed')) {
-            $this->setIsConfirmed($dot->get('is_confirmed'));
-        }
+        $this->setProperties($collection);
 
         return $this;
-
     }
 
 

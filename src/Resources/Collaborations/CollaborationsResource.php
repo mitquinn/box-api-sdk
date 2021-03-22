@@ -1,6 +1,8 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Resources;
+namespace Mitquinn\BoxApiSdk\Resources\Collaborations;
+
+use Mitquinn\BoxApiSdk\Resources\EntriesResource;
 
 /**
  * Class CollaborationsResource

@@ -4,6 +4,7 @@ namespace Mitquinn\BoxApiSdk\Resources\Tasks;
 
 use Illuminate\Support\Collection;
 use Mitquinn\BoxApiSdk\Resources\Resource;
+use Mitquinn\BoxApiSdk\Traits\HasResourcePropertyChecks;
 
 /**
  * Class Tasks
@@ -26,16 +27,14 @@ class Tasks extends Resource
     {
         $collection = new Collection($response);
 
+        $this->setProperties($collection);
+
         if ($collection->has('entries')) {
             $tasks = [];
             foreach ($collection->get('entries') as $task) {
                 $tasks[] = new Task($task);
             }
             $this->setEntries($tasks);
-        }
-
-        if ($collection->has('total_count')) {
-            $this->setTotalCount($collection->get('total_count'));
         }
 
         return $this;

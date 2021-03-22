@@ -2,6 +2,7 @@
 
 namespace Mitquinn\BoxApiSdk\Resources;
 
+use Mitquinn\BoxApiSdk\Traits\HasResourcePropertyChecks;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -10,6 +11,8 @@ use Psr\Http\Message\ResponseInterface;
  */
 abstract class Resource
 {
+    use HasResourcePropertyChecks;
+
     /** @var array $response */
     protected array $response;
 

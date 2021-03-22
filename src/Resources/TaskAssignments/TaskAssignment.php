@@ -58,48 +58,10 @@ class TaskAssignment extends Resource
     {
         $collection = new Collection($response);
 
-        if ($collection->has('id')) {
-            $this->setId($collection->get('id'));
-        }
-
-        if ($collection->has('type')) {
-            $this->setType($collection->get('type'));
-        }
-
-        if ($collection->has('assigned_at')) {
-            $this->setAssignedAt($collection->get('assigned_at'));
-        }
-
-        if ($collection->has('assigned_by')) {
-            $this->setAssignedBy(new User($collection->get('assigned_by')));
-        }
-
-        if ($collection->has('assigned_by')) {
-            $this->setAssignedBy(new User($collection->get('assigned_by')));
-        }
-
-        if ($collection->has('assigned_to')) {
-            $this->setAssignedTo(new User($collection->get('assigned_to')));
-        }
-
-        if ($collection->has('completed_at')) {
-            $this->setCompletedAt($collection->get('completed_at'));
-        }
+        $this->setProperties($collection);
 
         if ($collection->has('item')) {
             $this->setItem(new File($collection->get('item')));
-        }
-
-        if ($collection->has('message')) {
-            $this->setMessage($collection->get('message'));
-        }
-
-        if ($collection->has('reminded_at')) {
-            $this->setRemindedAt($collection->get('reminded_at'));
-        }
-
-        if ($collection->has('resolution_state')) {
-            $this->setResolutionState($collection->get('resolution_state'));
         }
 
         return $this;

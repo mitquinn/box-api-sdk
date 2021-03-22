@@ -1,8 +1,10 @@
 <?php
 
-namespace Mitquinn\BoxApiSdk\Resources;
+namespace Mitquinn\BoxApiSdk\Resources\Events;
 
-use Adbar\Dot;
+use Illuminate\Support\Collection;
+use Mitquinn\BoxApiSdk\Resources\Resource;
+use Mitquinn\BoxApiSdk\Resources\User;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasCreatedBy;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasType;
 
@@ -34,35 +36,13 @@ class Event extends Resource
      */
     protected function mapResource(array $response): static
     {
-        $dot = new Dot($response);
+        $collection = new Collection($response);
 
-        if ($dot->has('type')) {
-            $this->setType($dot->get('type'));
-        }
-
-        if ($dot->has('additional_details')) {
-            $this->setAdditionalDetails($dot->get('additional_details'));
-        }
-
-        if ($dot->has('created_by')) {
-            $this->setCreatedBy( new User($dot->get('created_by')));
-        }
-
-        if ($dot->has('event_id')) {
-            $this->setEventId($dot->get('event_id'));
-        }
-
-        if ($dot->has('event_type')) {
-            $this->setEventType($dot->get('event_type'));
-        }
-
-        if ($dot->has('session_id')) {
-            $this->setSessionId($dot->get('session_id'));
-        }
+        $this->setProperties($collection);
 
         //Todo: add setting for event source here.
-        if ($dot->has('source')) {
-            $this->setSource(new User($dot->get('source')));
+        if ($collection->has('source')) {
+            $this->setSource(new User($collection->get('source')));
         }
 
         return $this;

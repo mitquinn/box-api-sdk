@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Mitquinn\BoxApiSdk\Resources\File;
 use Mitquinn\BoxApiSdk\Resources\Resource;
 use Mitquinn\BoxApiSdk\Resources\User;
+use Mitquinn\BoxApiSdk\Traits\HasResourcePropertyChecks;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasCreatedAt;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasCreatedBy;
 use Mitquinn\BoxApiSdk\Traits\Properties\HasId;
@@ -54,45 +55,15 @@ class Task extends Resource
     {
         $collection = new Collection($response);
 
-        if ($collection->has('id')) {
-            $this->setId($collection->get('id'));
-        }
-
-        if ($collection->has('type')) {
-            $this->setType($collection->get('type'));
-        }
-
-        if ($collection->has('action')) {
-            $this->setAction($collection->get('action'));
-        }
-
-        if ($collection->has('completion_rule')) {
-            $this->setCompletionRule($collection->get('completion_rule'));
-        }
-
-        if ($collection->has('created_at')) {
-            $this->setCreatedAt($collection->get('created_at'));
-        }
+        $this->setProperties($collection);
 
         //Todo: Convert to user mini
         if ($collection->has('created_by')) {
             $this->setCreatedBy(new User($collection->get('created_by')));
         }
 
-        if ($collection->has('due_at')) {
-            $this->setDueAt($collection->get('due_at'));
-        }
-
-        if ($collection->has('is_complete')) {
-            $this->setIsComplete($collection->get('is_complete'));
-        }
-
         if ($collection->has('item')) {
             $this->setItem(new File($collection->get('item')));
-        }
-
-        if ($collection->has('message')) {
-            $this->setMessage($collection->get('message'));
         }
 
         //Todo: Change to Task Assignment when created.
